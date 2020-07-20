@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="card-body">
-            <form role="form" action="/anggota/data-pribadi-update/{{$pr->anggota_id}}" method="post">
+            <form role="form" action="/anggota/data-pribadi-update/{{$pr->anggota_kode}}" method="post">
                     {{ csrf_field() }}
                     <div class="row">
                       <div class="col-sm-6">

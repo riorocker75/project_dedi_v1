@@ -44,14 +44,14 @@ class AnggotaController extends Controller
 
     function __invoke(){
         // return view('anggota.anggota');
-        $id=Session::get('ang_id');
-        $data=Anggota::where('anggota_id' ,$id)->get();
+        $id=Session::get('ang_kode');
+        $data=Anggota::where('anggota_kode' ,$id)->get();
         return view('anggota.data_pribadi', ['pribadi' => $data]);
     }
 
     // perubahan data pribadi
     function data_pribadi($id){
-        $data=Anggota::where('anggota_id' ,$id)->get();
+        $data=Anggota::where('anggota_kode' ,$id)->get();
         return view('anggota.data_pribadi', ['pribadi' => $data]);
     }
 
@@ -70,7 +70,7 @@ class AnggotaController extends Controller
 
         ]);
 
-        Anggota::where('anggota_id',$id)->update([
+        Anggota::where('anggota_kode',$id)->update([
             'anggota_nik' => $request->nik,
             'anggota_nama' => $request->nama,
             'anggota_tanggal_lahir' => $request->tanggal_lahir,
@@ -81,7 +81,12 @@ class AnggotaController extends Controller
             'anggota_pekerjaan' =>$request->pekerjaan,
             'anggota_gaji' =>$request->gaji
         ]);
-      
+         
+        User::where('kode_user',$id)->update([
+			'nama' => $request->nama,
+			// 'username' =>$username,
+			'status' => 1
+		   ]);
         return redirect('anggota/data-pribadi/'.$id.'')->with('alert-success','Data telah diperbaharui');
     }
 

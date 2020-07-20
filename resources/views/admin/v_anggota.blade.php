@@ -60,9 +60,9 @@
                     <td>{{ $a->anggota_kontak }}</td>
                     <td>{{cek_status_anggota($a->status)}}</td>
                     <td>                    
-                    <a class="btn btn-secondary btn-sm" href="{{url('/admin/detail/anggota/'.$a->anggota_id)}}"><i class="fas fa-eye"></i> Lihat</a>   
+                    <a class="btn btn-secondary btn-sm" href="{{url('/admin/detail/anggota/'.$a->anggota_kode)}}"><i class="fas fa-eye"></i> Lihat</a>   
 
-                    <a class="btn btn-danger btn-sm" href="{{url('/admin/detail/anggota/hapus/'.$a->anggota_id)}}"><i class="fas fa-trash"></i> Delete</a>   
+                    <a class="btn btn-danger btn-sm" href="{{url('/admin/detail/anggota/hapus/'.$a->anggota_kode)}}"><i class="fas fa-trash"></i> Delete</a>   
                      <!-- <a class="btn btn-success btn-sm" href="anggota_tabungan/{{ $a->anggota_id }}"><i class="far fa-money-bill-alt"></i> Tabungan</a>                    -->
                    </td>
                  </tr>

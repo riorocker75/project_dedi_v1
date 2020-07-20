@@ -123,18 +123,10 @@ class AnggotaLogin extends Controller
        $data->status = 0;
        $data->save();
 
-       User::create([
-        'nama' => $nama,
-        'username' =>$username,
-        'password' =>bcrypt($password),
-        'level' => 3,
-        'kode_user' =>$kode,
-        'status' => 1
-       ]);
     //    $lastInsertedId= $data->anggota_id;
 
         
-        return redirect('login/user')->with('alert-success','Tunggu verifikasi !!');
+        return redirect('login/anggota')->with('alert-success','Tunggu verifikasi !!');
 
     }
 

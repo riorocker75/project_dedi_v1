@@ -20,7 +20,7 @@ class AdminLogin extends Controller
 {
      function __invoke(){
         if(!Session::get('login-adm')){
-            return view('login/index_user');
+            return view('login/index_admin');
         }else{
             return redirect('/dashboard/admin');
         }
@@ -44,7 +44,7 @@ class AdminLogin extends Controller
                         Session::put('login-adm',TRUE);
                         return redirect('/dashboard/admin')->with('alert-success','Selamat Datang Kembali Admin');
                     }else{
-                        return redirect('/login/user')->with('alert-danger','Password atau Email, Salah !');
+                        return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
                     }
             
 
@@ -62,44 +62,20 @@ class AdminLogin extends Controller
                     Session::put('login-op',TRUE);
                     return redirect('/dashboard/operator')->with('alert-success','Selamat Datang Kembali Pengurus');
                 }else{
-                    return redirect('/login/user')->with('alert-danger','Password atau Email, Salah !');
+                    return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
                 }
          
             // end cek data ada atau tidak
             }elseif($data->level == 3){
-                Session::flush();
-                $data_ang=Anggota::where('anggota_username', $username)->first();
-
-                    if($data_ang->status == "1"){
-                        if(Hash::check($password,$data->password)){
-                        Session::put('ang_id', $data_ang->anggota_id);
-                        Session::put('ang_nama', $data_ang->anggota_nama);
-                        Session::put('ang_username', $data_ang->anggota_username);
-                        Session::put('ang_kontak', $data_ang->anggota_kontak);
-                        Session::put('ang_nik', $data_ang->anggota_nik);
-                        Session::put('ang_status', $data_ang->status);
-                        Session::put('ang_kode', $data_ang->anggota_kode);
-
-                        Session::put('level', 3);
-                        Session::put('login-ang',TRUE);
-                            return redirect('/dashboard/anggota')->with('alert-success','Selamat Datang Kembali Anggota');
-                        }else{
-                            return redirect('/login/user')->with('alert-danger','Password atau Email, Salah !');
-                        }   
-
-                    }elseif($data_ang->status == "2"){
-                        return redirect('/login/user')->with('alert-danger','Akun Keanggotaan Kamu ditolak mohon ajukan ulang dengan data yang sesuai persyaratan!');
-                    }else{
-                         return redirect('/login/user')->with('alert-danger','Akun Keanggotaan Kamu belum di verifikasi mohon bersabar!');
-                    } 
-
+            
+                
              // end cek level anggota
             }else{
-                return redirect('/login/user')->with('alert-danger','Tidak meliki akses kesini');
+                return redirect('/login/admin')->with('alert-danger','Tidak meliki akses kesini');
             }
                 // end cek level 
     }else{
-        return redirect('/login/user')->with('alert-danger','Password atau Email, Salah !');
+        return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
     }
     // cek kebenaran input
 
@@ -108,6 +84,6 @@ class AdminLogin extends Controller
 
   public function logout(){
         Session::flush();
-        return redirect('/login/user')->with('alert-success','Logout berhasil');
+        return redirect('/login/admin')->with('alert-success','Logout berhasil');
     }
 }

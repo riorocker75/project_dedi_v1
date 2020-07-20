@@ -19,7 +19,10 @@
                 <!--Top Right-->
                 <div class="top-right clearfix">
                     <ul class="clearfix">
-                        <li><a data-toggle="modal" data-target="#login"><span class="icon flaticon-user"></span>Login</a> <span>or</span> <a href="{{url('/')}}/daftar/anggota"><span class="icon flaticon-upload"></span>Daftar</a></li>
+                        <li>
+                            {{-- <a data-toggle="modal" data-target="#login"><span class="icon flaticon-user"></span>Login</a>  --}}
+                        <a href="{{url('/login/user')}}"><span class="icon flaticon-user"></span>Login</a>
+                            <span>or</span> <a href="{{url('/')}}/daftar/anggota"><span class="icon flaticon-upload"></span>Daftar</a></li>
                         <!--Search Box-->
                         <li class="search-box-outer">
                             <div class="dropdown">

@@ -36,7 +36,7 @@
          
   
           <li class="nav-item">
-          <a href="/anggota/data-pribadi/{{Session::get('ang_id')}}" class="nav-link">
+          <a href="/anggota/data-pribadi/{{Session::get('ang_kode')}}" class="nav-link">
               <i class="nav-icon fas fa-id-card"></i>
               <p> Data Pribadi</p>
             </a>
@@ -79,7 +79,7 @@
           </li> 
   
            <li class="nav-item">
-            <a href="{{url('/logout/anggota')}}" class="nav-link">
+            <a href="{{url('/logout/admin')}}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p> Keluar</p>
             </a>

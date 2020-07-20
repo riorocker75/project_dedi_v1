@@ -57,7 +57,7 @@ class AnggotaCtrl extends Controller
 	}
 
 	function detail_anggota($id){
-		$data= Anggota::where('anggota_id',$id)->get();
+		$data= Anggota::where('anggota_kode',$id)->get();
 		return view('admin.v_anggota_edit',[
 			'data' =>$data
 		]);
@@ -112,10 +112,17 @@ class AnggotaCtrl extends Controller
 	   $data->status_umroh=0;
 	   $data->status_pendidikan=0;
 
-
-
        $data->status = 1;
-       $data->save();
+	   $data->save();
+	   
+	   User::create([
+        'nama' => $nama,
+        'username' =>$username,
+        'password' =>bcrypt($password),
+        'level' => 3,
+        'kode_user' =>$kode,
+        'status' => 1
+       ]);
 
     //    $lastInsertedId= $data->anggota_id;
 
@@ -141,7 +148,7 @@ class AnggotaCtrl extends Controller
             'gaji' =>'required'
 		]);
 		
-		Anggota::where('anggota_id',$id)->update([
+		Anggota::where('anggota_kode',$id)->update([
 			'anggota_nama' =>$nama,
 			'anggota_nik' => $nik,
 			'anggota_username' =>$username,
@@ -156,12 +163,21 @@ class AnggotaCtrl extends Controller
 			'status_pinjaman' =>$request->status_pinjaman
 		]);
 
+		User::where('kode_user',$id)->update([
+			'nama' => $nama,
+			'username' =>$username,
+			'status' => 1
+		   ]);
+
 		if($request->password != ""){
 			$this->validate($request, [
 				'password' => 'min:4'
 			]);
-			Anggota::where('anggota_id',$id)->update([
+			Anggota::where('anggota_kode',$id)->update([
 				'anggota_password' =>bcrypt($password)
+			]);
+			User::where('kode_user',$id)->update([
+				'password' =>bcrypt($password)
 			]);
 		}	
 
@@ -170,8 +186,9 @@ class AnggotaCtrl extends Controller
 	}
 
 	function hapus_anggota($id){
-		Anggota::where('anggota_id',$id)->delete();
-        return redirect('/dashboard/admin/anggota')->with('alert-danger','Data telah dihapus');
+		Anggota::where('anggota_kode',$id)->delete();
+		User::where('kode_user',$id)->delete();
+		return redirect('/dashboard/admin/anggota')->with('alert-danger','Data telah dihapus');
 	}
 
 

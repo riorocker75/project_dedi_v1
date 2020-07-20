@@ -26,6 +26,13 @@ Route::get('/simulasi','Front\FrontCtrl@simulasi');
 Route::get('/login/tes' ,'Auth\UserController@tes');
 
 
+/*
+=========================== 
+		Login User
+===========================
+*/
+Route::get('/login/user' ,'Auth\AdminLogin');
+
 
 /*
 =========================== 

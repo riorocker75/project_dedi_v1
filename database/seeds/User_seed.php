@@ -31,5 +31,33 @@ class User_seed extends Seeder
             'kode_user' => 'OP-723',
             'status' => 1
         ]);
+
+        User::create([
+            'nama' => 'Sumail',
+            'username' => 'sumail',
+            'password' =>bcrypt("sumail"),
+            'level' => 3,
+            'kode_user' => 'AG-341',
+            'status' => 1
+        ]);
+
+        User::create([
+            'nama' => 'Dedi',
+            'username' => 'anggota',
+            'password' =>bcrypt("anggota"),
+            'level' => 3,
+            'kode_user' => 'AG-827',
+            'status' => 1
+        ]);
+
+        User::create([
+            'nama' => 'Lumion',
+            'username' => 'lumion',
+            'password' =>bcrypt("lumion"),
+            'level' => 3,
+            'kode_user' => 'AG-365',
+            'status' => 1
+        ]);
+
     }
 }
