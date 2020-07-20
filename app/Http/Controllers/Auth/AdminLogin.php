@@ -42,7 +42,7 @@ class AdminLogin extends Controller
                         Session::put('adm_kode', $data->kode_user);
                         Session::put('level', 1);
                         Session::put('login-adm',TRUE);
-                        return redirect('/dashboard/admin')->with('alert-success','Selamat Datang Kembali');
+                        return redirect('/dashboard/admin')->with('alert-success','Selamat Datang Kembali Admin');
                     }else{
                         return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
                     }
@@ -60,7 +60,7 @@ class AdminLogin extends Controller
                     Session::put('op_kode', $data->kode_user);
                     Session::put('level', 2);
                     Session::put('login-op',TRUE);
-                    return redirect('/dashboard/operator')->with('alert-success','Selamat Datang Kembali');
+                    return redirect('/dashboard/operator')->with('alert-success','Selamat Datang Kembali Pengurus');
                 }else{
                     return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
                 }
