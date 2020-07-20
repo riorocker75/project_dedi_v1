@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
          $this->call(Kategori_pinjaman_seed::class);
          $this->call(OpsiSimpanan_seed::class);
          $this->call(OpsiSimpananBerjangka_seed::class);
+         $this->call(User_seed::class);
+
 
 
     }

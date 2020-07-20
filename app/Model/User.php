@@ -10,11 +10,10 @@ class User extends Model
     public $timestamps = false;
     protected $fillable =[
       'nama',
-      'user_name',
+      'username',
       'password',
       'level',
       'kode_user',
       'status'
-       
     ];
 }
