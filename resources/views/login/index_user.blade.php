@@ -37,6 +37,11 @@
             <button type="submit" class="btn btn-primary btn-block">Login</button>
           </div>
           <!-- /.col -->
+        
+
+          <p class="mb-0" style="margin-top:15git add px;margin-left:10px">
+            <a  class="text-center" href="{{url('daftar/anggota')}}">Daftar Menjadi Anggota</a>
+          </p>
         </div>
       </form>
  
