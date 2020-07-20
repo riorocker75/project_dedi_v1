@@ -29,25 +29,53 @@ class AdminLogin extends Controller
     function loginCheck(Request $request){
     	$username = $request->username;
         $password = $request->password;
-        $data = Admin::where('admin_username',$username)->first();
-            if($data){
+        $data = User::where('username',$username)->first();
+
+        if($data){
+            if($data->level == 1){
+                    Session::flush();
+                    
+                    if(Hash::check($password,$data->password)){
+                        Session::put('adm_id', $data->id);
+                        Session::put('adm_nama', $data->nama);
+                        Session::put('adm_username', $data->admin_username);
+                        Session::put('adm_kode', $data->kode_user);
+                        Session::put('level', 1);
+                        Session::put('login-adm',TRUE);
+                        return redirect('/dashboard/admin')->with('alert-success','Selamat Datang Kembali');
+                    }else{
+                        return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
+                    }
+            
+
+                // end cek data admin di buat
+            }elseif($data->level == 2){
+           
                  Session::flush();
                 
-                if(Hash::check($password,$data->admin_password)){
-                    Session::put('adm_id', $data->admin_id);
-
-                    Session::put('adm_nama', $data->admin_nama);
-                    Session::put('adm_username', $data->admin_username);
-                    Session::put('adm_kontak', $data->admin_kontak);
-                    Session::put('level', 1);
-                    Session::put('login-adm',TRUE);
-                    return redirect('/dashboard/admin')->with('alert-success','Selamat Datang Kembali');
+                if(Hash::check($password,$data->password)){
+                    Session::put('op_id', $data->id);
+                    Session::put('op_nama', $data->nama);
+                    Session::put('op_username', $data->username);
+                    Session::put('op_kode', $data->kode_user);
+                    Session::put('level', 2);
+                    Session::put('login-op',TRUE);
+                    return redirect('/dashboard/operator')->with('alert-success','Selamat Datang Kembali');
                 }else{
                     return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
                 }
+         
+            // end cek data ada atau tidak
             }else{
-                return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
+                return redirect('/login/admin')->with('alert-danger','Tidak meliki akses kesini');
             }
+                // end cek level
+    }else{
+        return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
+    }
+    // cek kebenaran input
+
+
     }
 
   public function logout(){

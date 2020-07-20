@@ -16,7 +16,7 @@ use App\Model\Operator;
 use App\Model\Anggota;
 use App\Model\Pekerjaan;
 
-
+use App\Model\User;
 
 class PekerjaanCtrl extends Controller
 {

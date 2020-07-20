@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 use App\Model\Admin;
 use App\Model\Anggota;
 use App\Model\Operator;
-
+use App\Model\User;
 
 
 class AdminController extends Controller

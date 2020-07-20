@@ -149,7 +149,7 @@
         <div class="modal-body">
             <a href="{{url('/')}}/login/anggota" class="btn btn-primary"><i class="fa fa-user" aria-hidden="true"></i> Login Anggota</a>
             <a href="{{url('/')}}/login/admin" class="btn btn-default"><i class="fa fa-desktop" aria-hidden="true"></i> Login Admin</a>
-            <a href="{{url('/')}}/login/operator" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i> Login Pengurus</a>
+            {{-- <a href="{{url('/')}}/login/operator" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i> Login Pengurus</a> --}}
         </div>
        
       </div>

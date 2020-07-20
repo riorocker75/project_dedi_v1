@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Str;
 
+
 use Illuminate\Support\Facades\Hash;
 
+use App\Model\User;
 use App\Model\Admin;
 use App\Model\Pinjaman;
 use App\Model\Cat_Pinjaman;
@@ -22,7 +24,7 @@ use App\Model\Simpanan;
 use App\Model\Anggota;
 use App\Model\Operator;
 
-use App\Model\User;
+
 
 class PinjamanCtrl extends Controller
 {

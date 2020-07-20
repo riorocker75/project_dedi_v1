@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Session;
 use App\Model\Admin;
 use App\Model\Anggota;
 use App\Model\Operator;
-
+use App\Model\User;
 
 class OperatorLogin extends Controller
 {
+
+    // ok disini operator login logicnya sudah pindah ke AdminLogin
      function __invoke(){
         if(!Session::get('login-op')){
             return view('login/index_operator');
@@ -30,31 +32,41 @@ class OperatorLogin extends Controller
     function loginCheck(Request $request){
     	$username = $request->username;
         $password = $request->password;
-        $data = Operator::where('operator_username',$username)->first();
-            if($data){
-                 Session::flush();
+        $data = User::where('username',$username)->first();
+        // $data = User::where([
+        //     ['username', '=', $username],
+        //     ['level', '=', '2'],
+        // ])->first();
+        if($data){
+                if($data->level == 2){
+                        Session::flush();
+                        
+                        if(Hash::check($password,$data->password)){
+                            Session::put('op_id', $data->id);
+                            Session::put('op_nama', $data->nama);
+                            Session::put('op_username', $data->username);
+                            Session::put('op_kode', $data->kode_user);
+                            Session::put('level', 2);
+                            Session::put('login-op',TRUE);
+                            return redirect('/dashboard/operator')->with('alert-success','Selamat Datang Kembali');
+                        }else{
+                            return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
+                        }
                 
-                if(Hash::check($password,$data->operator_password)){
-                    Session::put('op_id', $data->operator_id);
-                    Session::put('op_nama', $data->operator_nama);
-                    Session::put('op_username', $data->operator_username);
-                    Session::put('op_nomor_pegawai', $data->operator_nomor_pegawai);
-                    Session::put('level', 2);
-
-                    Session::put('op_kontak', $data->operator_kontak);
-                    Session::put('login-op',TRUE);
-                    return redirect('/dashboard/operator')->with('alert-success','Selamat Datang Kembali');
+                    // end cek data ada atau tidak
                 }else{
-                    return redirect('/login/operator')->with('alert-danger','Password atau Email, Salah !');
+                    return redirect('/login/admin')->with('alert-danger','Tidak meliki akses kesini');
                 }
-            }else{
-                return redirect('/login/operator')->with('alert-danger','Password atau Email, Salah !');
-            }
+                    // end cek level
+        }else{
+            return redirect('/login/admin')->with('alert-danger','Password atau Email, Salah !');
+        }
+
     }
 
   public function logout(){
         Session::flush();
-        return redirect('/login/operator')->with('alert-success','Logout berhasil');
+        return redirect('/login/admin')->with('alert-success','Logout berhasil');
     }
 
 }

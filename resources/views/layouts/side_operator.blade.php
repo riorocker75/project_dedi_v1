@@ -114,7 +114,7 @@
           </li> 
   
            <li class="nav-item">
-            <a href="{{url('/logout/operator')}}" class="nav-link">
+            <a href="{{url('/logout/admin')}}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p> Keluar</p>
             </a>

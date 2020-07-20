@@ -27,7 +27,7 @@ class OperatorController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-op')){
-                return redirect('login/operator')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/admin')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });
