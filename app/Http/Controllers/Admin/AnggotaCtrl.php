@@ -24,6 +24,7 @@ use App\Model\Simpanan\TransaksiSimpananLain;
 use App\Model\PinjamanTransaksi;
 use App\Model\SimpananTransaksi;
 
+use App\Model\Notif;
 
 
 class AnggotaCtrl extends Controller

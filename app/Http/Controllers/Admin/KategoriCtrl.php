@@ -15,6 +15,7 @@ use App\Model\User;
 use App\Model\Cat_Pinjaman;
 use App\Model\Cat_Simpanan;
 
+use App\Model\Notif;
 
 class KategoriCtrl extends Controller
 {

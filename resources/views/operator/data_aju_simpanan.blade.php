@@ -25,14 +25,17 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
-                   
-                    Simpanan Sukarela
+                   @php
+                       $tot_umum = App\Model\Simpanan::where('status', 0)->get();
+                   @endphp
+                    Simpanan Sukarela <label class="badge badge-success">{{count($tot_umum)}}</label>
                   </h3>
                   <div class="card-tools">
-                  {{-- <a href="{{url('/operator/tambah/mohon/simpanan-umum')}}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Pemohon</a> --}}
+                    <a data-toggle="collapse" href="#sim_umum" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                 
                   </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="sim_umum">
                   <table id="data1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -87,13 +90,17 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
+                    @php
+                    $tot_depo = App\Model\Simpanan\SimpananBerjangka::where('status', 0)->get();
+                   @endphp
+                  Simpanan Berjangka <label class="badge badge-success">{{count($tot_depo)}}</label>
                    
-                    Simpanan Berjangka
                   </h3>
                   <div class="card-tools">
+                    <a data-toggle="collapse" href="#sim_depo" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
                   </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="sim_depo">
                   <table id="data2" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -142,14 +149,19 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
+                    @php
+                    $tot_umroh = App\Model\Simpanan\SimpananUmroh::where('status', 0)->get();
+                   @endphp
+                  Simpanan Umroh <label class="badge badge-success">{{count($tot_umroh)}}</label>
                    
-                    Simpanan Umroh
+                    
                   </h3>
                   <div class="card-tools">
-                  <a href="{{url('/operator/tambah/mohon/simpanan-umroh')}}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Pemohon</a>
+                    <a data-toggle="collapse" href="#sim_umroh" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                  
                   </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="sim_umroh">
                   <table id="data3" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -187,14 +199,19 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
+                    @php
+                    $tot_pend = App\Model\Simpanan\SimpananPendidikan::where('status', 0)->get();
+                   @endphp
+                   Simpanan Pendidikan <label class="badge badge-success">{{count($tot_pend)}}</label>
                    
-                    Simpanan Pendidikan
+                   
                   </h3>
                   <div class="card-tools">
-                  <a href="{{url('/operator/tambah/mohon/simpanan-pendidikan')}}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Pemohon</a>
+                    <a data-toggle="collapse" href="#sim_umroh" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                 
                   </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="sim_umroh">
                   <table id="data4" class="table table-bordered table-striped">
                     <thead>
                       <tr>

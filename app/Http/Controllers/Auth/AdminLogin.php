@@ -16,6 +16,8 @@ use App\Model\Anggota;
 use App\Model\Operator;
 
 use App\Model\User;
+use App\Model\Notif;
+
 class AdminLogin extends Controller
 {
      function __invoke(){

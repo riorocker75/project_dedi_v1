@@ -16,6 +16,7 @@ use App\Model\Admin;
 use App\Model\User;
 use App\Model\operator;
 
+use App\Model\Notif;
 
 class OperatorCtrl extends Controller
 {

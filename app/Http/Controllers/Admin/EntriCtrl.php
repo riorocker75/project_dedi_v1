@@ -14,6 +14,7 @@ use App\Model\Admin;
 use App\Model\User;
 use App\Model\Entri_Simpanan;
 use App\Model\Entri_Anggota;
+use App\Model\Notif;
 
 
 class EntriCtrl extends Controller

@@ -16,6 +16,9 @@ use App\Model\User;
 use App\Model\Admin;
 use App\Model\Anggota;
 use App\Model\Operator;
+
+use App\Model\Notif;
+
 class LaporanCtrl extends Controller
 {
     public function __construct()

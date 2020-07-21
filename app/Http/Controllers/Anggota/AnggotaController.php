@@ -26,16 +26,17 @@ use App\Model\Operator;
 
 use App\Model\Simpanan\OpsiSimpananBerjangka;
 
-
+use App\Model\Notif;
 
 use App\Model\User;
+
 class AnggotaController extends Controller
 {
    public function __construct()
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-ang')){
-                return redirect('login/anggota')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });

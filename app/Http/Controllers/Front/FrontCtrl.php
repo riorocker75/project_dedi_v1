@@ -22,6 +22,7 @@ use App\Model\Anggota;
 use App\Model\Operator;
 
 use App\Model\User;
+use App\Model\Notif;
 
 class FrontCtrl extends Controller
 {

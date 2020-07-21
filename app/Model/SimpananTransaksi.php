@@ -16,7 +16,9 @@ class SimpananTransaksi extends Model
         'jenis_transaksi',
         'kode_simpanan',
         'kode_transaksi',
-        'nominal_transaksi'
+        'nominal_transaksi',
+        'ket_transaksi',
+        'status'
       
     ];
 }

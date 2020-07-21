@@ -21,6 +21,7 @@ use App\Model\Simpanan;
 use App\Model\Simpanan\TransaksiSimpananLain;
 use App\Model\PinjamanTransaksi;
 use App\Model\SimpananTransaksi;
+use App\Model\Notif;
 
 
 class PembayaranCtrl extends Controller
@@ -29,7 +30,7 @@ class PembayaranCtrl extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-op')){
-                return redirect('login/admin')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });

@@ -24,12 +24,13 @@ use App\Model\Simpanan\SimpananBerjangka;
 use App\Model\Simpanan\SimpananUmroh;
 use App\Model\Simpanan\SimpananPendidikan;
 
-
+use App\Model\Notif;
 
 
 use App\Model\Anggota;
 use App\Model\Anggota_Gaji;
 
+use App\Model\User;
 use App\Model\Operator;
 class Ang_Transaksi extends Controller
 {
@@ -37,7 +38,7 @@ class Ang_Transaksi extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-ang')){
-                return redirect('login/anggota')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });

@@ -26,9 +26,9 @@ class TblSimpananTransaksi extends Migration
                 $table->text('kembalian_transaksi')->nullable();
                 $table->dateTime('tgl_transaksi');
                 $table->text('jenis_transaksi')->nullable();
-                $table->text('ket_transaksi')->nullable();
-                $table->text('status')->nullable();
-
+                $table->text('ket_transaksi');
+                $table->text('status')->comment('1=simpanan,2=penarikan');
+                    
             });
         }
     }

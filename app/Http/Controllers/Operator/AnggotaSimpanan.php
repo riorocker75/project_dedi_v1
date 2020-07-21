@@ -18,11 +18,19 @@ use App\Model\Operator;
 use App\Model\Pinjaman;
 use App\Model\Cat_Pinjaman;
 
+use App\Model\Notif;
+
 use App\Model\Simpanan;
 use App\Model\Simpanan\OpsiSimpanan;
 
 use App\Model\Simpanan\SimpananBerjangka;
 use App\Model\Simpanan\OpsiSimpananBerjangka;
+
+use App\Model\Simpanan\OpsiSimpananLain;
+use App\Model\Simpanan\SimpananUmroh;
+use App\Model\Simpanan\SimpananPendidikan;
+
+use App\Model\SimpananTransaksi;
 
 
 class AnggotaSimpanan extends Controller
@@ -31,7 +39,7 @@ class AnggotaSimpanan extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-op')){
-                return redirect('login/admin')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });
@@ -67,6 +75,7 @@ class AnggotaSimpanan extends Controller
             $request->validate([
                 'sukarela' => 'required'
             ]);
+            $sp = Simpanan::where('no_rekening',$id)->first();
             $date=date('Y-m-d');
 
             Anggota::where('anggota_id',$request->ang_id)->update([
@@ -77,14 +86,75 @@ class AnggotaSimpanan extends Controller
                  'tgl_buka_rek' =>$date,
                  'total_simpanan' =>$request->sukarela   
             ]);
+             
+            $total_simpan=$request->sukarela - $sp->jlh_wajib;
 
+            $kode_trs="TRSU-" .rand(1000,9999);
+            //   transaksi pertama
+            SimpananTransaksi::create([
+                    'anggota_id' =>$request->ang_id,
+                    'no_rekening' => $id,  
+                    'operator_id' =>Session::get('op_kode'),
+                    'kode_simpanan' => "SSK",
+                    'kode_transaksi' => $kode_trs,
+                    'nominal_transaksi' => $total_simpan,
+                    'tgl_transaksi' => date('Y-m-d'),
+                    'jenis_transaksi' => "Simpanan Sukarela",
+                    'ket_transaksi' => "Pembayaran Simpanan Sukarela Pertama",
+                    'status' => 1
+            ]); 
+
+            // simpanan pokok pertama
+            SimpananTransaksi::create([
+                'anggota_id' =>$request->ang_id,
+                'no_rekening' => $id,  
+                'operator_id' =>Session::get('op_kode'),
+                'kode_simpanan' => "SSK",
+                'kode_transaksi' => $kode_trs,
+                'nominal_transaksi' => $sp->jlh_pokok,
+                'tgl_transaksi' => date('Y-m-d'),
+                'jenis_transaksi' => "Simpanan Pokok",
+                'ket_transaksi' => "Pembayaran Simpanan Pokok Pertama",
+                'status' => 1
+        ]); 
+          
+        // simpanan wajib pertama
+        SimpananTransaksi::create([
+            'anggota_id' =>$request->ang_id,
+            'no_rekening' => $id,  
+            'operator_id' =>Session::get('op_kode'),
+            'kode_simpanan' => "SSK",
+            'kode_transaksi' => $kode_trs,
+            'nominal_transaksi' => $sp->jlh_wajib,
+            'tgl_transaksi' => date('Y-m-d'),
+            'jenis_transaksi' => "Simpanan Pokok",
+            'ket_transaksi' => "Pembayaran Simpanan Wajib Pertama",
+            'status' => 1
+    ]);
             return redirect('/operator/data-simpanan')->with('alert-success','Simpanan Berhasil Di setujui');
     }
+
+
     function aju_umum_hapus($id){
         Simpanan::where('no_rekening',$id)->delete();
         return redirect('/operator/data-simpanan')->with('alert-danger','Data Telah dihapus');
     }
 
+
+  
+    function pesan_sim_umum(Request $request){
+        $date=date('Y-m-d');
+        Notif::create([
+            'kode_user' => $request->ang_kode,
+            'pesan' => $request->pesan,
+            'ket' => "Permohonan Buka Simpanan Sukarela",
+            'tgl' => $date,
+            'level' => 3,
+            'status_baca' =>0,
+            'status' =>0
+        ]);
+        return redirect()->back()->with('alert-success','Pesan telah disampaikan');
+    }
 
 /*
 ================================
@@ -98,11 +168,65 @@ class AnggotaSimpanan extends Controller
         ]);
     }
     function aju_deposit_act(Request $request,$id){
+        $date=date('Y-m-d');
         
-        // $request->validate([
-            
-        // ]);
+        $request->validate([
+            'nominal' => 'required'
+        ]);
+         $ops= OpsiSimpananBerjangka::where('id', $request->nominal)->first();   
+
+        SimpananBerjangka::where('rekening_deposit',$id)->update([
+            'opsi_deposit_id' => $request->nominal,
+            'nilai_deposit' => $ops->nominal_deposit,
+            'jangka_deposit' => $ops->periode_deposit,
+            'status' => 1,
+            'tgl_deposit' =>$date
+
+        ]);
+
+        Anggota::where('anggota_id', $request->ang_id)->update([
+            'status_deposit' => 1
+        ]);
+
+        $kode_trs="TRBK-" .rand(1000,9999);
+        //   transaksi pertama
+        SimpananTransaksi::create([
+                'anggota_id' =>$request->ang_id,
+                'no_rekening' => $id,  
+                'operator_id' =>Session::get('op_kode'),
+                'kode_simpanan' => "SBK",
+                'kode_transaksi' => $kode_trs,
+                'nominal_transaksi' => $ops->nominal_deposit,
+                'tgl_transaksi' => date('Y-m-d'),
+                'jenis_transaksi' => "Simpanan Berjangka",
+                'ket_transaksi' => "Pembayaran Simpanan Berjangka Pertama",
+                'status' => 1
+        ]);
+
+        return redirect('/operator/data-simpanan')->with('alert-success','Data telah diupdate');
+
     }
+
+    function aju_deposit_hapus($id){
+        SimpananBerjangka::where('rekening_deposit',$id)->delete();
+        return redirect('/operator/data-simpanan')->with('alert-danger','Data Telah dihapus');
+        
+    }
+
+    function pesan_sim_deposit(Request $request){
+        $date=date('Y-m-d');
+        Notif::create([
+            'kode_user' => $request->ang_kode,
+            'pesan' => $request->pesan,
+            'ket' => "Permohonan Buka Simpanan Berjangka",
+            'tgl' =>$date,
+            'level' => 3,
+            'status_baca' =>0,
+            'status' =>0
+        ]);
+        return redirect()->back()->with('alert-success','Pesan telah disampaikan');
+    }
+
 
 /*
 ==================================
@@ -114,10 +238,25 @@ class AnggotaSimpanan extends Controller
         return view('operator.simpanan.op_aju_simpanan_umroh');
 
     }
+
     function aju_umroh_act(Request $request,$id){
 
     }
 
+
+    function pesan_sim_umroh(Request $request){
+        $date=date('Y-m-d');
+        Notif::create([
+            'kode_user' => $request->ang_kode,
+            'pesan' => $request->pesan,
+            'ket' => "Permohonan Buka Simpanan Umroh",
+            'tgl' => $date,
+            'level' => 3,
+            'status_baca' =>0,
+            'status' =>0
+        ]);
+        return redirect()->back()->with('alert-success','Pesan telah disampaikan');
+    }
 
 /*
 ==================================
@@ -131,5 +270,19 @@ class AnggotaSimpanan extends Controller
     function aju_pendidikan_act(Request $request,$id){}
 
 
+    function pesan_sim_pendidikan(Request $request){
+        $date=date('Y-m-d');
+        Notif::create([
+            'kode_user' => $request->ang_kode,
+            'pesan' => $request->pesan,
+            'ket' => "Permohonan Buka Simpanan Pendidikan",
+            'tgl' => $date,
+            'level' => 3,
+            'status_baca' =>0,
+            'status' =>0
+        ]);
+        return redirect()->back()->with('alert-success','Pesan telah disampaikan');
+    }
+   
 
 }

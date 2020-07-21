@@ -17,6 +17,7 @@ use App\Model\Anggota;
 use App\Model\Pekerjaan;
 
 use App\Model\User;
+use App\Model\Notif;
 
 class PekerjaanCtrl extends Controller
 {

@@ -23,6 +23,7 @@ use App\Model\Anggota_Gaji;
 
 use App\Model\Operator;
 use App\Model\User;
+use App\Model\Notif;
 
 class AnggotaLogin extends Controller
 {

@@ -29,12 +29,16 @@
                   Ajukan permohonan
                   </h3>
                   <div class="card-tools">
-                   
+                    <div class="float-right">
+                      <a  data-toggle="modal" data-target="#pesan_pend" class="btn btn-block btn-outline-info">Kirim Pesan &nbsp;&nbsp;<i class="fa fa-comment"></i></a>
+                    </div>
                   </div>
                 </div>
                 <div class="card-body">
                     @php
-                        $dt = App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
+                        
+                      // $ang=App\Model\Anggota::where('anggota_id',$dt->anggota_id)->first();
+
                     @endphp  
                     
                     <form action="" method="post">
@@ -87,4 +91,32 @@
       </section>
     </div>
     
+
+    
+    <!-- Modal pesan datang ke koperasi-->
+<div class="modal fade" id="pesan_pend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Kirim Pesan Ke Pemohon</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <form action="{{url('/operator/detail/aju/simpanan-pendidikan/pesan/act')}}" method="post">
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Isi Pesan</label>
+            <textarea name="pesan"  placeholder="misal: Harap datang besok jam 8 pagi"  class="form-control" rows="2" required></textarea>
+          </div>
+        <input type="text" value="{{ $ang->anggota_kode}}" name="ang_kode" hidden>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Kirim Pesan</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
 @endsection

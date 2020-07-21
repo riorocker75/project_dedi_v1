@@ -22,6 +22,7 @@ use App\Model\Anggota;
 use App\Model\Anggota_Gaji;
 
 use App\Model\Operator;
+use App\Model\Notif;
 
 
 class PengajuanCtrl extends Controller

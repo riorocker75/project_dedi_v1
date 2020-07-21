@@ -57,11 +57,11 @@
                         <tr>
                             <td>{{$du->kode_transaksi}}
                               <br>
-                              <small class="tgl-text">{{$du->tgl_transaksi}}</small>
+                              <small class="tgl-text">{{format_tanggal(date('Y-m-d' , strtotime($du->tgl_transaksi)))}}</small>
                             </td>
                           <td>{{$du->no_rekening}}</td>
                             <td>{{$du->$jenis_transaksi}}</td>
-                            <td>Rp{{number_format($du->nominal_transaksi)}}</td>
+                            <td>Rp.{{number_format($du->nominal_transaksi)}}</td>
                             {{-- <td>
                             <a href="{{}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
                             </td> --}}
@@ -104,25 +104,26 @@
                         <th>Nomor Rekening</th>
                         <th>Jenis Transaksi</th>  
                         <th>Nominal Deposit</th>                   
-                        <th>Opsi</th>                   
+                        {{-- <th>Opsi</th>--}}
                       </tr>
                     </thead>
                     <tbody> 
                         
                         {{-- data 1 --}}
+                        @foreach ($data_umum as $du)
                         <tr>
-                            <td>TRSU-6555
+                            <td>{{$du->kode_transaksi}}
                               <br>
-                              <small class="tgl-text">14-07-2020</small>
+                              <small class="tgl-text">{{format_tanggal(date('Y-m-d' , strtotime($du->tgl_transaksi)))}}</small>
                             </td>
-                            <td>886539</td>
-                            <td>Simpanan Sukarela</td>
-                            <td>Rp.200.000</td>
-                            <td>
+                            <td>{{$du->no_rekening}}</td>
+                            <td>{{$du->$jenis_transaksi}}</td>
+                            <td>Rp.{{number_format($du->nominal_transaksi)}}</td>
+                            {{-- <td>
                             <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
+                            </td> --}}
                         </tr>
-
+                        @endforeach
 
                     </tbody>   
                 </table> 

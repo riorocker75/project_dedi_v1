@@ -19,6 +19,7 @@ use App\Model\Operator;
 use App\Model\Pinjaman;
 use App\Model\Cat_Pinjaman;
 use App\Model\Simpanan;
+use App\Model\Notif;
 
 
 class OperatorController extends Controller
@@ -27,7 +28,7 @@ class OperatorController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-op')){
-                return redirect('login/admin')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });

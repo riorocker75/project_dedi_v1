@@ -17,6 +17,7 @@ use App\Model\Cat_Pinjaman;
 
 use App\Model\Anggota;
 use App\Model\Operator;
+use App\Model\Notif;
 
 use App\Model\User;
 class Ang_PinjamanCtrl extends Controller
@@ -25,7 +26,7 @@ class Ang_PinjamanCtrl extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-ang')){
-                return redirect('login/anggota')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
             }
             return $next($request);
         });
