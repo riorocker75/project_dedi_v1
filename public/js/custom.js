@@ -102,6 +102,7 @@ $(document).ready(function () {
  
 });
 
+// pengecekan deposit ajukan
 $(document).ready(function () {
    
   $('#deposit').change(function () {
@@ -126,4 +127,51 @@ $(document).ready(function () {
 });
 
 
+// pengecekan simpanan umroh aju
+$(document).ready(function () {
+   
+  $('#umroh').change(function () {
+    var umroh =$('#umroh').children("option:selected").val(); 
+         if(umroh.length > 0){ 
+
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+              type:"post",
+              url:"/anggota/cek-umroh",
+              data:{umroh:umroh},
+              success: function(data){          
+                $('#review_umroh').html(data);
+                
+              }
+            });
+          }
+   
+   });
+});
+
+// pengecekan simpanan pendiidkan aju
+$(document).ready(function () {
+   
+  $('#pendidikan').change(function () {
+    var pendidikan =$('#pendidikan').children("option:selected").val(); 
+         if(pendidikan.length > 0){ 
+
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+              type:"post",
+              url:"/anggota/cek-pendidikan",
+              data:{pendidikan:pendidikan},
+              success: function(data){          
+                $('#review_pendidikan').html(data);
+                
+              }
+            });
+          }
+   
+   });
+});
 

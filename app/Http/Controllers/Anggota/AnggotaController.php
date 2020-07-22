@@ -25,6 +25,7 @@ use App\Model\Anggota_Gaji;
 use App\Model\Operator;
 
 use App\Model\Simpanan\OpsiSimpananBerjangka;
+use App\Model\Simpanan\OpsiSimpananLain;
 
 use App\Model\Notif;
 
@@ -294,6 +295,94 @@ class AnggotaController extends Controller
             ";
 
     }
+
+
+
+    function cek_umroh(Request $request){
+
+        $nominal =$request->umroh;
+        $review=OpsiSimpananLain::where('id',$nominal)->first();
+        $nilai_simpan=number_format($review->nominal_deposit);
+           
+            $jangka=$review->jangka_simpanan;
+           $angsuran=number_format($review->angsuran_simpanan);
+            $total_simpan=number_format($review->total_simpanan);
+
+
+        echo "
+                <div class='form-group'>
+                    <label>Lama Setoran Simpanan</label>
+                    <input type='text' class='form-control' value='$jangka tahun' disabled>
+                </div>
+
+                <div class='form-group'>
+                    <label>Periode</label>
+                    <input type='text' class='form-control' value='Rp.$angsuran/bulan' disabled>
+                </div> 
+
+                <div class='form-group'>
+                    <label>Total Simpanan $jangka tahun </label>
+                    <input type='text' class='form-control' value='Rp. $total_simpan' disabled>
+                </div> 
+            
+        ";
+
+        echo "
+                <script>
+                $(document).ready(function () {
+                    $('#tampil_umroh').css('display','block');
+                });
+                </script>
+            ";
+
+    }
+
+    function cek_pendidikan(Request $request){
+
+        $nominal =$request->pendidikan;
+        $review=OpsiSimpananLain::where('id',$nominal)->first();
+        $nilai_simpan=number_format($review->nominal_deposit);
+           
+        $jangka=$review->jangka_simpanan;
+        $bunga=$review->bunga;
+        $angsuran=number_format($review->angsuran_simpanan);
+        $total_simpan=number_format($review->total_simpanan);
+
+
+        echo "
+                <div class='form-group'>
+                    <label>Lama Setoran Simpanan</label>
+                    <input type='text' class='form-control' value='$jangka tahun' disabled>
+                </div>
+
+                <div class='form-group'>
+                    <label>Periode</label>
+                    <input type='text' class='form-control' value='Rp.$angsuran/bulan' disabled>
+                </div> 
+
+                <div class='form-group'>
+                    <label>Nisbah pertahun </label>
+                    <input type='text' class='form-control' value='$bunga %' disabled>
+                </div> 
+
+                <div class='form-group'>
+                    <label>Total Simpanan $jangka tahun + nisbah $bunga % pertahun</label>
+                    <input type='text' class='form-control' value='Rp. $total_simpan' disabled>
+                </div> 
+            
+        ";
+
+        echo "
+                <script>
+                $(document).ready(function () {
+                    $('#tampil_pendidikan').css('display','block');
+                });
+                </script>
+            ";
+
+    }
+
+
 
 
 }

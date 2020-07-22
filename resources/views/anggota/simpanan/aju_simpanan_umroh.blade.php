@@ -37,44 +37,42 @@
                         $dt = App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
                     @endphp  
                     
-                    <form action="" method="post">
+                    <form action="{{url('/anggota/ajukan/simpanan-umroh/act')}}" method="post">
                         @csrf
                        <div class="form-group">
                          <label for="">Nama</label>
-                       <input type="text" name="nama" id="" class="form-control" value="{{$dt->anggota_nama}}" disabled>
+                       <input type="text" name="ang_id" value="{{$dt->anggota_id}}" hidden>
+                       <input type="text" name="nama" class="form-control" value="{{$dt->anggota_nama}}" disabled>
                        </div> 
 
                        {{-- buat ajax cek di simpanan umroh detailnya  --}}
                        <div class="form-group">
                         <label for="">Jenis Simpanan Umroh</label>
-                        <select name="nominal" class="form-control">
-                            <option value="">Tenor 3 Tahun</option>
-                            <option value="">--pilih tenor--</option>
-
+                        <select name="nominal" class="form-control" id="umroh" required>
+                          <option value="">--Pilih Jenis Simpanan Umroh--</option>
+                          @php
+                              $umroh_list=App\Model\Simpanan\OpsiSimpananLain::where('kode_simpanan','SUH')->orderBy('id','asc')->get();
+                          @endphp
+                          @foreach ($umroh_list as $ul)
+                              
+                           <option value="{{$ul->id}}">{{$ul->jenis_simpanan}} Tenor: {{$ul->jangka_simpanan}} tahun</option>
+                          @endforeach
                         </select>
+
+                            @if($errors->has('nominal'))
+                            <small class="text-muted text-danger">
+                            {{ $errors->first('nominal')}}
+                            </small>
+                            @endif
                          </div> 
 
                          {{-- disini dibuat show data aja --}}
-                         <div class="form-group">
-                            <label for="">Lama Setoran</label>
-                            <input type="text" id="" class="form-control" value="3 tahun" disabled>
-                           
-                        </div> 
-                         <div class="form-group">
-                            <label for="">Setoran perbulan</label>
-                            <input type="text" id="" class="form-control" value="Rp.600.000" disabled>
-                           
-                        </div> 
-                        <div class="form-group">
-                            <label for="">Total Akhir</label>
-                            <input type="text" id="" class="form-control" value="Rp.21.600.000" disabled>
-                           
-                        </div> 
+                        <div id="review_umroh"></div>
 
                        
                       {{-- end show data ajax --}}
 
-                      <button class="btn btn-primary float-right" type="submit">Ajukan Simpanan Umroh <i class="fa fa-paper-plane"></i></button>
+                      <button class="btn btn-primary float-right" type="submit" id="tampil_umroh" style="display:none">Ajukan Simpanan Umroh <i class="fa fa-paper-plane"></i></button>
                     </form>
                 </div>
               </div>

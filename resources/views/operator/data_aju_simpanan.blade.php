@@ -31,7 +31,7 @@
                     Simpanan Sukarela <label class="badge badge-success">{{count($tot_umum)}}</label>
                   </h3>
                   <div class="card-tools">
-                    <a data-toggle="collapse" href="#sim_umum" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a data-toggle="collapse" href="#sim_umum" class="btn btn-default"> Selengkapnya <i class="fa fa-chevron-circle-down"></i></a>
                  
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                    
                   </h3>
                   <div class="card-tools">
-                    <a data-toggle="collapse" href="#sim_depo" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a data-toggle="collapse" href="#sim_depo" class="btn btn-default"> Selengkapnya <i class="fa fa-chevron-circle-down"></i></a>
                   </div>
                 </div>
                 <div class="card-body collapse" id="sim_depo">
@@ -157,7 +157,7 @@
                     
                   </h3>
                   <div class="card-tools">
-                    <a data-toggle="collapse" href="#sim_umroh" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a data-toggle="collapse" href="#sim_umroh" class="btn btn-default"> Selengkapnya <i class="fa fa-chevron-circle-down"></i></a>
                   
                   </div>
                 </div>
@@ -175,18 +175,32 @@
                     <tbody> 
                         
                         {{-- data 1 --}}
+                        @php
+                         $sim_umroh =App\Model\Simpanan\SimpananUmroh::where('status', 0)->get();
+                         @endphp
+                             
+                         @foreach ($sim_umroh as $sh)
+                         @php
+                         $ang_umroh = App\Model\Anggota::where('anggota_id',$sh->anggota_id)->first();
+                         $ops_umroh=App\Model\Simpanan\OpsiSimpananLain::where('id',$sh->opsi_simpanan_lain_id)->first();
+                         @endphp
+                            
                         <tr>
-                            <td>AG-827
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>Tenor 3 tahun</td>
-                            <td>Rp.1.800.000</td>
-                            <td><label class="badge badge-warning">menuggu konfirmasi</label></td>
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
+                          <td>{{$ang_umroh->anggota_kode}}
+                            <br>
+                            <small class="tgl-text">{{format_tanggal(date('Y-m-d',strtotime($sh->tgl_mulai)))}}</small>
+                          </td>
+                        <td>{{$ops_umroh->jenis_simpanan}} 
+                          <br>
+                          <small class="tgl-text">Tenor:{{$sh->jangka_umroh}} tahun</small> 
+                        </td>
+                          <td>Rp.{{number_format($sh->angsuran_umroh)}}</td>
+                          <td><label class="badge badge-warning">menuggu konfirmasi</label></td>
+                          <td>
+                            <a href="{{url('/operator/detail/aju/simpanan-umroh/'.$sh->no_rekening)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
+                          </td>
                         </tr>
+                        @endforeach
                     </tbody>   
                 </table>
                 </div>
@@ -207,11 +221,11 @@
                    
                   </h3>
                   <div class="card-tools">
-                    <a data-toggle="collapse" href="#sim_umroh" class="btn btn-default"> Tampilkan lebih <i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a data-toggle="collapse" href="#sim_pend" class="btn btn-default"> Selengkapnya <i class="fa fa-chevron-circle-down"></i></a>
                  
                   </div>
                 </div>
-                <div class="card-body collapse" id="sim_umroh">
+                <div class="card-body collapse" id="sim_pend">
                   <table id="data4" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -223,20 +237,32 @@
                       </tr>
                     </thead>
                     <tbody> 
-                        
+                      @php
+                      $sim_pend =App\Model\Simpanan\SimpananPendidikan::where('status', 0)->get();
+                      @endphp
+                          
+                      @foreach ($sim_pend as $sp)
+                      @php
+                      $ang_pend = App\Model\Anggota::where('anggota_id',$sh->anggota_id)->first();
+                      $ops_pend=App\Model\Simpanan\OpsiSimpananLain::where('id',$sh->opsi_simpanan_lain_id)->first();
+                      @endphp
                         {{-- data 1 --}}
                         <tr>
-                            <td>AG-827
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>Simpanan Pendidikan SLTA</td>
-                            <td>Rp.180.000</td>
-                            <td><label class="badge badge-warning">menuggu konfirmasi</label></td>
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
+                          <td>{{$ang_pend->anggota_kode}}
+                            <br>
+                            <small class="tgl-text">{{format_tanggal(date('Y-m-d',strtotime($sh->tgl_mulai)))}}</small>
+                          </td>
+                        <td>{{$ops_pend->jenis_simpanan}} 
+                          <br>
+                          <small class="tgl-text">Tenor:{{$sp->jangka_pend}} tahun</small> 
+                        </td>
+                          <td>Rp.{{number_format($sp->angsuran_pend)}}</td>
+                          <td><label class="badge badge-warning">menuggu konfirmasi</label></td>
+                          <td>
+                            <a href="{{url('/operator/detail/aju/simpanan-pendidikan/'.$sp->no_rekening)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
+                          </td>
                         </tr>
+                       @endforeach 
                     </tbody>   
                 </table>
                 </div>

@@ -36,40 +36,50 @@
                 </div>
                 <div class="card-body">
                      
-                    
-                    <form action="" method="post">
+                    @foreach ($data as $dt)
+                        
+                    <form action="{{url('/operator/aju/simpanan-umroh/act/'.$dt->no_rekening)}}" method="post">
                         @csrf
+                        @php
+                        $ops=App\Model\Simpanan\OpsiSimpananLain::where('kode_simpanan','SUH')->orderBy('id','asc')->get();
+                        $ops_e=App\Model\Simpanan\OpsiSimpananLain::where('id',$dt->opsi_simpanan_lain_id)->first();
+  
+                          $ang=App\Model\Anggota::where('anggota_id',$dt->anggota_id)->first();
+                        @endphp
                         <div class="form-group">
                             <label for="">Nama dan Nik</label>
-                            <select name="" class="form-control">
-                                   <option value="">Dedi | 985687855</option> 
-                            </select>
+                            <input type="text" class="form-control" value="{{$ang->anggota_nama}} | {{$ang->anggota_nik}}" disabled>
                           </div> 
 
                        {{-- buat ajax cek di simpanan umroh detailnya  --}}
                        <div class="form-group">
                         <label for="">Jenis Simpanan Umroh</label>
-                        <select name="nominal" class="form-control">
-                            <option value="">Tenor 3 Tahun</option>
-                            <option value="">--pilih tenor--</option>
+                        <select name="nominal" class="form-control" required>
+                        <option value="{{$ops_e->id}}" hidden selected>{{$ops_e->jenis_simpanan}} Tenor {{$ops_e->jangka_simpanan}} tahun</option>
+                           @foreach ($ops as $op)
+                        <option value="{{$op->id}}">{{$op->jenis_simpanan}} Tenor {{$op->jangka_simpanan}} tahun</option>
+                               
+                           @endforeach
 
                         </select>
                          </div> 
+                         <input type="text" value="{{$dt->anggota_id}}" name="ang_id" hidden>
 
                          {{-- disini dibuat show data aja --}}
+                         
                          <div class="form-group">
                             <label for="">Lama Setoran</label>
-                            <input type="text" id="" class="form-control" value="3 tahun" disabled>
+                         <input type="text"  class="form-control" value="{{$dt->jangka_umroh}} tahun" disabled>
                            
                         </div> 
                          <div class="form-group">
                             <label for="">Setoran perbulan</label>
-                            <input type="text" id="" class="form-control" value="Rp.600.000" disabled>
+                            <input type="text" class="form-control" value="Rp.{{number_format($dt->angsuran_umroh)}}" disabled>
                            
                         </div> 
                         <div class="form-group">
                             <label for="">Total Akhir</label>
-                            <input type="text" id="" class="form-control" value="Rp.21.600.000" disabled>
+                            <input type="text" class="form-control" value="Rp.{{number_format($dt->total)}}" disabled>
                            
                         </div> 
 
@@ -77,7 +87,11 @@
                       {{-- end show data ajax --}}
 
                       <button class="btn btn-primary float-right" type="submit">Setujui Simpanan Umroh <i class="fa fa-paper-plane"></i></button>
+                      <a href="{{url('/operator/detail/aju/simpanan-umroh/hapus/'.$dt->no_rekening)}}" class="btn btn-default"><i class="fa fa-trash" ></i> Hapus</a>
+                    
                     </form>
+                    @endforeach
+
                 </div>
               </div>
             </section>

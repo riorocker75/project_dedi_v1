@@ -37,44 +37,43 @@
                         $dt = App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
                     @endphp  
                     
-                    <form action="" method="post">
+                    <form action="{{url('/anggota/ajukan/simpanan-pendidikan/act')}}" method="post">
                         @csrf
                        <div class="form-group">
                          <label for="">Nama</label>
-                       <input type="text" name="nama" id="" class="form-control" value="{{$dt->anggota_nama}}" disabled>
+                       <input type="text" name="ang_id" value="{{$dt->anggota_id}}" hidden>
+                       <input type="text" name="nama" class="form-control" value="{{$dt->anggota_nama}}" disabled>
                        </div> 
 
                        {{-- buat ajax cek di simpanan pendidikan detailnya  --}}
                        <div class="form-group">
                         <label for="">Jenis Simpanan Pendidikan</label>
-                        <select name="nominal" class="form-control">
-                            <option value="">Pendidikan SLTA</option>
-                            <option value="">--pilih tenor--</option>
+                          <select name="nominal" class="form-control" id="pendidikan" required>
+                          @php
+                          $pend_list=App\Model\Simpanan\OpsiSimpananLain::where('kode_simpanan','SPN')->orderBy('id','asc')->get();
+                          @endphp
 
-                        </select>
+                        <option value="">--Pilih Jenis Simpanan Pendidikan--</option>
+
+                          @foreach ($pend_list as $pd)
+                              
+                            <option value="{{$pd->id}}">{{$pd->jenis_simpanan}}</option>
+                          @endforeach
+                          </select>
+                        
+                            @if($errors->has('nominal'))
+                            <small class="text-muted text-danger">
+                            {{ $errors->first('nominal')}}
+                            </small>
+                            @endif
                          </div> 
 
                          {{-- disini dibuat show data aja --}}
-                         <div class="form-group">
-                            <label for="">Lama Setoran</label>
-                            <input type="text" id="" class="form-control" value="3 tahun" disabled>
-                           
-                        </div> 
-                         <div class="form-group">
-                            <label for="">Setoran perbulan</label>
-                            <input type="text" id="" class="form-control" value="Rp.180.000" disabled>
-                           
-                        </div> 
-                        <div class="form-group">
-                            <label for="">Total Simpanan AKhir</label>
-                            <input type="text" id="" class="form-control" value="Rp.7.439.040" disabled>
-                           
-                        </div> 
-
+                         <div id="review_pendidikan"></div>
                        
                       {{-- end show data ajax --}}
 
-                      <button class="btn btn-primary float-right" type="submit">Ajukan Simpanan Pendidikan<i class="fa fa-paper-plane"></i></button>
+                      <button class="btn btn-primary float-right" type="submit" id="tampil_pendidikan" style="display:none" >Ajukan Simpanan Pendidikan<i class="fa fa-paper-plane"></i></button>
                     </form>
                 </div>
               </div>

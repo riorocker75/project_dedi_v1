@@ -20,7 +20,9 @@ use App\Model\Tabungan;
 use App\Model\Simpanan;
 use App\Model\Simpanan\OpsiSimpanan;
 
-use App\Model\SimpananLain;
+use App\Model\Simpanan\SimpananPendidikan;
+use App\Model\Simpanan\SimpananUmroh;
+
 use App\Model\Simpanan\OpsiSimpananLain;
 
 use App\Model\Simpanan\SimpananBerjangka;
@@ -124,6 +126,29 @@ class Ang_SimpananCtrl extends Controller
     function aju_simpanan_umroh(){
         return view('anggota.simpanan.aju_simpanan_umroh');
     }
+
+    function aju_umroh_act(Request $request){
+        $no_rek='85'.rand(1000,9999);
+        $request->validate([
+            'nominal' => 'required'
+        ]);
+        $date=date('Y-m-d');
+        $nilai_simpan=OpsiSimpananLain::where('id', $request->nominal)->first();
+        SimpananUmroh::create([
+           'anggota_id' => $request->ang_id,
+           'no_rekening' => $no_rek,
+           'opsi_simpanan_lain_id' =>$request->nominal,
+           'jangka_umroh' => $nilai_simpan->jangka_simpanan,
+           'angsuran_umroh' => $nilai_simpan->angsuran_simpanan,
+           'total' => $nilai_simpan->total_simpanan,
+           'tgl_mulai' => $date,
+           'status_aju' =>0,
+           'status' =>0
+        ]);
+
+        return redirect('/anggota/aju-simpanan')->with('alert-success','Permohonan Di lanjutkan ke Pengurus');
+
+    }
 /*
 ============================
 |  pengajuan simpanan Pendidikan
@@ -133,6 +158,27 @@ class Ang_SimpananCtrl extends Controller
         return view('anggota.simpanan.aju_simpanan_pendidikan');
     }
 
+    function aju_pendidikan_act(Request $request){
+        $no_rek='84'.rand(1000,9999);
+        $request->validate([
+            'nominal' => 'required'
+        ]);
+        $date=date('Y-m-d');
+        $nilai_simpan=OpsiSimpananLain::where('id', $request->nominal)->first();
+        SimpananPendidikan::create([
+           'anggota_id' => $request->ang_id,
+           'no_rekening' => $no_rek,
+           'opsi_simpanan_lain_id' =>$request->nominal,
+           'jangka_pend' => $nilai_simpan->jangka_simpanan,
+           'angsuran_pend' => $nilai_simpan->angsuran_simpanan,
+           'total' => $nilai_simpan->total_simpanan,
+           'tgl_mulai' => $date,
+           'status_aju' =>0,
+           'status' =>0
+        ]);
 
+        return redirect('/anggota/aju-simpanan')->with('alert-success','Permohonan Di lanjutkan ke Pengurus');
+
+    }
 
 }

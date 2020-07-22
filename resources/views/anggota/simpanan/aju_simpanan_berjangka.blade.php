@@ -56,13 +56,13 @@
                             @foreach ($deposit as $dp)
                             <option value="{{$dp->id}}">Rp.{{number_format($dp->nominal_deposit)}}</option>
                             @endforeach
-
-                          @if($errors->has('nominal'))
-                          <small class="text-muted text-danger">
-                          {{ $errors->first('nominal')}}
-                          </small>
-                          @endif
                         </select>
+
+                        @if($errors->has('nominal'))
+                        <small class="text-muted text-danger">
+                        {{ $errors->first('nominal')}}
+                        </small>
+                        @endif
                          </div> 
 
                          {{-- disini dibuat show data aja --}}

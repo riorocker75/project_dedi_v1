@@ -235,15 +235,65 @@ class AnggotaSimpanan extends Controller
 */     
 
     function aju_sim_umroh($id){
-        return view('operator.simpanan.op_aju_simpanan_umroh');
+        $data=SimpananUmroh::where('no_rekening',$id)->get();
+        return view('operator.simpanan.op_aju_simpanan_umroh',[
+            'data' =>$data
+        ]);
+     
 
     }
 
     function aju_umroh_act(Request $request,$id){
+        $date=date('Y-m-d');
+        
+        $request->validate([
+            'nominal' => 'required'
+        ]);
+         $ops= OpsiSimpananLain::where('id', $request->nominal)->first();   
+
+        SimpananUmroh::where('no_rekening',$id)->update([
+            'opsi_simpanan_lain_id' => $request->nominal,
+            'angsuran_umroh' => $ops->angsuran_simpanan,
+            'jangka_umroh' => $ops->jangka_simpanan,
+            'total' => $ops->total_simpanan,
+            'status_aju' => 1,
+            'status' => 1,
+            'tgl_mulai' =>$date
+
+        ]);
+
+        Anggota::where('anggota_id', $request->ang_id)->update([
+            'status_umroh' => 1
+        ]);
+
+        $sisa_bayar =$ops->total_simpanan - $ops->angsuran_simpanan;
+        $kode_trs="TRUH-" .rand(1000,9999);
+        //   transaksi pertama
+        DB::table('tbl_simpanan_transaksi')->insert([
+                'anggota_id' =>$request->ang_id,
+                'no_rekening' => $id,  
+                'operator_id' =>Session::get('op_kode'),
+                'kode_simpanan' => "SUH",
+                'kode_transaksi' => $kode_trs,
+                'sisa_angsuran' =>$sisa_bayar,
+                'nominal_transaksi' => $ops->angsuran_simpanan,
+                'tgl_transaksi' => date('Y-m-d'),
+                'jenis_transaksi' => "Simpanan Umroh",
+                'ket_transaksi' => "Pembayaran Angsuran Simpanan Umroh Pertama",
+                'status' => 1
+        ]);
+
+        return redirect('/operator/data-simpanan')->with('alert-success','Data telah diupdate');    
+
 
     }
 
 
+    function aju_umroh_hapus($id){
+        SimpananUmroh::where('no_rekening',$id)->delete();
+        return redirect('/operator/data-simpanan')->with('alert-danger','Data Telah dihapus');
+        
+    }
     function pesan_sim_umroh(Request $request){
         $date=date('Y-m-d');
         Notif::create([
@@ -264,12 +314,61 @@ class AnggotaSimpanan extends Controller
 ==================================
 */      
     function aju_sim_pendidikan($id){
-        return view('operator.simpanan.op_aju_simpanan_pendidikan');
+        $data=SimpananPendidikan::where('no_rekening',$id)->get();
+        return view('operator.simpanan.op_aju_simpanan_pendidikan',[
+            'data' =>$data
+        ]);
+    }
+    function aju_pendidikan_act(Request $request,$id){
+        $date=date('Y-m-d');
+        
+        $request->validate([
+            'nominal' => 'required'
+        ]);
+         $ops= OpsiSimpananLain::where('id', $request->nominal)->first();   
+
+         SimpananPendidikan::where('no_rekening',$id)->update([
+            'opsi_simpanan_lain_id' => $request->nominal,
+            'angsuran_pend' => $ops->angsuran_simpanan,
+            'jangka_pend' => $ops->jangka_simpanan,
+            'total' => $ops->total_simpanan,
+            'status_aju' => 1,
+            'status' => 1,
+            'tgl_mulai' =>$date
+
+        ]);    
+         Anggota::where('anggota_id', $request->ang_id)->update([
+            'status_pendidikan' => 1
+        ]);
+        $thn=$ops->jangka_simpanan * 12;
+        $murni_angsur= $ops->angsuran_simpanan * $thn;    
+        $sisa_bayar =$murni_angsur - $ops->angsuran_simpanan;
+        $kode_trs="TRPN-" .rand(1000,9999);
+        //   transaksi pertama
+        DB::table('tbl_simpanan_transaksi')->insert([
+                'anggota_id' =>$request->ang_id,
+                'no_rekening' => $id,  
+                'operator_id' =>Session::get('op_kode'),
+                'kode_simpanan' => "SPN",
+                'kode_transaksi' => $kode_trs,
+                'sisa_angsuran' =>$sisa_bayar,
+                'nominal_transaksi' => $ops->angsuran_simpanan,
+                'tgl_transaksi' => date('Y-m-d'),
+                'jenis_transaksi' => "Simpanan Pendidikan",
+                'ket_transaksi' => "Pembayaran Angsuran Simpanan Pendidikan Pertama",
+                'status' => 1
+        ]);
+
+        return redirect('/operator/data-simpanan')->with('alert-success','Data telah diupdate');
+
+
 
     }
-    function aju_pendidikan_act(Request $request,$id){}
 
-
+    function aju_pendidikan_hapus($id){
+        SimpananPendidikan::where('no_rekening',$id)->delete();
+        return redirect('/operator/data-simpanan')->with('alert-danger','Data Telah dihapus');
+    }
     function pesan_sim_pendidikan(Request $request){
         $date=date('Y-m-d');
         Notif::create([

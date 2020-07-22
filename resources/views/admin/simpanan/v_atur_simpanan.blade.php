@@ -41,9 +41,12 @@
                <a href="{{url('/admin/pengaturan/simpanan-deposit')}}" class="btn btn-default"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Pengaturan Simpanan Berjangka</a>
                   <br>
                   <br>
-              <a href="{{url('/admin/pengaturan/simpanan-lain')}}" class="btn btn-default"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Pengaturan Simpanan Lain</a>
+              <a href="{{url('/admin/pengaturan/simpanan-umroh')}}" class="btn btn-default"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Pengaturan Simpanan Umroh</a>
                   <br>
                   <br>
+              <a href="{{url('/admin/pengaturan/simpanan-pendidikan')}}" class="btn btn-default"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Pengaturan Simpanan Pendidikan</a>
+              <br>
+              <br>
           </div>
        </div>
       </div>

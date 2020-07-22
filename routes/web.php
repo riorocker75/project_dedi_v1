@@ -73,9 +73,25 @@ Route::post('/admin/pengaturan/simpanan-deposit/update/{id}', 'Admin\SimpananCtr
 Route::get('/admin/pengaturan/simpanan-deposit/hapus/{id}','Admin\SimpananCtrl@atur_deposit_hapus');
 
 
-//--pengaturan simpanan lain(umroh dan pendidikan)
-Route::get('/admin/pengaturan/simpanan-lain', 'Admin\SimpananCtrl@atur_lain');
+//--pengaturan simpanan umroh
+Route::get('/admin/pengaturan/simpanan-umroh', 'Admin\SimpananCtrl@atur_umroh');
+Route::post('/admin/pengaturan/simpanan-umroh/tambah', 'Admin\SimpananCtrl@atur_umroh_act');
+Route::get('/admin/pengaturan/simpanan-umroh/edit/{id}', 'Admin\SimpananCtrl@atur_umroh_edit');
+Route::post('/admin/pengaturan/simpanan-umroh/update/{id}', 'Admin\SimpananCtrl@atur_umroh_update');
 
+Route::get('/admin/pengaturan/simpanan-umroh/hapus/{id}','Admin\SimpananCtrl@atur_umroh_hapus');
+
+
+
+
+
+//--pengaturan simpanan pendidikan
+Route::get('/admin/pengaturan/simpanan-pendidikan', 'Admin\SimpananCtrl@atur_pendidikan');
+Route::post('/admin/pengaturan/simpanan-pendidikan/tambah', 'Admin\SimpananCtrl@atur_pendidikan_act');
+Route::get('/admin/pengaturan/simpanan-pendidikan/edit/{id}', 'Admin\SimpananCtrl@atur_pendidikan_edit');
+Route::post('/admin/pengaturan/simpanan-pendidikan/update/{id}', 'Admin\SimpananCtrl@atur_pendidikan_update');
+
+Route::get('/admin/pengaturan/simpanan-pendidikan/hapus/{id}','Admin\SimpananCtrl@atur_pendidikan_hapus');
 
 
 // kategori pinjaman
@@ -195,14 +211,16 @@ Route::post('/operator/detail/aju/simpanan-deposit/pesan/act','Operator\AnggotaS
 
 //--simpanan umroh aju dari sisi anggota
 Route::get('/operator/detail/aju/simpanan-umroh/{id}', 'Operator\AnggotaSimpanan@aju_sim_umroh');
-Route::post('/operator/aju/simpanan-umroh/act', 'Operator\AnggotaSimpanan@aju_umroh_act');
+Route::post('/operator/aju/simpanan-umroh/act/{id}', 'Operator\AnggotaSimpanan@aju_umroh_act');
+Route::get('/operator/detail/aju/simpanan-umroh/hapus/{id}', 'Operator\AnggotaSimpanan@aju_umroh_hapus');
 
 Route::post('/operator/detail/aju/simpanan-umroh/pesan/act','Operator\AnggotaSimpanan@pesan_sim_umroh');
 
 
 //--simpanan pendidikan aju dari sisi anggota
 Route::get('/operator/detail/aju/simpanan-pendidikan/{id}', 'Operator\AnggotaSimpanan@aju_sim_pendidikan');
-Route::post('/operator/aju/simpanan-pendidikan/act', 'Operator\AnggotaSimpanan@aju_pendidikan_act');
+Route::post('/operator/aju/simpanan-pendidikan/act/{id}', 'Operator\AnggotaSimpanan@aju_pendidikan_act');
+Route::get('/operator/detail/aju/simpanan-pendidikan/hapus/{id}', 'Operator\AnggotaSimpanan@aju_pendidikan_hapus');
 
 Route::post('/operator/detail/aju/simpanan-pendidikan/pesan/act','Operator\AnggotaSimpanan@pesan_sim_pendidikan');
 
@@ -251,6 +269,9 @@ Route::get('/anggota/view-pinjaman/{id}', 'Anggota\AnggotaController@view_pinjam
 Route::post('/anggota/cek-angsur','Anggota\AnggotaController@cek_angsuran');
 Route::post('/anggota/cek-angsur-fix','Anggota\AnggotaController@cek_angsuran_fix');
 Route::post('/anggota/cek-deposit','Anggota\AnggotaController@cek_deposit');
+Route::post('/anggota/cek-umroh','Anggota\AnggotaController@cek_umroh');
+Route::post('/anggota/cek-pendidikan','Anggota\AnggotaController@cek_pendidikan');
+
 
 
 
@@ -269,8 +290,13 @@ Route::post('/anggota/ajukan/simpanan-umum/act','Anggota\Ang_SimpananCtrl@aju_si
 Route::get('/anggota/ajukan/simpanan-deposit','Anggota\Ang_SimpananCtrl@aju_simpanan_deposit');
 Route::post('/anggota/ajukan/simpanan-deposit/act','Anggota\Ang_SimpananCtrl@aju_deposit_act');
 
+//--ajukan simpanan umroh
 Route::get('/anggota/ajukan/simpanan-umroh','Anggota\Ang_SimpananCtrl@aju_simpanan_umroh');
+Route::post('/anggota/ajukan/simpanan-umroh/act','Anggota\Ang_SimpananCtrl@aju_umroh_act');
+
+//--ajukan simpanan pendidikan
 Route::get('/anggota/ajukan/simpanan-pendidikan','Anggota\Ang_SimpananCtrl@aju_simpanan_pendidikan');
+Route::post('/anggota/ajukan/simpanan-pendidikan/act','Anggota\Ang_SimpananCtrl@aju_pendidikan_act');
 
 // bagian transaksi
 Route::get('/anggota/riwayat/transaksi/','Anggota\Ang_Transaksi@histori_simpanan');
