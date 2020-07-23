@@ -23,25 +23,22 @@
           <div class="row">
             <section class="col-lg-6 connectedSortable">
               <div class="card">
+                @foreach ($data as $dt)
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                  Ajukan permohonan
+                 Data pengajuan
                   </h3>
                   <div class="card-tools">
                     <div class="float-right">
-                      <a  data-toggle="modal" data-target="#pesan_pend" class="btn btn-block btn-outline-info">Kirim Pesan &nbsp;&nbsp;<i class="fa fa-comment"></i></a>
+                        <div class="badge badge-primary">Masa Angsuran Simpanan</div>
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
-                    @php
-                        
-                      // $ang=App\Model\Anggota::where('anggota_id',$dt->anggota_id)->first();
-
-                    @endphp  
-                    @foreach ($data as $dt)
-                    <form action="{{url('/operator/aju/simpanan-pendidikan/act/'.$dt->no_rekening)}}" method="post">
+                 
+                   
+                    <form action="" method="post">
                         @csrf
                         @php
                         $ops=App\Model\Simpanan\OpsiSimpananLain::where('kode_simpanan','SPN')->orderBy('id','asc')->get();
@@ -58,16 +55,9 @@
                        {{-- buat ajax cek di simpanan pendidikan detailnya  --}}
                        <div class="form-group">
                         <label for="">Jenis Simpanan Pendidikan</label>
-                        <select name="nominal" class="form-control" required>
-                          <option value="{{$ops_e->id}}" hidden selected>{{$ops_e->jenis_simpanan}} Tenor {{$ops_e->jangka_simpanan}} tahun</option>
-                          @foreach ($ops as $op)
-                            <option value="{{$op->id}}">{{$op->jenis_simpanan}} Tenor {{$op->jangka_simpanan}} tahun</option>
-                              
-                          @endforeach
-
-                        </select>
+                            <input type="text" class="form-control" value="{{$ops_e->jenis_simpanan}} Tenor {{$ops_e->jangka_simpanan}} tahun" disabled>
                          </div> 
-                         <input type="text" value="{{$dt->anggota_id}}" name="ang_id" hidden>
+                         <input type="text"  value="{{$dt->anggota_id}}" name="ang_id" hidden>
 
                          {{-- disini dibuat show data aja --}}
                          <div class="form-group">
@@ -75,6 +65,12 @@
                             <input type="text" id="" class="form-control" value="{{$dt->jangka_pend}} tahun" disabled>
                            
                         </div> 
+
+                        <div class="form-group">
+                            <label for="">Nisbah pertahun</label>
+                            <input type="text" id="" class="form-control" value="{{$ops_e->bunga}} %" disabled>
+                           
+                        </div>
                          <div class="form-group">
                             <label for="">Setoran perbulan</label>
                             <input type="text" id="" class="form-control" value="Rp.{{number_format($dt->angsuran_pend)}}" disabled>
@@ -89,12 +85,11 @@
                        
                       {{-- end show data ajax --}}
 
-                      <button class="btn btn-primary float-right" type="submit">Setujui Simpanan Pendidikan <i class="fa fa-paper-plane"></i></button>
-                      <a href="{{url('/operator/detail/aju/simpanan-pendidikan/hapus/'.$dt->no_rekening)}}" class="btn btn-default"><i class="fa fa-trash" ></i> Hapus</a>
+                      {{-- <a href="{{url('/operator/detail/aju/simpanan-pendidikan/hapus/'.$dt->no_rekening)}}" class="btn btn-default"><i class="fa fa-trash" ></i> Hapus</a> --}}
                         
                     </form>
-                    @endforeach
                 </div>
+                @endforeach
               </div>
             </section>
           
@@ -105,30 +100,5 @@
     
 
     
-    <!-- Modal pesan datang ke koperasi-->
-<div class="modal fade" id="pesan_pend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Kirim Pesan Ke Pemohon</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <form action="{{url('/operator/detail/aju/simpanan-pendidikan/pesan/act')}}" method="post">
-        @csrf
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Isi Pesan</label>
-            <textarea name="pesan"  placeholder="misal: Harap datang besok jam 8 pagi"  class="form-control" rows="2" required></textarea>
-          </div>
-        <input type="text" value="{{ $ang->anggota_kode}}" name="ang_kode" hidden>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" type="submit">Kirim Pesan</button>
-        </div>
-    </form>
-    </div>
-  </div>
-</div>
+
 @endsection

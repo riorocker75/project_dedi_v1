@@ -243,14 +243,14 @@
                           
                       @foreach ($sim_pend as $sp)
                       @php
-                      $ang_pend = App\Model\Anggota::where('anggota_id',$sh->anggota_id)->first();
-                      $ops_pend=App\Model\Simpanan\OpsiSimpananLain::where('id',$sh->opsi_simpanan_lain_id)->first();
+                      $ang_pend = App\Model\Anggota::where('anggota_id',$sp->anggota_id)->first();
+                      $ops_pend=App\Model\Simpanan\OpsiSimpananLain::where('id',$sp->opsi_simpanan_lain_id)->first();
                       @endphp
                         {{-- data 1 --}}
                         <tr>
                           <td>{{$ang_pend->anggota_kode}}
                             <br>
-                            <small class="tgl-text">{{format_tanggal(date('Y-m-d',strtotime($sh->tgl_mulai)))}}</small>
+                            <small class="tgl-text">{{format_tanggal(date('Y-m-d',strtotime($sp->tgl_mulai)))}}</small>
                           </td>
                         <td>{{$ops_pend->jenis_simpanan}} 
                           <br>

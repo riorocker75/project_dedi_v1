@@ -18,6 +18,8 @@ use App\Model\Cat_Simpanan;
 use App\Model\Tabungan;
 
 use App\Model\Simpanan;
+use App\Model\SimpananTransaksi;
+
 use App\Model\Simpanan\OpsiSimpanan;
 
 use App\Model\Simpanan\SimpananPendidikan;

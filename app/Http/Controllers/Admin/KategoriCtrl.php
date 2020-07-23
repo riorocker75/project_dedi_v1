@@ -23,7 +23,7 @@ class KategoriCtrl extends Controller
 	{
 		$this->middleware(function ($request, $next) {
 			if(!Session::get('login-adm')){
-				return redirect('login/admin')->with('alert-danger','Dilarang Masuk Terlarang');
+				return redirect('login/user')->with('alert-danger','Dilarang Masuk Terlarang');
 			}
 			return $next($request);
 		});

@@ -73,7 +73,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"post",
-              url:"/anggota/cek-angsur-fix",
+              url:"/ajax/cek-angsur-fix",
               data:{angsur:angsur},
               success: function(data){          
                 $('#skenario-fix').html(data);
@@ -114,7 +114,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"post",
-              url:"/anggota/cek-deposit",
+              url:"/ajax/cek-deposit",
               data:{deposit:deposit},
               success: function(data){          
                 $('#review_deposit').html(data);
@@ -139,7 +139,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"post",
-              url:"/anggota/cek-umroh",
+              url:"/ajax/cek-umroh",
               data:{umroh:umroh},
               success: function(data){          
                 $('#review_umroh').html(data);
@@ -163,7 +163,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"post",
-              url:"/anggota/cek-pendidikan",
+              url:"/ajax/cek-pendidikan",
               data:{pendidikan:pendidikan},
               success: function(data){          
                 $('#review_pendidikan').html(data);
@@ -175,3 +175,26 @@ $(document).ready(function () {
    });
 });
 
+// pengecekan data anggota
+$(document).ready(function () {
+   
+  $('#anggota').change(function () {
+    var anggota =$('#anggota').children("option:selected").val(); 
+         if(anggota.length > 0){ 
+
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+              type:"post",
+              url:"/ajax/cek-anggota",
+              data:{anggota:anggota},
+              success: function(data){          
+                $('#detail-anggota').html(data);
+                
+              }
+            });
+          }
+   
+   });
+});

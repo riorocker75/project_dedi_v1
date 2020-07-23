@@ -22,6 +22,8 @@ class TblSimpananBerjangka extends Migration
                $table->text('nilai_deposit');
                $table->text('jangka_deposit');
                $table->dateTime('tgl_deposit');
+               $table->text('total_nisbah')->nullable();
+
                $table->dateTime('tgl_tarik')->nullable(); 
                $table->text('status')->nullable();
            });

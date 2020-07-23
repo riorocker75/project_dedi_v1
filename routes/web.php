@@ -36,6 +36,24 @@ Route::get('/login/user' ,'Auth\AdminLogin');
 
 /*
 =========================== 
+		Ajax checker
+===========================
+*/
+// 
+Route::post('/ajax/cek-angsur','AjaxCtrl@cek_angsuran');
+Route::post('/ajax/cek-angsur-fix','AjaxCtrl@cek_angsuran_fix');
+Route::post('/ajax/cek-deposit','AjaxCtrl@cek_deposit');
+Route::post('/ajax/cek-umroh','AjaxCtrl@cek_umroh');
+Route::post('/ajax/cek-pendidikan','AjaxCtrl@cek_pendidikan');
+
+
+// pengecekan data anggota
+Route::post('/ajax/cek-anggota','AjaxCtrl@cek_anggota');
+
+
+
+/*
+=========================== 
 		Admin
 ===========================
 */
@@ -111,7 +129,11 @@ Route::get('/admin/pekerjaan', 'Admin\PekerjaanCtrl');
 Route::post('/admin/pekerjaan/tambah-act', 'Admin\PekerjaanCtrl@tambah_act');
 Route::get('/admin/pekerjaan/delete-act/{id}', 'Admin\PekerjaanCtrl@tambah_delete');
 
-// data pengajuan
+/* 
+--------------------------------
+	mulai data pengajuan
+--------------------------------
+*/
 //---anggota gabung
 Route::get('/admin/mohon-gabung','Admin\PengajuanCtrl@anggota_gabung');
 Route::get('/admin/detail/anggota-mohon/{id}','Admin\PengajuanCtrl@detail_gabung');
@@ -134,6 +156,30 @@ Route::get('/admin/review-pinjaman/{id}','Admin\PengajuanCtrl@data_peminjam_deta
 //---simpanan
 Route::get('/admin/pemohon/simpanan','Admin\PengajuanCtrl@mohon_simpanan');
 
+//----simpanan deposit aju
+Route::get('/admin/detail/aju/simpanan-deposit/{id}', 'Admin\PengajuanCtrl@aju_sim_deposit');
+Route::get('/admin/pemohon/simpanan-deposit/tambah', 'Admin\PengajuanCtrl@aju_sim_deposit_tambah');
+
+Route::post('/admin/pemohon/simpanan-deposit/tambah/act', 'Admin\PengajuanCtrl@aju_sim_deposit_act');
+
+
+//----simpanan umroh aju
+Route::get('/admin/detail/aju/simpanan-umroh/{id}', 'Admin\PengajuanCtrl@aju_sim_umroh');
+Route::get('/admin/pemohon/simpanan-umroh/tambah', 'Admin\PengajuanCtrl@aju_sim_umroh_tambah');
+
+Route::post('/admin/pemohon/simpanan-umroh/tambah/act', 'Admin\PengajuanCtrl@aju_sim_umroh_act');
+
+//----simpanan pendidikan aju
+Route::get('/admin/detail/aju/simpanan-pendidikan/{id}', 'Admin\PengajuanCtrl@aju_sim_pendidikan');
+Route::get('/admin/pemohon/simpanan-pendidikan/tambah', 'Admin\PengajuanCtrl@aju_sim_pendidikan_tambah');
+
+Route::post('/admin/pemohon/simpanan-pendidikan/tambah/act', 'Admin\PengajuanCtrl@aju_sim_pendidikan_act');
+
+/* 
+--------------------------------------
+	end pengajuan simpanan dan anggota
+--------------------------------------
+*/
 
 // Bagian Transaksi
 Route::get('/admin/transaksi/simpanan','Admin\TransaksiCtrl@transaksi_simpanan');
@@ -264,13 +310,6 @@ Route::get('/anggota/data-pinjaman/{id}' , 'Anggota\AnggotaController@data_pinja
 Route::get('/anggota/ajukan-pinjaman' , 'Anggota\AnggotaController@aju_pinjam');
 Route::post('/anggota/ajukan-pact' , 'Anggota\AnggotaController@aju_pinjam_act');
 Route::get('/anggota/view-pinjaman/{id}', 'Anggota\AnggotaController@view_pinjaman');
-
-// pengecekan di ajax
-Route::post('/anggota/cek-angsur','Anggota\AnggotaController@cek_angsuran');
-Route::post('/anggota/cek-angsur-fix','Anggota\AnggotaController@cek_angsuran_fix');
-Route::post('/anggota/cek-deposit','Anggota\AnggotaController@cek_deposit');
-Route::post('/anggota/cek-umroh','Anggota\AnggotaController@cek_umroh');
-Route::post('/anggota/cek-pendidikan','Anggota\AnggotaController@cek_pendidikan');
 
 
 
