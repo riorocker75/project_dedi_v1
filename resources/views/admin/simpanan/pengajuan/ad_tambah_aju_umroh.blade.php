@@ -35,7 +35,7 @@
                 </div>
             
                 <div class="card-body">
-                    <form action="{{url('/')}}" method="post">
+                    <form action="{{url('/admin/pemohon/simpanan-umroh/tambah/act')}}" method="post">
                         @csrf
                 
                         <div class="form-group">
