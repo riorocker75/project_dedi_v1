@@ -70,7 +70,7 @@ Route::get('/dashboard/admin/operator_tambah', 'Admin\OperatorCtrl@operator_tamb
 Route::post('/dashboard/admin/operator_act', 'Admin\OperatorCtrl@operator_act');
 Route::get('/dashboard/admin/operator_hapus/{id}', 'Admin\OperatorCtrl@operator_hapus');
 Route::get('/dashboard/admin/operator_edit/{id}','Admin\OperatorCtrl@operator_edit');
-Route::post('/dashboard/admin/operator_update', 'Admin\OperatorCtrl@operator_update');
+Route::post('/dashboard/admin/operator_update/{id}', 'Admin\OperatorCtrl@operator_update');
 // Route::post('/dashboard/admin/operator_update', 'Admin\OperatorCtrl@operator_update');
 
 Route::get('/dashboard/admin/anggota', 'Admin\AnggotaCtrl@anggota');

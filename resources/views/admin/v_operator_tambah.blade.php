@@ -38,27 +38,33 @@
                 <!-- general form elements disabled -->
                 <div class="card card-warning">
                   <div class="card-body">
-                    <form role="form" action="operator_act" method="post">
+                    <form role="form" action="{{url('/dashboard/admin/operator_act')}}" method="post">
                       {{ csrf_field() }}
                       <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                               <!-- text input -->
-                              <div class="form-group">
-                                <label>Kode Pegawai</label>
-                                <input type="text" class="form-control" name="kode_pagawai" required="required" placeholder="Nomor ....">
-                              </div>
-                            
-                          
+                              
                               <!-- text input -->
                               <div class="form-group">
                                 <label>Nomor Pengurus</label>
                                 <input type="number" class="form-control" name="nomor_pegawai" required="required" placeholder="Nomor ....">
+                                @if($errors->has('nomor_pegawai'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('nomor_pegawai')}}
+                                    </small>
+                                @endif
                               </div>
                           
                           
                               <div class="form-group">
                                 <label>Nama Pengurus</label>
                                 <input type="text" class="form-control" name="nama" required="required" placeholder="Nama ...">
+
+                                @if($errors->has('nama'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('nama')}}
+                                    </small>
+                                @endif
                               </div>
                             
                           
@@ -68,18 +74,33 @@
                                   <option value="">--Pilih--</option>
                                   <option value="Laki - Laki">Laki - Laki</option>
                                   <option value="Perempuan">Perempuan</option>
-                                </select>                            
+                                </select>  
+                                @if($errors->has('kelamin'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('kelamin')}}
+                                    </small>
+                                @endif                          
                               </div>
                         
                           
                               <div class="form-group">
                                 <label>Tanggal Lahir</label>
-                                <input type="date" name="tanggal_lahir" class="form-control" required="required">                        
-                              </div>
+                              <input type="date" name="tanggal_lahir" class="form-control" required="required" value="{{date('Y-m-d')}}">                        
+                              @if($errors->has('tanggal_lahir'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('tanggal_lahir')}}
+                                    </small>
+                                @endif 
+                            </div>
 
                               <div class="form-group">
                                 <label>Tempat Lahir</label>
                                 <textarea class="form-control" name="tempat_lahir" rows="3" required="required"></textarea>
+                                @if($errors->has('tempat_lahir'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('tempat_lahir')}}
+                                    </small>
+                                @endif
                               </div>
                             </div>
 
@@ -87,22 +108,41 @@
                               <div class="form-group">
                                 <label>Alamat lengkap</label>
                                 <textarea class="form-control" name="alamat" rows="3" required="required"></textarea>
+                                @if($errors->has('alamat'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('alamat')}}
+                                    </small>
+                                @endif
                               </div>
 
                               <div class="form-group">
                                 <label>Kontak</label>
                                 <input type="number" class="form-control" name="kontak" placeholder="08217xxxx" required="required">
+                                @if($errors->has('kontak'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('kontak')}}
+                                    </small>
+                                @endif
                               </div>
 
                               <div class="form-group">
                                 <label>Username</label>
                                 <input type="text" class="form-control" name="username" placeholder="Usename .." required="required">
+                                @if($errors->has('username'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('username')}}
+                                    </small>
+                                @endif
                               </div>
 
                               <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" class="form-control" name="password">
-                                <p style="color: red">*input jika akan diganti</p>
+                                @if($errors->has('password'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('password')}}
+                                    </small>
+                                @endif
                               </div>
 
                             </div>

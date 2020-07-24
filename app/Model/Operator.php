@@ -11,7 +11,7 @@ class Operator extends Model
     public $timestamps = false;
     protected $fillable =[
         'operator_kode',
-        'operator_nomot_pegawai',
+        'operator_nomor_pegawai',
         'operator_nama',
         'operator_kelamin',
         'operator_tanggal_lahir',

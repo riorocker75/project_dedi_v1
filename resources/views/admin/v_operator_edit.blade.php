@@ -39,37 +39,40 @@
                 <div class="card card-warning">
                   <div class="card-body">
                     @foreach($operator as $o)
-                    <form action="operator_update" method="post">
+                    <form action="{{url('/dashboard/admin/operator_update/'.$o->operator_id)}}" method="post">
                     {{-- <form action="operator_update/{{$o->operator_id}}" method="post"> --}}
                       {{ csrf_field() }}
                       <div class="row">
+                      
                         <div class="col-sm-6">
                           <!-- text input -->
                           <div class="form-group">
-                            <label>KODE PETUGAS</label>
-                            <input type="text" class="form-control" name="id" value="{{ $o->operator_id }}">
-                            <input type="text" class="form-control" name="kode_pegawai" value="{{ $o->operator_kode }}">
+                            <label>Nomor Pengurus</label>
+                            <input type="number" class="form-control" name="nomor_pegawai" value="{{ $o->operator_nomor_pegawai }}" required>
+                            @if($errors->has('nomor_pegawai'))
+                            <small class="text-muted text-danger">
+                                {{ $errors->first('nomor_pegawai')}}
+                                </small>
+                            @endif
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <!-- text input -->
                           <div class="form-group">
-                            <label>NOMOR PETUGAS</label>
-                            <input type="number" class="form-control" name="nomor_pegawai" value="{{ $o->operator_nomor_pegawai }}">
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <!-- text input -->
-                          <div class="form-group">
-                            <label>NAMA OPERATOR</label>
-                            <input type="text" class="form-control" name="nama" value="{{ $o->operator_nama }}">
+                            <label>Nama Operator</label>
+                            <input type="text" class="form-control" name="nama" value="{{ $o->operator_nama }}" required>
+                            @if($errors->has('nama'))
+                            <small class="text-muted text-danger">
+                                {{ $errors->first('nama')}}
+                                </small>
+                            @endif
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>JENIS KELAMIN</label>
+                            <label>Jenis Kelamin</label>
                             <select class="form-control" name="kelamin" required="required">
-                              <option value="">--Pilih--</option>
+                            <option value="{{$o->operator_kelamin}}" selected hidden>{{$o->operator_kelamin}}</option>
                               <option value="Laki - Laki">Laki - Laki</option>
                               <option value="Perempuan">Perempuan</option>
                             </select>                            
@@ -77,8 +80,8 @@
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>TANGGAL LAHIR</label>
-                            <input type="date" name="tanggal_lahir" class="form-control" value="{{$o->operator_tanggal_lahir}}">                        
+                            <label>Tanggal lahir</label>
+                            <input type="date" name="tanggal_lahir" class="form-control" value="{{date('Y-m-d',strtotime($o->operator_tanggal_lahir))}}" required>                        
                           </div>
                         </div>
                       </div>
@@ -86,36 +89,46 @@
                         <div class="col-sm-6">
                           <!-- textarea -->
                           <div class="form-group">
-                            <label>TEMPAT LAHIR</label>
-                            <textarea class="form-control" name="tempat_lahir" rows="3">{{$o->operator_tempat_lahir}}</textarea>
+                            <label>Tempat Lahir</label>
+                            <textarea class="form-control" name="tempat_lahir" rows="3" required>{{$o->operator_tempat_lahir}}</textarea>
                           </div>
                         </div>
                          <div class="col-sm-6">
                           <!-- textarea -->
                           <div class="form-group">
-                            <label>ALAMAT LENGKAP</label>
-                            <textarea class="form-control" name="alamat" rows="3">{{$o->operator_alamat}}</textarea>
+                            <label>Alamat Lengkap</label>
+                            <textarea class="form-control" name="alamat" rows="3" required>{{$o->operator_alamat}}</textarea>
                           </div>
                         </div>                        
                       </div>
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>KONTAK</label>
-                            <input type="number" class="form-control" name="kontak" value="{{ $o->operator_kontak }}">
+                            <label>Kontak</label>
+                            <input type="number" class="form-control" name="kontak" value="{{ $o->operator_kontak }}" required>
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>USERNAME</label>
-                            <input type="text" class="form-control" name="username" value="{{ $o->operator_username }}">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username" value="{{ $o->operator_username }}" required>
+                            @if($errors->has('username'))
+                            <small class="text-muted text-danger">
+                                {{ $errors->first('username')}}
+                                </small>
+                            @endif
                           </div>
                         </div> 
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label>PASSWORD</label>
+                            <label>Password</label>
                             <input type="password" class="form-control" name="password">
                             <p style="color: red">*input jika akan diganti</p>
+                            @if($errors->has('password'))
+                            <small class="text-muted text-danger">
+                                {{ $errors->first('password')}}
+                                </small>
+                            @endif
                           </div>
                         </div>
                       </div>                                                          
