@@ -33,7 +33,7 @@ class Anggota_seed extends Seeder
             'anggota_pekerjaan' => "1",
             'anggota_gaji' => "50000000",
             'tgl_gabung' =>"2020-06-20",
-
+            'status_pokok' =>1,
             'status_pinjaman' =>1,
             'status_simpanan' =>1,
             'status_deposit' =>0,
@@ -60,6 +60,7 @@ class Anggota_seed extends Seeder
             'anggota_pekerjaan' => "1",
             'anggota_gaji' => "7000000",
             'tgl_gabung' =>"2020-06-20",
+            'status_pokok' =>1,
             'status_pinjaman' =>1,
             'status_simpanan' =>1,
             'status_deposit' =>0,
@@ -86,7 +87,7 @@ class Anggota_seed extends Seeder
             'anggota_pekerjaan' => "1",
             'anggota_gaji' => "4000000",
             'tgl_gabung' =>"2020-06-20",
-
+            'status_pokok' =>1,
             'status_pinjaman' =>0,
             'status_simpanan' =>0,
             'status_deposit' =>0,

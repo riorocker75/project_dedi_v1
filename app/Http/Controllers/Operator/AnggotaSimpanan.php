@@ -90,6 +90,8 @@ class AnggotaSimpanan extends Controller
             $total_simpan=$request->sukarela - $sp->jlh_wajib;
 
             $kode_trs="TRSU-" .rand(1000,9999);
+            $kode_trs_2="TRSU-" .rand(100,999);
+            $kode_trs_3="TRSU-" .rand(10000,99999);
             //   transaksi pertama
             SimpananTransaksi::create([
                     'anggota_id' =>$request->ang_id,
@@ -110,7 +112,7 @@ class AnggotaSimpanan extends Controller
                 'no_rekening' => $id,  
                 'operator_id' =>Session::get('op_kode'),
                 'kode_simpanan' => "SSK",
-                'kode_transaksi' => $kode_trs,
+                'kode_transaksi' => $kode_trs_2,
                 'nominal_transaksi' => $sp->jlh_pokok,
                 'tgl_transaksi' => date('Y-m-d'),
                 'jenis_transaksi' => "Simpanan Pokok",
@@ -124,7 +126,7 @@ class AnggotaSimpanan extends Controller
             'no_rekening' => $id,  
             'operator_id' =>Session::get('op_kode'),
             'kode_simpanan' => "SSK",
-            'kode_transaksi' => $kode_trs,
+            'kode_transaksi' => $kode_trs_3,
             'nominal_transaksi' => $sp->jlh_wajib,
             'tgl_transaksi' => date('Y-m-d'),
             'jenis_transaksi' => "Simpanan Pokok",
@@ -251,11 +253,12 @@ class AnggotaSimpanan extends Controller
         ]);
          $ops= OpsiSimpananLain::where('id', $request->nominal)->first();   
 
-        SimpananUmroh::where('no_rekening',$id)->update([
+        DB::table('tbl_simpanan_umroh')->where('no_rekening',$id)->update([
             'opsi_simpanan_lain_id' => $request->nominal,
             'angsuran_umroh' => $ops->angsuran_simpanan,
             'jangka_umroh' => $ops->jangka_simpanan,
             'total' => $ops->total_simpanan,
+            'total_angsur' => $ops->angsuran_simpanan,
             'status_aju' => 1,
             'status' => 1,
             'tgl_mulai' =>$date
@@ -327,11 +330,12 @@ class AnggotaSimpanan extends Controller
         ]);
          $ops= OpsiSimpananLain::where('id', $request->nominal)->first();   
 
-         SimpananPendidikan::where('no_rekening',$id)->update([
+         DB::table('tbl_simpanan_pendidikan')->where('no_rekening',$id)->update([
             'opsi_simpanan_lain_id' => $request->nominal,
             'angsuran_pend' => $ops->angsuran_simpanan,
             'jangka_pend' => $ops->jangka_simpanan,
             'total' => $ops->total_simpanan,
+            'total_angsur' => $ops->angsuran_simpanan,
             'status_aju' => 1,
             'status' => 1,
             'tgl_mulai' =>$date

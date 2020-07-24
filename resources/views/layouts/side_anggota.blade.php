@@ -44,14 +44,14 @@
           <li class="nav-item">
             <a href="{{url('/anggota/ajukan-pinjaman')}}" class="nav-link">
               <i class="nav-icon fas fa-credit-card"></i>
-              <p> Ajukan Pinjaman</p>
+              <p> Ajukan Pembiayaan</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{url('/anggota/data-pinjaman/'.Session::get('ang_id').'')}}" class="nav-link">
               <i class="nav-icon fas fa-bookmark"></i>
-              <p> Riwayat Peminjaman</p>
+              <p> Riwayat Pembiayaan</p>
             </a>
           </li>
 

@@ -114,7 +114,7 @@ class AnggotaLogin extends Controller
        $data->anggota_kontak = $kontak;
        $data->anggota_gaji =$request->gaji;
        $data->anggota_pekerjaan = $request->kerja;
-
+       $data->status_pokok=0;
 	   $data->status_pinjaman=0;
 	   $data->status_simpanan=0;
 	   $data->status_deposit=0;

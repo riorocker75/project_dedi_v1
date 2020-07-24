@@ -107,8 +107,8 @@ class AnggotaCtrl extends Controller
        $data->status_pinjaman =$request->status_pinjaman;
 	   $data->tgl_gabung =$date;
 	   $data->suami_istri=$request->suami_istri;
-
-	   $data->status_simpanan=0;
+	   $data->status_pokok=1;
+	   $data->status_simpanan=1;
 	   $data->status_deposit=0;
 	   $data->status_umroh=0;
 	   $data->status_pendidikan=0;

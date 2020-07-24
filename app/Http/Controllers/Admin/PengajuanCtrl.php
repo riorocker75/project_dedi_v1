@@ -183,13 +183,14 @@ function aju_sim_umroh_act(Request $request){
     ]);
 
     $nilai_simpan=OpsiSimpananLain::where('id', $request->nominal)->first();
-    SimpananUmroh::create([
+    DB::table('tbl_simpanan_umroh')->insert([
        'anggota_id' => $request->nama,
        'no_rekening' => $no_rek,
        'opsi_simpanan_lain_id' =>$request->nominal,
        'jangka_umroh' => $nilai_simpan->jangka_simpanan,
        'angsuran_umroh' => $nilai_simpan->angsuran_simpanan,
        'total' => $nilai_simpan->total_simpanan,
+       'total_angsur' =>$ops->angsuran_simpanan,
        'tgl_mulai' => $date,
        'status_aju' =>1,
        'status' =>1
@@ -249,13 +250,14 @@ function aju_sim_pendidikan_act(Request $request){
 
     $ops= OpsiSimpananLain::where('id', $request->nominal)->first();   
 
-    SimpananPendidikan::create([
+    DB::table('tbl_simpanan_pendidikan')->insert([
        'anggota_id' => $request->nama,
         'no_rekening' => $no_rek,
         'opsi_simpanan_lain_id' =>$request->nominal,
        'angsuran_pend' => $ops->angsuran_simpanan,
        'jangka_pend' => $ops->jangka_simpanan,
        'total' => $ops->total_simpanan,
+       'total_angsur' =>$ops->angsuran_simpanan,
        'status_aju' => 1,
        'status' => 1,
        'tgl_mulai' =>$date

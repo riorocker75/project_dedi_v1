@@ -49,61 +49,25 @@
                     <tbody> 
                         
                         {{-- data 1 --}}
+                        @foreach ($data as $dt)
+
+                        @php
+                        $rv=App\Model\SimpananTransaksi::where('id',$dt->id)->first();
+                         @endphp
                         <tr>
-                            <td>TRSU-6555
+                            <td>{{$rv->kode_transaksi}}
                               <br>
-                              <small class="tgl-text">14-07-2020</small>
+                              <small class="tgl-text">{{format_tanggal(date('Y-m-d', strtotime($rv->tgl_transaksi)))}}</small>
                             </td>
-                            <td>886539</td>
-                            <td>Simpanan Sukarela</td>
-                            <td>Rp.200.000</td>
+                            <td>{{$dt->no_rekening}}</td>
+                          <td>{{$rv->jenis_transaksi}}</td>
+                            <td>Rp.{{number_format($rv->nominal_transaksi)}}</td>
                             <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
+                            <a href="{{url('/admin/transaksi/simpanan-umum/detail/'.$rv->kode_transaksi)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
 
-                        {{-- data 2 --}}
-                        <tr>
-                            <td>TRSU-2289
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>889665</td>
-                            <td>Simpanan Sukarela</td>
-                            <td>Rp.50.000</td>
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
-                        </tr>
-
-                         {{-- data 3 --}}
-                         <tr>
-                            <td>TRSU-6698
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>889332</td>
-                            <td>Simpanan Sukarela</td>
-                            <td>Rp.70.000</td>
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
-                        </tr>
-
-                        {{-- data 4 --}}
-                        <tr>
-                          <td>TRSU-5567
-                            <br>
-                              <small class="tgl-text">14-07-2020</small>
-                          </td>
-                          <td>887899</td>
-                          <td>Simpanan Sukarela</td>
-                          <td>Rp.130.000</td>
-                          <td>
-                          <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                          </td>
-                      </tr>
-
+                        @endforeach
                     </tbody>   
                 </table> 
                 </div>

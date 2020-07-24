@@ -26,89 +26,47 @@
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                 Seluruh Transaksi Simpanan Pendidikan
+                  Transaksi Simpanan Pendidikan
                   </h3>
                   <div class="card-tools">
                    
                   </div>
                 </div>
                 <div class="card-body">
+
                   <table id="data1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Kode Transaksi</th>
                         <th>Nomor Rekening</th>
-                        <th>Tenor (Tahun)</th> 
-                        <th>Jenis Simpanan</th>  
-
-                        <th>Setoran/bulan</th> 
-                        <th>Sisa Bayar</th> 
-                        <th>Status</th>                   
+                        <th>Jenis Transaksi</th>  
+                        <th>Nominal Transaksi</th>                   
+                                      
                         <th>Opsi</th>                   
                       </tr>
                     </thead>
                     <tbody> 
                         
                         {{-- data 1 --}}
+                        @foreach ($data as $dt)
+
+                        @php
+                        $rv=App\Model\SimpananTransaksi::where('id',$dt->id)->first();
+                         @endphp
                         <tr>
-                            <td>
-                              TRPD-5698
+                            <td>{{$rv->kode_transaksi}}
                               <br>
-                              <small class="tgl-text">14-07-2020</small>
+                              <small class="tgl-text">{{format_tanggal(date('Y-m-d', strtotime($rv->tgl_transaksi)))}}</small>
                             </td>
-                            <td>846588</td>
-                            <td>3 tahun</td>
-                            <td>SMA</td>
-
-                            <td>Rp.180.000</td>
-                            <td>Rp.7.259.040</td>
-                            <td> <label class="badge badge-warning">Masa cicilan</label></td>
+                            <td>{{$dt->no_rekening}}</td>
+                          <td>{{$rv->jenis_transaksi}}</td>
+                            <td>Rp.{{number_format($rv->nominal_transaksi)}}</td>
                             <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
+                            <a href="{{url('/admin/transaksi/simpanan-pendidikan/detail/'.$rv->kode_transaksi)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
 
-                        {{-- data 2 --}}
-                        <tr>
-                            <td>TRPD-4836
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>843895</td>
-                            <td>3 tahun</td>
-                            <td>SMA</td>
-
-                            <td>Rp.180.000</td>
-                            <td>Rp.7.259.040</td>
-                            <td> <label class="badge badge-warning">Masa cicilan</label></td>
-
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
-                        </tr>
-
-                         {{-- data 3 --}}
-                         <tr>
-                            <td>TRPD-4278
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>847825</td>
-                            <td>3 tahun</td>
-                            <td>Kuliah</td>
-
-                            <td>Rp.300.000</td>
-                            <td>Rp.12.098.400</td>
-                            <td> <label class="badge badge-warning">Masa cicilan</label></td>
-
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
-                        </tr>
-
-                        {{-- data 4 --}}
-                       
-
+                        @endforeach
                     </tbody>   
                 </table> 
                 </div>

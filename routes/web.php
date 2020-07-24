@@ -181,31 +181,91 @@ Route::post('/admin/pemohon/simpanan-pendidikan/tambah/act', 'Admin\PengajuanCtr
 --------------------------------------
 */
 
-// Bagian Transaksi
+/*
+---------------------------------------
+	Bagian Transaksi simpanan & pinjaman
+---------------------------------------
+*/
+
 Route::get('/admin/transaksi/simpanan','Admin\TransaksiCtrl@transaksi_simpanan');
 Route::get('/admin/transaksi/pinjaman','Admin\TransaksiCtrl@transaksi_pinjaman');
 
-// simpanan umum
+//----- simpanan umum
 Route::get('/admin/transaksi/simpanan-umum','Admin\TransaksiCtrl@transaksi_simpanan_umum');
+Route::get('/admin/transaksi/simpanan-umum/detail/{id}', 'Admin\TransaksiCtrl@tr_umum_detail');
 
-// simpanan berjangka
-Route::get('/admin/transaksi/simpanan-berjangka','Admin\TransaksiCtrl@transaksi_deposito');
 
-// simpanan umroh
+//---- simpanan berjangka
+Route::get('/admin/transaksi/simpanan-berjangka','Admin\TransaksiCtrl@transaksi_deposit');
+Route::get('/admin/transaksi/simpanan-deposit/detail/{id}', 'Admin\TransaksiCtrl@tr_deposit_detail');
+
+
+//---- simpanan umroh
 Route::get('/admin/transaksi/simpanan-umroh','Admin\TransaksiCtrl@transaksi_umroh');
+Route::get('/admin/transaksi/simpanan-umroh/detail/{id}', 'Admin\TransaksiCtrl@tr_umroh_detail');
 
-// simpanan pendidikan
+//---- simpanan pendidikan
 Route::get('/admin/transaksi/simpanan-pendidikan','Admin\TransaksiCtrl@transaksi_pendidikan');
+Route::get('/admin/transaksi/simpanan-pendidikan/detail/{id}', 'Admin\TransaksiCtrl@tr_pendidikan_detail');
 
-// bagian pembayaran
+/*
+----------------------------
+	bagian pembayaran
+---------------------------
+*/
 Route::get('/admin/pembayaran/pinjaman','Admin\PembayaranCtrl@bayar_pinjaman');
 Route::get('/admin/pembayaran/pinjaman/detail/{id}','Admin\PembayaranCtrl@detail_bayar_pinjaman');
 Route::post('/admin/pembayaran/pinjaman/bayar','Admin\PembayaranCtrl@bayar_pinjaman_act');
 Route::get('/admin/pembayaran/pinjaman/transaksi/hapus/{id}','Admin\PembayaranCtrl@hapus_tr_pinjaman');
 
+/*
+------------------------
+pembayaran simpanan
+-------------------------
+*/
+Route::get('/admin/pembayaran/simpanan','Admin\PembayaranCtrl@laman_bayar_simpanan');
 
 
-// laporan
+// ---Bayar Simpanan umum 
+Route::get('/admin/pembayaran/simpanan-umum','Admin\PembayaranCtrl@bayar_sim_umum');
+Route::get('/admin/pembayaran/simpanan-umum/detail/{id}','Admin\PembayaranCtrl@bayar_sim_umum_detail');
+Route::post('/admin/pembayaran/simpanan-umum/tambah','Admin\PembayaranCtrl@bayar_sim_umum_tambah');
+
+//--tutup rekening simpanan umum
+Route::post('/admin/pembayaran/simpanan-umum/tutup-rekening','Admin\PembayaranCtrl@sim_umum_tutup');
+
+
+// harap kelarin besok
+// ---Bayar Simpanan deposit
+Route::get('/admin/pembayaran/simpanan-deposit','Admin\PembayaranCtrl@bayar_sim_deposit');
+Route::get('/admin/pembayaran/simpanan-deposit/detail/{id}','Admin\PembayaranCtrl@bayar_sim_deposit_detail');
+Route::post('/admin/pembayaran/simpanan-deposit/tambah','Admin\PembayaranCtrl@bayar_sim_deposit_tambah');
+//--tutup rekening simpanan pendidikan
+Route::post('/admin/pembayaran/simpanan-deposit/tutup-rekening','Admin\PembayaranCtrl@sim_deposit_tutup');
+
+
+// ---Bayar Simpanan umroh
+Route::get('/admin/pembayaran/simpanan-umroh','Admin\PembayaranCtrl@bayar_sim_umroh');
+Route::get('/admin/pembayaran/simpanan-umroh/detail/{id}','Admin\PembayaranCtrl@bayar_sim_umroh_detail');
+Route::post('/admin/pembayaran/simpanan-umroh/tambah','Admin\PembayaranCtrl@bayar_sim_umroh_tambah');
+
+//--tutup rekening simpanan umroh
+Route::post('/admin/pembayaran/simpanan-umroh/tutup-rekening','Admin\PembayaranCtrl@sim_umroh_tutup');
+
+// ---Bayar Simpanan pendidikan
+Route::get('/admin/pembayaran/simpanan-pendidikan','Admin\PembayaranCtrl@bayar_sim_pendidikan');
+Route::get('/admin/pembayaran/simpanan-pendidikan/detail/{id}','Admin\PembayaranCtrl@bayar_sim_pendidikan_detail');
+Route::post('/admin/pembayaran/simpanan-pendidikan/tambah','Admin\PembayaranCtrl@bayar_sim_pendidikan_tambah');
+
+//--tutup rekening simpanan pendidikan
+Route::post('/admin/pembayaran/simpanan-pendidikan/tutup-rekening','Admin\PembayaranCtrl@sim_pendidikan_tutup');
+
+
+/*
+--------------------------- 
+	Bagian laporan
+---------------------------
+*/	
 //-- laporan shu
 Route::get('/admin/laporan/shu','Admin\LaporanCtrl@laporan_shu');
 

@@ -63,7 +63,7 @@
             <li class="nav-item">
               <a href="{{url('/dashboard/admin/kategori_pinjaman')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Kategori Pinjaman</p>
+                <p>Kategori Pembiayaan</p>
               </a>
             </li> 
             <li class="nav-item">

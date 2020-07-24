@@ -24,8 +24,19 @@ use App\Model\Anggota;
 
 use App\Model\PinjamanTransaksi;
 
-use App\Model\Simpanan\TransaksiSimpananLain;
 use App\Model\SimpananTransaksi;
+
+use App\Model\Simpanan\OpsiSimpananLain;
+use App\Model\Simpanan\SimpananUmroh;
+use App\Model\Simpanan\SimpananPendidikan;
+
+use App\Model\Simpanan\SimpananBerjangka;
+use App\Model\Simpanan\OpsiSimpananBerjangka;
+
+
+
+
+
 use App\Model\Notif;
 
 
@@ -50,22 +61,98 @@ class TransaksiCtrl extends Controller
     }
 
     function transaksi_simpanan_umum(){
+        $data=DB::table('tbl_simpanan_transaksi')
+        ->select(DB::raw('no_rekening, MAX(id) as id'))
+        ->where('kode_simpanan','SSK')
+        ->groupBy('no_rekening')
+        ->orderby('no_rekening', 'desc')
+        ->get();
+        // $data= SimpananTransaksi::where('kode_simpanan','SSK')->orderBy('tgl_transaksi','desc')->get();
+        return view('admin.transaksi.dt_simpanan_umum',[
+            'data' =>$data
+        ]);
+    }
+
+    function tr_umum_detail($id){
+        $data= SimpananTransaksi::where('kode_transaksi',$id)->get();
         
-        return view('admin.transaksi.dt_simpanan_umum');
+        return view('admin.transaksi.detail_trs_umum',[
+            'data' => $data
+        ]);
     }
 
     // transaksi simmpanan berjangka
-    function transaksi_deposito(){
-        return view('admin.transaksi.dt_simpanan_berjangka');
+    function transaksi_deposit(){
+
+        $data=DB::table('tbl_simpanan_transaksi')
+        ->select(DB::raw('no_rekening, MAX(id) as id'))
+        ->where('kode_simpanan','SBK')
+        ->groupBy('no_rekening')
+        ->orderby('no_rekening', 'desc')
+        ->get();
+
+        return view('admin.transaksi.dt_simpanan_berjangka',[
+            'data' =>$data
+        ]);
     }
+
+    function tr_deposit_detail($id){
+        $data= SimpananTransaksi::where('kode_transaksi',$id)->get();
+        return view('admin.transaksi.detail_trs_deposit',[
+            'data' => $data
+        ]);
+    }
+
+    // transaksi simmpanan umroh
 
     function transaksi_umroh(){
-        return view('admin.transaksi.dt_simpanan_umroh');
+
+        $data=DB::table('tbl_simpanan_transaksi')
+        ->select(DB::raw('no_rekening, MAX(id) as id'))
+        ->where('kode_simpanan','SUH')
+        ->groupBy('no_rekening')
+        ->orderby('no_rekening', 'desc')
+        ->get();
+
+        return view('admin.transaksi.dt_simpanan_umroh',[
+            'data' =>$data
+        ]);
     }
 
-    function transaksi_pendidikan(){
-        return view('admin.transaksi.dt_simpanan_pendidikan');
+
+    function tr_umroh_detail($id){
+        $data= SimpananTransaksi::where('kode_transaksi',$id)->get();
+        return view('admin.transaksi.detail_trs_umroh',[
+            'data' => $data
+        ]);
     }
+
+    // transaksi simmpanan pendidikan
+
+    function transaksi_pendidikan(){
+        $data=DB::table('tbl_simpanan_transaksi')
+        ->select(DB::raw('no_rekening, MAX(id) as id'))
+        ->where('kode_simpanan','SPN')
+        ->groupBy('no_rekening')
+        ->orderby('no_rekening', 'desc')
+        ->get();
+        return view('admin.transaksi.dt_simpanan_pendidikan',[
+            'data' =>$data
+        ]);
+    }
+
+    function tr_pendidikan_detail($id){
+        $data= SimpananTransaksi::where('kode_transaksi',$id)->get();
+        return view('admin.transaksi.detail_trs_pendidikan',[
+            'data' => $data
+        ]);
+    }
+
+/*
+------------------------------------
+|   transaksi pinjaman start
+-----------------------------------
+*/
 
     function transaksi_pinjaman(){
 
@@ -80,7 +167,11 @@ class TransaksiCtrl extends Controller
     }
 
    
-
+/*
+------------------------------------
+|  end transaksi pinjaman 
+-----------------------------------
+*/
 
 
 

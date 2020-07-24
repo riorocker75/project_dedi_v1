@@ -22,6 +22,7 @@ class TblSimpananPendidikan extends Migration
                 $table->text('jangka_pend');
                 $table->text('angsuran_pend');
                 $table->text('total');
+                $table->text('total_angsur')->nullable();
                 $table->date('tgl_mulai');
                 $table->date('tgl_tutup')->nullable();
                 $table->text('ket')->nullable();

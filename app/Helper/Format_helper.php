@@ -53,3 +53,34 @@ function cek_status_anggota($status){
         break;
     }
 }
+
+function cek_status_simpanan($status){
+    switch($status){
+        case 0:
+            echo '<label class="badge badge-danger">Non aktif</label>';
+        break;
+        case 1:
+            echo '<label class="badge badge-success">Aktif</label>';
+        break;
+        case 3:
+            echo '<label class="badge badge-danger">Tutup Rekening</label>';
+        break;
+        default:
+            echo "tidak ada";
+         break;
+    }
+}
+
+function jenis_sukarela($kode){
+    switch($kode){
+        case 1:
+            echo "Simpanan Sukarela";
+        break;
+        case 2:
+            echo"Simpanan Wajib";
+        break;
+        default:
+        echo "Simpanan Lainya";
+    break;
+    }
+}

@@ -1,0 +1,109 @@
+
+
+oya bang mau nanya, yg halaman ini itu detail dia harus membayar kapan
+atau itu histori dia sudah membayar?
+nggak itu dia kapan aja bayarnya dan skema angsuranya
+
+berarti klw dia membayar nnti yg update pengurus ya? trus nnti muncul di
+halaman histori peminjaman?
+
+nah untuk bayar nya seperti di usecase kemarin abg buat di admin untuk 
+pembayaranya di pengurus kan cuma approve aja hehe
+
+iya mksdnya itu
+
+knp gk dibuat menu angsuran aja bang?
+dimana?
+
+di halaman anggota, biar dia yg upload sendiri klw dia udh ngangsur
+
+eh tpi gk deh, soalnya ini kn koperasi,jd hrs ketemu face to face
+
+cuman dosennya minta gitu
+
+wkwkkw bisa juga abg buat gitu jadi dia cuma upload bukti dia udah bayar 
+kan 
+
+iya nnti yg approve adminnya
+
+sama bang kata dosennya, kn anggota klw mau mendaftar itu hrs membayar
+simpanan pokok 35k
+nah simpanan pokoknya itu disimpan di db mana?
+soalnya kan kita gk ada simpanan pokok,abg masukin di simpanan sukarela
+dosennya maunya gitu, dia bayar dulu yg pokok 35k, masuk ke db
+trus nnti dicek sama admin, bru di approve dia jd anggota
+
+krna klw gk gitu, bisa jd dia blm bayar simpanan pokok yg syarat buat
+jd anggota tpi dia malahan udh ngajuin peminjaman
+
+bisa abg pisahinitu abg buat db simpanan_pokok nah. jadi
+sebelum dia daftar dia upload dulu bukti transfer nanti si admin
+approve lalu dia bisa login
+
+nah iya bang gitu,atau yg ini udh bener, cuman pas dia ngajuin peminjaman,
+pas dia milih menu peminjaman, nnti ada notifikasi di kanan atas
+harap melakukan simpanan pokok terlebih dahulu, bru bisa melakukan
+peminjaman
+
+biar abg gk ngulang lagi
+
+jadi dia bisa login setelah daftar ?
+
+iya kan skemanya, dia daftar, di approve bru bayar simpanan pokok
+
+klw dia daftar, trus bayar, rupanya dia gk disetujui pendaftaran anggota,
+kan uangnya hrs di kembalikan dulu
+
+nah klw dia daftar,trus udh di approve, trus bisa login, bru dia bayar
+simpanan pokoknya sebelum dia melakukan peminjaman
+
+gmna?
+
+ok bisa gampang itu wkkwk 
+
+ada detail tanggalnya ya bang kapan dia melakukan simpanan pokok itu,
+
+trwajib untuk transaksi pasti abg selalu buat tgl
+
+sama upload foto bang, bukti tf, walaupun koperasinya mintanya face to face
+ibunya maunya sistemnya gk setengah2
+
+maunya klw lewat sistem, udh lewat sistem, gk usah dia ke koperasi lgi
+wkwkkw bank besar aja mesti datang lagnsung wkwkwk
+
+iya kmrn udh blg ke dosennya lewat chat
+
+dosennya nanya kalau misalnya saya mau mendaftar jd anggota, kn saya hrs
+membayar simpanan pokok/wajib, nah di mana dbnya disimpan?
+aku bilang anggotanya hrs ke kantor bu buat membayar 35knya sama memberikan
+berkas2 yang mendukung, kayak bukti kk,atau ktp
+dosennya blg, klw gitu setengah2 dong, knp gk lgsg di sistemnya aja?
+trus kan bisa pas dia mendaftar dia mengupload foto yg diperlukan buat
+pendaftaran? kayak ktp, kk, bukti gaji dll
+
+gitu katanya
+
+padahal koperasinya maunya klw transaksi pembayaran gitu hrs face to face
+
+wkwkkw ikutin aja lah biar gampang mulus
+
+iya bang makanya minta di tambahin itu jd pas anggotanya regis dia upload
+foto yg diperlukan
+
+ibunya gk mau setgh2, padahal kn ini kemauan koperasi
+wkwkkw dosen nggk pernah salah 2kwkkwk
+
+itu makanya lgsg diam aku,iyain aja ke ibunya, katanya hrs kelar minggu ini
+biar bisa di demoin ke ibunya
+
+soalnya inti dr halaman anggota itu yg itu
+ok
+jadi dia mau demo lagnsung di hosting?
+atau kita install kan ke laptaopnya wkwkwk dari git 
+
+paling lewat gmeets atau zoom
+lewat teamviewer aja biar di senang klik2
+
+tergantung dosennya bang mau lewat mana
+
+trus klw abg ada update di laptop abg, di sini tinggal di

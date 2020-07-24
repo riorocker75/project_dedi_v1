@@ -20,6 +20,7 @@ class TblKategoriPinjaman extends Migration
                $table->text('kategori_besar_pinjaman');
                $table->text('kategori_lama_pinjaman');
                $table->text('kategori_besar_bunga');
+            //    $table->text('kategori_potongan');
                $table->text('kategori_angsuran')->nullable();
             });
         }
