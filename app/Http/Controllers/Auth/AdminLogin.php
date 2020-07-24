@@ -17,7 +17,8 @@ use App\Model\Operator;
 
 use App\Model\User;
 use App\Model\Notif;
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 class AdminLogin extends Controller
 {
      function __invoke(){

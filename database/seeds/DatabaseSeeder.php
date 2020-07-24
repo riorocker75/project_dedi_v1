@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
          $this->call(OpsiSimpananBerjangka_seed::class);
          $this->call(User_seed::class);
 
+         $this->call(Option_seed::class);
+
+
 
 
     }

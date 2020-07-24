@@ -5,14 +5,15 @@
 
 <div class="content-header">
     <div class="container-fluid">
+
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Ajukan Peminjaman</h1>
+          <h1 class="m-0 text-dark">Ajukan Pembiayaan</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('/dashboard/anggota')}}">Home</a></li>
-            <li class="breadcrumb-item active">Ajukan Peminjaman</li>
+            <li class="breadcrumb-item active">Ajukan Pembiayaan</li>
           </ol>
         </div>
       </div>
@@ -21,7 +22,20 @@
  <!-- Main content -->
  <section class="content">
     <div class="container-fluid">
-     
+
+     <?php
+     $pr=App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
+    if($pr->status_pinjaman == 0){
+    ?>
+    <div class="alert alert-warning alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-exclamation-triangle"></i>Peringatan!!</h5>
+    Harap Melakukan Pembayaran Uang Pendaftaran dan Upload Peryaratan Segera!! <a href="{{url('/anggota/verifikasi/bayar')}}">&nbsp;disini</a>
+    <br>
+    Agar Anda Bisa melakukan Pembiayaan
+    </div>
+    <?php }else{?>
+      {{-- start else jika udah statusnya 1 atau lainya --}}
       <div class="row">
         <section class="col-lg-12 connectedSortable">
           <div class="card">
@@ -42,7 +56,7 @@
                   <div class="col-lg-6 col-md-6 col-12">
 
                     <div class="form-group">
-                      <label>Nama Calon Peminjam</label>
+                      <label>Nama Calon Pembiyaan</label>
                     <input type="text" class="form-control" value={{Session::get('ang_nama')}} disabled>
                     </div>
 
@@ -107,6 +121,9 @@
         </section>
       
       </div>
+      {{-- end else status pinjaman --}}
+    <?php } ?>
+    
     </div>
   </section>
 </div> 

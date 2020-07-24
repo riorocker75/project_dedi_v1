@@ -33,7 +33,8 @@ use App\Model\Simpanan\SimpananPendidikan;
 use App\Model\Simpanan\SimpananBerjangka;
 use App\Model\Simpanan\OpsiSimpananBerjangka;
 
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 
 
 

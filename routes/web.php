@@ -263,6 +263,19 @@ Route::post('/admin/pembayaran/simpanan-pendidikan/tutup-rekening','Admin\Pembay
 
 /*
 --------------------------- 
+	Bagian Pengaturan Sistem
+---------------------------
+*/
+Route::get('/admin/pengaturan/syarat', 'Admin\PengaturanCtrl@syarat');
+Route::post('/admin/pengaturan/syarat/update', 'Admin\PengaturanCtrl@syarat_update');
+
+
+Route::get('/admin/pengaturan/syarat', 'Admin\PengaturanCtrl@syarat');
+Route::post('/admin/pengaturan/syarat/update', 'Admin\PengaturanCtrl@syarat_update');
+
+
+/*
+--------------------------- 
 	Bagian laporan
 ---------------------------
 */	
@@ -353,6 +366,7 @@ Route::get('/logout/anggota' ,'Auth\AnggotaLogin@logout');
 Route::get('/daftar/anggota' ,'Auth\AnggotaLogin@daftar');
 Route::post('/daftar/anggota-act' ,'Auth\AnggotaLogin@daftar_act');
 
+
 // cek validasi
 Route::post('/anggota/cek_nik', 'Auth\AnggotaLogin@cek_nik');
 Route::post('/anggota/cek_username', 'Auth\AnggotaLogin@cek_username');
@@ -400,3 +414,10 @@ Route::post('/anggota/ajukan/simpanan-pendidikan/act','Anggota\Ang_SimpananCtrl@
 // bagian transaksi
 Route::get('/anggota/riwayat/transaksi/','Anggota\Ang_Transaksi@histori_simpanan');
 
+
+// bagian bayar uang pendaftaran
+
+Route::get('/anggota/verifikasi/bayar', 'Anggota\GabungCtrl@upload_bukti_daftar');
+Route::post('/anggota/verifikasi/bayar/act', 'Anggota\GabungCtrl@upload_bukti_daftar_act');
+
+// bagian bayar upload bukti pembayaran

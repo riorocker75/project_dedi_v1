@@ -22,7 +22,8 @@ use App\Model\Simpanan\TransaksiSimpananLain;
 use App\Model\PinjamanTransaksi;
 use App\Model\SimpananTransaksi;
 use App\Model\Notif;
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 
 class PembayaranCtrl extends Controller
 {

@@ -25,8 +25,9 @@ use App\Model\PinjamanTransaksi;
 use App\Model\SimpananTransaksi;
 
 use App\Model\Notif;
-
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
+use App\Model\Option;
 class AnggotaCtrl extends Controller
 {
     //

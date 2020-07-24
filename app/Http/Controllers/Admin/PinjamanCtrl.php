@@ -24,7 +24,8 @@ use App\Model\Simpanan;
 use App\Model\Anggota;
 use App\Model\Operator;
 use App\Model\Notif;
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 
 
 class PinjamanCtrl extends Controller

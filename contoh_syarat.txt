@@ -1,0 +1,42 @@
+<p>Untuk menjadi anggota Anda Harus Membayar sejumlah uang senilai <strong>Rp.35.000 </strong>dengan rincian berikut:</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td style="background-color:#ffffff; border-color:#ffffff"><strong>&nbsp;Simpanan Pokok</strong></td>
+			<td style="background-color:#ffffff; border-color:#ffffff">&nbsp;Rp.20.0000</td>
+		</tr>
+		<tr>
+			<td style="background-color:#ffffff; border-color:#ffffff"><strong>&nbsp;Simpanan Wajib</strong></td>
+			<td style="background-color:#ffffff; border-color:#ffffff">&nbsp;Rp.5.000</td>
+		</tr>
+		<tr>
+			<td style="background-color:#ffffff; border-color:#ffffff"><strong>&nbsp;Biaya Administrasi</strong></td>
+			<td style="background-color:#ffffff; border-color:#ffffff">&nbsp;Rp.5.000</td>
+		</tr>
+		<tr>
+			<td style="background-color:#ffffff; border-color:#ffffff"><strong>&nbsp;Simpanan Sukarela</strong></td>
+			<td style="background-color:#ffffff; border-color:#ffffff">&nbsp;Rp.5.000</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>Untuk transfer bisa dilakukan secara tatap muka langsung melalui Koperasi atau melakukan transfer antar Bank pada nomor Rekening dibawah ini</p>
+
+<p><strong>BANK BRI SYARIAH</strong></p>
+
+<p>0700 000 899 992</p>
+
+<p><strong>AN Koperasi Syariah</strong></p>
+
+<p>Setelah melakukan pembayaran secara Transfer maka ikutin langkah dibawah ini:</p>
+
+<p>&nbsp;</p>
+
+<p>-Harap Untuk Persayaratan pendaftaran harap upload <strong>KTP</strong>, <strong>FotoKopi KK</strong> dijadikan satu di PDF dan diupload pada <strong>form upload</strong></p>
+
+<p>-Untuk Pembayaran Pendaftaran Bisa juga di upload <strong>Bukti Bayar</strong> pada <strong>form upload</strong></p>
+
+<p>&nbsp;</p>

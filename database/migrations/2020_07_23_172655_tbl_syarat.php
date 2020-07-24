@@ -14,18 +14,17 @@ class TblSyarat extends Migration
     public function up()
     {
         if(!Schema::hasTable('tbl_syarat')){ 
-            if (Schema::hasTable('tbl_syarat')) {
+            Schema::create('tbl_syarat', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->text('anggota_id');
                 $table->text('kode_syarat')->nullable();
                 $table->text('isi');
-
+             
                 $table->date('tgl_upload');
                 $table->date('tgl_diterima')->nullable();
                 $table->text('ket_syarat')->nullable();
                 $table->text('status')->comment('0=masih di up, 1=telah disetujui, 2=ditolak karena buriq');
-
-            }
+            });
         }
     }
 
@@ -36,6 +35,6 @@ class TblSyarat extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tbl_syarat');
     }
 }

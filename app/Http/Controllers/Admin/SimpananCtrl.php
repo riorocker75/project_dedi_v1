@@ -20,7 +20,8 @@ use App\Model\Simpanan\OpsiSimpananLain;
 use App\Model\Simpanan\SimpananBerjangka;
 use App\Model\Simpanan\OpsiSimpananBerjangka;
 
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 
 use App\Model\Notif;
 

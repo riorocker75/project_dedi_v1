@@ -79,6 +79,7 @@
                                 <label for="">Status Kelayakan Pembiayaan</label>
                                 <select name="status_pinjam" class="form-control" required>
                                     <option value="">--Pilih Status--</option>
+                                    <option value="0">Tahap Review</option>
                                     <option value="1">Layak Pembiayaan</option>
                                     <option value="2">Tidak Layak Pembiayaan</option>
 

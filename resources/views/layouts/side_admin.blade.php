@@ -176,6 +176,34 @@
             <p> LAPORAN</p>
           </a>
         </li>
+
+        {{-- pengaturan aplikasi --}}
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+             Pengaturan
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="margin-left:20px;font-size:14px">
+            <li class="nav-item">
+            <a href="{{url('/admin/pengaturan/web')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pengaturan Web</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{url('/admin/pengaturan/syarat')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pengaturan Syarat</p>
+              </a>
+            </li>
+                           
+          </ul>
+        </li>
+
+        {{-- end pengaturan --}}
          <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-question"></i>

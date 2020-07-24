@@ -30,7 +30,8 @@ use App\Model\Simpanan\OpsiSimpananLain;
 use App\Model\Notif;
 
 use App\Model\User;
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 class AnggotaController extends Controller
 {
    public function __construct()
@@ -154,12 +155,6 @@ class AnggotaController extends Controller
             'data' =>$data
         ]);
     }
-
-
-
-
-
-
 
 
     

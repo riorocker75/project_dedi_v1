@@ -5,6 +5,10 @@
 @foreach ($pribadi as $pr)
 <div class="content-wrapper">
 <div class="content-header">
+  <div class="col-lg-12">
+    
+   
+  </div>
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -22,7 +26,21 @@
  <!-- Main content -->
  <section class="content">
     <div class="container-fluid">
-     
+      
+      <?php
+      if($pr->status_pinjaman == 0){
+      ?>
+     <div class="alert alert-warning alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-exclamation-triangle"></i>Peringatan!!</h5>
+      Harap Melakukan Pembayaran Uang Pendaftaran dan Upload Peryaratan Segera!! <a href="{{url('/anggota/verifikasi/bayar')}}">&nbsp;disini</a>
+      <br>
+      Agar Anda Bisa melakukan Pembiayaan
+    </div>
+      <?php }else{?>
+  
+      <?php } ?>
+
       <div class="row">
         <section class="col-lg-12 connectedSortable">
           <div class="card">

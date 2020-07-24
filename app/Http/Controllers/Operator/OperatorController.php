@@ -21,7 +21,9 @@ use App\Model\Cat_Pinjaman;
 use App\Model\Simpanan;
 use App\Model\Notif;
 
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
+use App\Model\Option;
 class OperatorController extends Controller
 {
 	public function __construct()

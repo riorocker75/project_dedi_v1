@@ -32,7 +32,8 @@ use App\Model\Simpanan\SimpananPendidikan;
 
 use App\Model\SimpananTransaksi;
 
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 class AnggotaSimpanan extends Controller
 {
     public function __construct()

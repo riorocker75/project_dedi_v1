@@ -33,7 +33,8 @@ use App\Model\Simpanan\SimpananUmroh;
 use App\Model\Simpanan\SimpananPendidikan;
 use App\Model\Simpanan\OpsiSimpananLain;
 
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 class PengajuanCtrl extends Controller
 {
     public function __construct()

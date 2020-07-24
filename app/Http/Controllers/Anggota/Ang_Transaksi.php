@@ -32,6 +32,8 @@ use App\Model\Anggota_Gaji;
 
 use App\Model\User;
 use App\Model\Operator;
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 class Ang_Transaksi extends Controller
 {
     public function __construct()

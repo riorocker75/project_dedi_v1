@@ -17,7 +17,9 @@ use App\Model\Anggota;
 use App\Model\Operator;
 use App\Model\User;
 use App\Model\Notif;
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
+use App\Model\Option;
 
 class AdminController extends Controller
 {

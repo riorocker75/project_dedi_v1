@@ -118,13 +118,18 @@
 <script src="{{asset('lte/dist/js/pages/dashboard.js') }}"></script>
 <script src="{{asset('lte/dist/js/demo.js') }}"></script>
 <script src="{{asset('js/custom.js') }}"></script>
+<script src="{{asset('js/image_view.js') }}"></script>
+
 <script src="{{asset('js/bootstrap-select.js') }}"></script>
 
 
 <script src="{{asset('lte/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{asset('js/data_table.js') }}"></script>
-
+<script src="{{asset('js/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript">
+  CKEDITOR.replace('editor1');
+</script>
 
 
 </body>

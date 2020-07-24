@@ -14,20 +14,22 @@ class TblBuktiBayar extends Migration
     public function up()
     {
         if(!Schema::hasTable('tbl_bukti_bayar')){ 
-            if (Schema::hasTable('tbl_bukti_bayar')) {
-                $table->bigIncrements('id');
-                $table->text('anggota_id');
-                $table->text('kode_transaksi')->nullable();
-                $table->text('jenis_upload')->nullable();
+           Schema::create('tbl_bukti_bayar', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('anggota_id');
+            $table->text('kode_transaksi')->nullable();
+            $table->text('no_rekening')->nullable();
+            $table->text('nominal')->nullable();
 
-                $table->date('tgl_upload');
-                $table->date('tgl_diterima')->nullable();
+            $table->text('jenis_upload')->nullable();
 
-                $table->text('isi');
-                $table->text('ket_upload')->nullable();
-                $table->text('status')->comment('0=masih di up, 1=telah disetujui, 2=ditolak karena buriq');
+            $table->date('tgl_upload');
+            $table->date('tgl_diterima')->nullable();
 
-            }
+            $table->text('isi');
+            $table->text('ket_upload')->nullable();
+            $table->text('status')->comment('0=masih di up, 1=telah disetujui, 2=ditolak karena buriq');
+           });
         }
     }
 

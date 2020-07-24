@@ -13,7 +13,7 @@ class User_seed extends Seeder
      */
     public function run()
     {
-        // DB::table('tbl_user')->delete();
+        DB::table('tbl_user')->delete();
         User::create([
             'nama' => 'Dedi Lubis',
             'username' => 'admin',

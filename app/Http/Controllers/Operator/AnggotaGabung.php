@@ -19,7 +19,8 @@ use App\Model\Pinjaman;
 use App\Model\Cat_Pinjaman;
 use App\Model\Simpanan;
 use App\Model\Notif;
-
+use App\Model\BuktiBayar;
+use App\Model\Syarat;
 class AnggotaGabung extends Controller
 {
     public function __construct()
@@ -88,7 +89,6 @@ class AnggotaGabung extends Controller
     // end switch
    }
 
-
-
+ 
 
 }
