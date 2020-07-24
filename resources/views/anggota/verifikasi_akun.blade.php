@@ -20,7 +20,11 @@
      <!-- Main content -->
      <section class="content">
         <div class="container-fluid">
-         
+          @php
+          $pr=App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
+        @endphp
+
+      @if ($pr->status_pinjman == 0)
           <div class="row">
             <section class="col-lg-6 connectedSortable">
               <div class="card">
@@ -46,6 +50,7 @@
             </section>
 
 
+            
             <section class="col-lg-6 connectedSortable">
                 <div class="card">
                   <div class="card-header">
@@ -68,7 +73,7 @@
                   <form action="{{url('/anggota/verifikasi/bayar/act')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group" style="border: 1px solid #c1c2c3;padding:10px">
-						<b>Upload Persyaratan</b><br/>
+					            	<b>Upload Persyaratan</b><br/>
                         <input type="file" name="syarat" id="file_1" required>
                         <br>
                         <small class="text-danger">* wajib file .pdf max:2mb</small>
@@ -82,7 +87,7 @@
                     </div>
                     
                     <div class="form-group" style="border: 1px solid #c1c2c3;padding:10px">
-						<b>Upload Bukti Bayar</b><br/>
+						          <b>Upload Bukti Bayar</b><br/>
                         <input type="file" name="bukti_bayar" id="file_2">
                         <br>
                         <small class="text-danger">* support file PNG,JPG,JPEG max:2mb</small>
@@ -103,9 +108,17 @@
                   </div>
                 </div>
               </section>
+
+             
           
           </div>
-
+          @else
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class=" icon fas fa-check"></i>Selamat Akun Anggota Anda Full Approve</h5>
+              Harap Bijak Dalam Menjadi Anggota Ikutin Aturan dan Ketentuan Berlaku
+          </div>
+          @endif
           
         </div>
       </section>
