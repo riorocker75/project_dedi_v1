@@ -50,6 +50,14 @@ Route::post('/ajax/cek-pendidikan','AjaxCtrl@cek_pendidikan');
 // pengecekan data anggota
 Route::post('/ajax/cek-anggota','AjaxCtrl@cek_anggota');
 
+/*
+=========================== 
+		Review File
+===========================
+*/
+Route::get('/review/syarat/{id}','AjaxCtrl@viewfile_pdf');
+Route::get('/review/bukti/{id}','AjaxCtrl@viewfile_bukti_pdf');
+
 
 
 /*
@@ -218,6 +226,10 @@ Route::get('/admin/pembayaran/pinjaman/detail/{id}','Admin\PembayaranCtrl@detail
 Route::post('/admin/pembayaran/pinjaman/bayar','Admin\PembayaranCtrl@bayar_pinjaman_act');
 Route::get('/admin/pembayaran/pinjaman/transaksi/hapus/{id}','Admin\PembayaranCtrl@hapus_tr_pinjaman');
 
+
+//-- bagian transfer approve pinjaman
+Route::post('/admin/pinjaman/detail/transfer/act', 'Admin\PembayaranCtrl@transfer_pinjam_act');
+
 /*
 ------------------------
 pembayaran simpanan
@@ -272,6 +284,10 @@ Route::post('/admin/pengaturan/syarat/update', 'Admin\PengaturanCtrl@syarat_upda
 
 Route::get('/admin/pengaturan/syarat', 'Admin\PengaturanCtrl@syarat');
 Route::post('/admin/pengaturan/syarat/update', 'Admin\PengaturanCtrl@syarat_update');
+
+Route::get('/admin/pengaturan/rekening', 'Admin\PengaturanCtrl@rekening');
+Route::post('/admin/pengaturan/rekening/update', 'Admin\PengaturanCtrl@rekening_update');
+
 
 
 /*
@@ -342,6 +358,14 @@ Route::post('/operator/aju/simpanan-pendidikan/act/{id}', 'Operator\AnggotaSimpa
 Route::get('/operator/detail/aju/simpanan-pendidikan/hapus/{id}', 'Operator\AnggotaSimpanan@aju_pendidikan_hapus');
 
 Route::post('/operator/detail/aju/simpanan-pendidikan/pesan/act','Operator\AnggotaSimpanan@pesan_sim_pendidikan');
+
+
+// verifikasi lanjutan gabung anggota
+Route::get('/operator/verifikasi/anggota','Operator\AnggotaGabung@verifikasi_lanjut');
+Route::get('/operator/verifikasi/anggota/detail/{id}','Operator\AnggotaGabung@verifikasi_lanjut_detail');
+Route::post('/operator/verifikasi/anggota/act','Operator\AnggotaGabung@verifikasi_lanjut_act');
+
+Route::get('/operator/verifikasi/anggota/hapus/{id}','Operator\AnggotaGabung@verifikasi_lanjut_hapus');
 
 
 // pesan
@@ -419,5 +443,23 @@ Route::get('/anggota/riwayat/transaksi/','Anggota\Ang_Transaksi@histori_simpanan
 
 Route::get('/anggota/verifikasi/bayar', 'Anggota\GabungCtrl@upload_bukti_daftar');
 Route::post('/anggota/verifikasi/bayar/act', 'Anggota\GabungCtrl@upload_bukti_daftar_act');
+Route::get('/anggota/verifikasi/bayar/hapus/{id}', 'Anggota\GabungCtrl@upload_bukti_daftar_hapus');
 
 // bagian bayar upload bukti pembayaran
+
+/* 
+--------------------------
+|	bayar dengan transfer
+---------------------------
+*/
+
+//---transfer pinjaman
+Route::get('/anggota/pinjaman/bayar/transfer/detail/{id}','Anggota\BuktiBayarCtrl@transfer_pinjaman_detail');
+Route::post('/anggota/pinjaman/bayar/transfer/act/{id}','Anggota\BuktiBayarCtrl@transfer_pinjaman_act');
+
+//---transfer simpanan umum
+
+//---transfer Simpanan umroh
+
+
+//---transfer Simpanan Pendidikan

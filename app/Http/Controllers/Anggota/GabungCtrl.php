@@ -55,7 +55,7 @@ class GabungCtrl extends Controller
 
     function upload_bukti_daftar_act(Request $request){
         $this->validate($request, [
-			'syarat' => 'required|file|image|mimes:pdf,jpeg,png,jpg|max:2048',
+			'syarat' => 'required|file|mimes:pdf,jpeg,png,jpg|max:2048',
 			'bukti_bayar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
 		
         ]);
@@ -65,8 +65,11 @@ class GabungCtrl extends Controller
         $syarat = $request->file('syarat');
         $bukti_bayar =$request->file('bukti_bayar');
 
-        $nf_syarat = rand(1000,9999)."_".$syarat->getClientOriginalName();
-        $nf_bukti_bayar = rand(10000,9999)."_".$bukti_bayar->getClientOriginalName();
+        // $nf_syarat = rand(1000,9999)."_".$syarat->getClientOriginalName();
+        // $nf_bukti_bayar = rand(10000,9999)."_".$bukti_bayar->getClientOriginalName();
+
+        $nf_syarat = rand(1000,9999)."_".rand(10000,9999).".".$syarat->getClientOriginalExtension();
+        $nf_bukti_bayar = rand(10000,9999)."_".rand(1000,9999).".".$bukti_bayar->getClientOriginalExtension();
         $tujuan_upload = 'upload/syarat';
        
 
@@ -78,23 +81,26 @@ class GabungCtrl extends Controller
             'anggota_id' => Session::get('ang_id'),
             'kode_syarat' => $kode_s,
             'isi' =>  $nf_syarat,
+            'bukti' =>$nf_bukti_bayar,
             'tgl_upload' => date('Y-m-d'),
             'ket_syarat' => "Untuk Melengkapi Syarat Gabung Anggota",
             'status' => 0
         ]);
 
-        DB::table('tbl_syarat')->insert([
-            'anggota_id' => Session::get('ang_id'),
-            'kode_syarat' => $kode_by,
-            'isi' =>  $nf_bukti_bayar,
-            'tgl_upload' => date('Y-m-d'),
-            'ket_syarat' => "Bukti Bayar Pendaftaran Awal",
-            'status' => 0
-        ]);
 
         return redirect()->back()->with('alert-success','Data Telah Terkirim, Tunggu Verifikasi !!');
 
     }
+
+    function upload_bukti_daftar_hapus($id){
+        $syarat=Syarat::where('id',$id)->first();
+        File::delete('upload/syarat/'.$syarat->isi);
+        File::delete('upload/syarat/'.$syarat->bukti);
+
+        Syarat::where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+    }
+
 
 
 

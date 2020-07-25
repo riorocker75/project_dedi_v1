@@ -70,6 +70,7 @@ class PembayaranCtrl extends Controller
         $date=date('Y-m-d');
         $request->validate([
             'bayar' => 'required',
+            'wajib' => 'required',
             'ket_bayar' => 'required',
             'kode' =>'required',
             'kembalian' =>'required'
@@ -83,7 +84,6 @@ class PembayaranCtrl extends Controller
                 'status_bayar' => 2
             ]);
         }
-
         PinjamanTransaksi::create([
             'pinjaman_kode' =>$kode,
             'anggota_id' =>$anggota,
@@ -92,6 +92,24 @@ class PembayaranCtrl extends Controller
             'kembalian_bayar' =>$request->kembalian,
             'sisa_bayar' =>$sisa_bayar,
             'ket_bayar' => $request->ket_bayar
+         ]);
+         
+         $sim_u = Simpanan::where('anggota_id',$anggota)->first();
+         $kode_trs_sim ="TRSU-".rand(1000,9999);
+         Simpanan::where('anggota_id', $anggota)->update([
+            'jlh_wajib' => $request->wajib
+         ]);
+         DB::table('tbl_simpanan_transaksi')->insert([
+            'anggota_id' =>$anggota,
+            'no_rekening' => $sim_u->no_rekening,
+            'operator_id' =>Session::get('adm_kode'),
+            'kode_simpanan' => "SSK" ,
+            'kode_transaksi' =>$kode_trs_sim,
+            'nominal_transaksi' => $request->wajib,
+            'tgl_transaksi' => date('Y-m-d'),
+            'jenis_transaksi' => "Simpanan Wajib",
+            'ket_transaksi' => "Pembayaran Simpanan Wajib dari Angsuran Pembiayaan",
+            'status' => 1
          ]);
 
         return redirect('admin/pembayaran/pinjaman/detail/'.$kode.'')->with('alert-success','Pembayaran berhasil');
@@ -104,6 +122,37 @@ class PembayaranCtrl extends Controller
        return redirect()->back()->with('alert-success','Data telah diperbaharui');
 
     }
+
+    // bagian transfer pinjaman
+    function transfer_pinjam_act(Request $request){
+
+
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                  'tgl_diterima' => date('Y-m-d'),
+                  'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Transfer diterima');
+          
+                break;
+            case 'tolak':
+                DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                    'ket_upload' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+            return redirect()->back()->with('alert-warning','Transfer Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+        
+        
+        }
+
+    }
+
 
 /*
 =====================================

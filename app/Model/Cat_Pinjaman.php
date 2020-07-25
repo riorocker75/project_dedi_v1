@@ -11,7 +11,11 @@ class Cat_Pinjaman extends Model
      protected $fillable =[
      	'kategori_jenis',
      	'kategori_besar_pinjaman',
-     	'kategori_lama_pinjaman',
-     	'kategori_besar_bunga'
+      'kategori_lama_pinjaman',
+      'biaya_wajib',
+      'persen_potong',
+      'uang_potong',
+      'kategori_besar_bunga'
+      
       ];
 }

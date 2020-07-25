@@ -24,9 +24,71 @@
           $pr=App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
         @endphp
 
-      @if ($pr->status_pinjman == 0)
+      @if ($pr->status_pinjaman == 0)
           <div class="row">
-            <section class="col-lg-6 connectedSortable">
+            @php
+            $data_sy=App\Model\Syarat::where('anggota_id',Session::get('ang_id'))->get();
+            @endphp
+            {{-- start cek ada datanya --}}
+            @if (count($data_sy) > 0)
+                
+            <section class="col-lg-12 col-md-12 connectedSortable">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                   
+                  Data Upload
+                  </h3>
+                  <div class="card-tools">
+                   
+                  </div>
+                </div>
+                <div class="card-body">
+              
+                
+                  <table id="data1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th width="5%">Kode Syarat</th>
+                        <th width="15%">Status</th>                 
+                        <th>Keterangan</th>  
+                        <th>Opsi</th>                   
+                      </tr>
+                    </thead>
+                    <tbody> 
+                      
+                      @foreach ($data_sy as $dy)
+                         <tr>
+                            <td>{{$dy->kode_syarat}}
+                                <br>
+                                <small class="tgl-text">{{format_tanggal(date('Y-m-d',strtotime($dy->tgl_upload)))}}</small>
+                            </td>
+                           
+                            <td>
+                              <?php if($dy->status == 0){?>
+                                <label class="badge badge-warning">Menuggu Persetujuan</label>
+                              <?php }elseif($dy->status == 2){?>
+                                <label class="badge badge-danger">Ditolak</label>
+
+                              <?php }?>   
+                            </td>
+                            <td>{{$dy->ket_syarat}}</td>
+                            <td>
+                            <a href="{{url('/anggota/verifikasi/bayar/hapus/'.$dy->id)}}" style="padding:0 7px"> <i class="fa fa-trash"></i></a>
+                            </td>
+                         </tr>
+                
+                         @endforeach
+                
+                    </tbody>   
+                </table>
+                  
+                </div>
+              </div>
+            </section>
+            @endif
+            {{-- cek ada tidaknya data end --}}
+            <section class="col-lg-6 col-md-12 connectedSortable">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
@@ -38,6 +100,7 @@
                   </div>
                 </div>
                 <div class="card-body">
+              
                   @php
                       $syarat =App\Model\Option::where('option_name','syarat')->first();
                   @endphp
@@ -51,7 +114,7 @@
 
 
             
-            <section class="col-lg-6 connectedSortable">
+            <section class="col-lg-6 col-md-12 connectedSortable">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title">

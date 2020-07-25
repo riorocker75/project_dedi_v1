@@ -31,7 +31,6 @@ class TblAnggota extends Migration
                 $table->text('anggota_pekerjaan');
                 $table->text('anggota_gaji');
                 $table->text('suami_istri')->nullable();
-                // $table->text('lvl_pinjaman')->nullable();
                 $table->text('foto')->nullable();
                 $table->date('tgl_gabung')->nullable();
                 $table->text('status_pokok')->nullable()->comment('0=tahap review,1=sudah bayar, 2=ditolak');
@@ -42,6 +41,9 @@ class TblAnggota extends Migration
                 $table->text('status_pendidikan')->nullable()->comment('0=tahap review,1=layak,2=tidak layak');
 
                 $table->text('status');
+                // $table->text('status_syarat')->nullable();
+                // $table->text('lvl_pinjaman')->nullable();
+
 
             });
         }

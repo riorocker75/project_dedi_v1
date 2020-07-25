@@ -48,5 +48,12 @@ class Option_seed extends Seeder
             'option_value' => "blabla"
           
         ]);
+
+        Option::create([
+            'id' => 6,
+            'option_name' => 'rekening',
+            'option_value' => "blabla"
+          
+        ]);
     }
 }

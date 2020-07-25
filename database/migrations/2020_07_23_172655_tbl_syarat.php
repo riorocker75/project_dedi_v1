@@ -19,6 +19,7 @@ class TblSyarat extends Migration
                 $table->text('anggota_id');
                 $table->text('kode_syarat')->nullable();
                 $table->text('isi');
+                $table->text('bukti')->nullable();
              
                 $table->date('tgl_upload');
                 $table->date('tgl_diterima')->nullable();

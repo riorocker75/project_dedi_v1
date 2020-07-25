@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Str;
-
+use Response;
 use Illuminate\Support\Facades\Hash;
 
 use App\Model\Admin;
@@ -316,6 +316,25 @@ class AjaxCtrl extends Controller
 
 
     // end pengecekan data anggota
+
+
+    function viewfile_pdf($id){
+        $file='upload/syarat/'.$id.'.pdf';
+        header('Content-Type: application/pdf');
+        return response()->file(
+            public_path($file)
+        );
+     
+       
+    }
+
+    function viewfile_bukti_pdf($id){
+        $file='upload/bukti_bayar/'.$id.'.pdf';
+        header('Content-Type: application/pdf');
+        return response()->file(
+            public_path($file)
+        );
+    }
 
 
 }

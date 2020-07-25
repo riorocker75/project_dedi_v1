@@ -20,6 +20,12 @@ class TblKategoriPinjaman extends Migration
                $table->text('kategori_besar_pinjaman');
                $table->text('kategori_lama_pinjaman');
                $table->text('kategori_besar_bunga');
+               $table->text('biaya_wajib');
+               $table->text('persen_potong');
+               $table->text('uang_potong');
+               $table->text('persen_asuransi')->nullable();
+               $table->text('persen_sosial')->nullable();
+
             //    $table->text('kategori_potongan');
                $table->text('kategori_angsuran')->nullable();
             });

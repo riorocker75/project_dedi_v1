@@ -33,14 +33,16 @@
           </li>         
          
   
-          <li class="nav-item">
-          <a href="/operator/data-pribadi/{{Session::get('op_id')}}" class="nav-link">
+          {{-- <li class="nav-item">
+          <a href="{{url('/operator/data-pribadi/')}}/{{Session::get('op_id')}}" class="nav-link">
               <i class="nav-icon fas fa-id-card"></i>
               <p> Data Pribadi</p>
             </a>
-          </li>
+          </li> --}}
 
-
+          @php
+              $aju_pinjam =App\Model\Pinjaman::where('pinjaman_status','0')->get();
+          @endphp
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-bookmark"></i>
@@ -60,7 +62,11 @@
               <li class="nav-item">
                 <a href="{{url('/operator/data-pinjaman')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pengaju Pembiayaan</p>
+                  <p>Pengaju Pembiayaan 
+                    <?php if(count($aju_pinjam) > 0){?>
+                    <label class="badge badge-warning">baru</label>
+                    <?php }?>
+                  </p>
                 </a>
               </li>
               <li class="nav-item">
@@ -71,6 +77,22 @@
               </li>
                                     
             </ul>
+          </li>
+            <li class="nav-item">
+          <a href="{{url('/operator/verifikasi/anggota')}}" class="nav-link">
+              <i class="nav-icon fas fa-check"></i>
+              <p> Verifikasi Lanjutan&nbsp; 
+               
+               <?php
+                    $tot_vf =App\Model\Syarat::where('status',0)->get();
+                    if(count($tot_vf) > 0){
+              ?>
+               <label class="badge badge-warning">
+                {{count($tot_vf)}}
+               </label>
+              <?php  }?>
+            </p>
+            </a>
           </li>
          
           {{-- aktifkan lagi laporan kalau udah fix --}}

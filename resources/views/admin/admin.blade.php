@@ -30,6 +30,16 @@
             <div class="inner">
               @php
                   $jlh_anggota= App\Model\Anggota::where('status',1)->get();
+                  $sim_u=App\Model\Simpanan::where('status',1)->get();
+
+                  $sim_depo=App\Model\Simpanan\SimpananBerjangka::where('status',1)->get();
+                  $sim_umroh=App\Model\Simpanan\SimpananUmroh::where('status',1)->get();
+                  $sim_pend=App\Model\Simpanan\SimpananPendidikan::where('status',1)->get();
+
+              @endphp
+
+              @php
+                  
               @endphp
               <h3>{{count($jlh_anggota)}}</h3>
               <p>Anggota Bergabung</p>
@@ -55,7 +65,7 @@
         <div class="col-lg-3 col-6">
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3></h3>
+              <h3>ss</h3>
               <p>Total Aset Simpanan</p>
             </div>
             <div class="icon">

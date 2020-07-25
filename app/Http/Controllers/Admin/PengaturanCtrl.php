@@ -65,6 +65,22 @@ class PengaturanCtrl extends Controller
     }
 
 
+/*
+--------------------------- 
+	Bagian Pengaturan Rekening
+---------------------------
+*/
+
+function rekening(){
+    return view('admin.pengaturan.v_atur_rekening');
+}
+
+function rekening_update(Request $request){
+    DB::table('tbl_option')->where('option_name', 'rekening')->update([
+        'option_value' => $request->rekening
+    ]);
+    return redirect()->back()->with('alert-success','Nomor Rekening Telah Di Update');
+}
 
 
     // end

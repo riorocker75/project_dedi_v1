@@ -23,7 +23,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "1000000",
             'kategori_lama_pinjaman' => "25",
             'kategori_besar_bunga' => "2",
-            'kategori_angsuran' => "44800",
+            'biaya_wajib' => '3000',
+            'persen_potong' => '4',
+            'uang_potong' => '40000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "44800"
         ]);
         Cat_Pinjaman::create([
             'kategori_id' => 2,
@@ -31,7 +36,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "2000000",
             'kategori_lama_pinjaman' => "25",
             'kategori_besar_bunga' => "2",
-            'kategori_angsuran' => "89600",
+            'biaya_wajib' => '4000',
+            'persen_potong' => '4',
+            'uang_potong' => '80000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "89600"
         ]);
 
         Cat_Pinjaman::create([
@@ -40,7 +50,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "3000000",
             'kategori_lama_pinjaman' => "50",
             'kategori_besar_bunga' => "2",
-            'kategori_angsuran' => "74400",
+            'biaya_wajib' => '5000',
+            'persen_potong' => '4',
+            'uang_potong' => '120000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "74400"
         ]);
         Cat_Pinjaman::create([
             'kategori_id' => 4,
@@ -48,7 +63,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "4000000",
             'kategori_lama_pinjaman' => "50",
             'kategori_besar_bunga' => "2",
-            'kategori_angsuran' => "99200",
+            'biaya_wajib' => '6000',
+            'persen_potong' => '4',
+            'uang_potong' => '160000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "99200"
         ]);
 
         Cat_Pinjaman::create([
@@ -57,7 +77,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "5000000",
             'kategori_lama_pinjaman' => "50",
             'kategori_besar_bunga' => "2",
-            'kategori_angsuran' => "124000",
+            'biaya_wajib' => '7000',
+            'persen_potong' => '4',
+            'uang_potong' => '200000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "124000"
         ]);
 
         Cat_Pinjaman::create([
@@ -66,7 +91,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "6000000",
             'kategori_lama_pinjaman' => "50",
             'kategori_besar_bunga' => "1.75",
-            'kategori_angsuran' => "145200",
+            'biaya_wajib' => '8000',
+            'persen_potong' => '4',
+            'uang_potong' => '240000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "145200"
         ]);
 
         Cat_Pinjaman::create([
@@ -75,7 +105,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "10000000",
             'kategori_lama_pinjaman' => "50",
             'kategori_besar_bunga' => "1.75",
-            'kategori_angsuran' => "242000",
+            'biaya_wajib' => '9000',
+            'persen_potong' => '4',
+            'uang_potong' => '400000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "242000"
         ]);
 
         Cat_Pinjaman::create([
@@ -84,7 +119,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "14000000",
             'kategori_lama_pinjaman' => "100",
             'kategori_besar_bunga' => "1.75",
-            'kategori_angsuran' => "198800",
+            'biaya_wajib' => '10000',
+            'persen_potong' => '4',
+            'uang_potong' => '560000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "198800"
         ]);
         Cat_Pinjaman::create([
             'kategori_id' => 9,
@@ -92,7 +132,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "15000000",
             'kategori_lama_pinjaman' => "100",
             'kategori_besar_bunga' => "1.5",
-            'kategori_angsuran' => "204000",
+            'biaya_wajib' => '11000',
+            'persen_potong' => '4',
+            'uang_potong' => '600000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "204000"
         ]);
 
         Cat_Pinjaman::create([
@@ -101,7 +146,12 @@ class Kategori_pinjaman_seed extends Seeder
             'kategori_besar_pinjaman' => "20000000",
             'kategori_lama_pinjaman' => "100",
             'kategori_besar_bunga' => "1.5",
-            'kategori_angsuran' => "272000",
+            'biaya_wajib' => '12000',
+            'persen_potong' => '4',
+            'uang_potong' => '800000',
+            'persen_asuransi'=>'0.75',
+            'persen_sosial'=> '0.75',
+            'kategori_angsuran' => "272000"
         ]);
 
     }

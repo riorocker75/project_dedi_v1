@@ -60,7 +60,7 @@
                               <small class="tgl-text">{{format_tanggal(date('Y-m-d' , strtotime($du->tgl_transaksi)))}}</small>
                             </td>
                           <td>{{$du->no_rekening}}</td>
-                            <td>{{$du->$jenis_transaksi}}</td>
+                            <td>{{$du->jenis_transaksi}}</td>
                             <td>Rp.{{number_format($du->nominal_transaksi)}}</td>
                             {{-- <td>
                             <a href="{{}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>

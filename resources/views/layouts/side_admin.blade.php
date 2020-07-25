@@ -199,6 +199,13 @@
                 <p>Pengaturan Syarat</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="{{url('/admin/pengaturan/rekening')}}" class="nav-link">
+                <i class="fa fa-university nav-icon"></i>
+                <p>Pengaturan Rekening Bank</p>
+              </a>
+            </li>
                            
           </ul>
         </li>

@@ -31,7 +31,7 @@
               <h3 class="card-title">Data Anggota Koperasi</h3>             
             
               <div class="card-tools">
-              <a href="{{url('/admin/anggota/tambah')}}" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Tambah Penduduk</a>
+              <a href="{{url('/admin/anggota/tambah')}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i>&nbsp;Tambah Anggota</a>
               </div>
             </div>
             <!-- /.card-header -->

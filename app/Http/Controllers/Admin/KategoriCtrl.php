@@ -69,7 +69,13 @@ class KategoriCtrl extends Controller
 			'kategori_besar_pinjaman' =>$request->besar,	
 			'kategori_lama_pinjaman' =>$request->lama,
 			'kategori_besar_bunga' =>$request->bunga,
-			'kategori_angsuran' =>$request->angsuran
+			'kategori_angsuran' =>$request->angsuran,
+			'biaya_wajib' =>$request->wajib,
+			'persen_potong' =>$request->persen_wajib,
+			'uang_potong' =>$request->uang_potong,
+			'persen_sosial' => $request->persen_sosial,
+			'persen_asuransi' => $request->persen_asuransi
+
 		]);
 		return redirect('dashboard/admin/kategori_pinjaman');
 	}
@@ -85,7 +91,13 @@ class KategoriCtrl extends Controller
 			'kategori_besar_pinjaman' =>$request->besar,	
 			'kategori_lama_pinjaman' =>$request->lama,
 			'kategori_besar_bunga' =>$request->bunga,
-			'kategori_angsuran' =>$request->angsuran
+			'kategori_angsuran' =>$request->angsuran,
+			'biaya_wajib' =>$request->wajib,
+			'persen_potong' =>$request->persen_wajib,
+			'uang_potong' =>$request->uang_potong,
+			'persen_sosial' => $request->persen_sosial,
+			'persen_asuransi' => $request->persen_asuransi
+
 		]);
 		return redirect('dashboard/admin/kategori_pinjaman');
 	}

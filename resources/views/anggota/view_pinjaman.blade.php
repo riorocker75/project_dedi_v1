@@ -22,6 +22,7 @@
         <div class="container-fluid">
          
           <div class="row">
+            @foreach ($data as $dpj)
             <section class="col-lg-12 connectedSortable">
               <div class="card">
                 <div class="card-header">
@@ -30,11 +31,16 @@
                    Cek 
                   </h3>
                   <div class="card-tools">
-                   
+                   <a href="{{url('/anggota/pinjaman/bayar/transfer/detail/'.$dpj->pinjaman_kode)}}" class="btn btn-outline-primary"><i class="fa fa-credit-card"></i>&nbsp; Bayar Via Transfer</a>
                   </div>
                 </div>
                 <div class="card-body">
-                    @foreach ($data as $dpj)
+                    @php
+                    $ops=App\Model\Cat_Pinjaman::where('kategori_id',$dpj->kategori_id)->first();
+                    $source_sisa =App\Model\PinjamanTransaksi::where('pinjaman_kode',$dpj->pinjaman_kode)->get();
+
+                    $total_angsur = $dpj->pinjaman_skema_angsuran + $ops->biaya_wajib;
+                    @endphp
                     <div class="row">
                         {{-- data pinjaman --}}
                         <div class="col-lg-6 col-md-12 col-12">
@@ -53,7 +59,7 @@
 
                               <div class="form-group">
                                 <label>Angsuran per minggu</label>
-                                <input type="text" class="form-control" value="Rp.{{ number_format($dpj->pinjaman_skema_angsuran)}}" disabled>
+                                <input type="text" class="form-control" value="Rp.{{ number_format( $total_angsur)}}" disabled>
                               </div>
 
                         </div> 
@@ -100,10 +106,10 @@
                             <?php } ?> 
                         </div> 
                     </div> 
-                    @endforeach
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
+              @endforeach
 
             
             {{-- bagian pembayaran --}}

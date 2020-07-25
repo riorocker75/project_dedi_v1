@@ -37,28 +37,52 @@
                      $ang = App\Model\Anggota::where('anggota_id', Session::get('ang_id'))->first();
                  @endphp 
 
-                 @if ($ang->status_simpanan == 0)
+                 {{-- @if ($ang->status_simpanan == 0)
                  <a href="{{url('/anggota/ajukan/simpanan-umum')}}" class="btn btn-default"> Ajukan Simpanan Sukarela <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                  <br> 
                  <br> 
-                 @endif
+                 @endif --}}
                  
+                 {{-- deposit --}}
                  @if ($ang->status_deposit == 0)
                 <a href="{{url('/anggota/ajukan/simpanan-deposit')}}" class="btn btn-default"> Ajukan Simpanan Berjangka <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                    <br> 
                    <br>  
                 @endif
+
+                @if ($ang->status_deposit == 2)
+                <a href="{{url('/anggota/ajukan/simpanan-deposit')}}" class="btn btn-default"> Ajukan Simpanan Berjangka <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                   <br> 
+                   <br>  
+                @endif
+              {{-- end deposit--}}
+              {{-- umroh --}}
                   @if ($ang->status_umroh == 0)
                   <a href="{{url('/anggota/ajukan/simpanan-umroh')}}" class="btn btn-default"> Ajukan Simpanan Umroh <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     <br> 
                     <br> 
                     @endif
+                  @if ($ang->status_umroh == 2)
+                  <a href="{{url('/anggota/ajukan/simpanan-umroh')}}" class="btn btn-default"> Ajukan Simpanan Umroh <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <br> 
+                    <br> 
+                    @endif
+               {{-- end umroh --}}
+
+               {{-- pendidikan --}}
                 @if ($ang->status_pendidikan == 0)
                   <a href="{{url('/anggota/ajukan/simpanan-pendidikan')}}" class="btn btn-default"> Ajukan Simpanan Pendidikan <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                   <br> 
                   <br> 
                 @endif
 
+                @if ($ang->status_pendidikan == 2)
+                  <a href="{{url('/anggota/ajukan/simpanan-pendidikan')}}" class="btn btn-default"> Ajukan Simpanan Pendidikan <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                  <br> 
+                  <br> 
+                @endif
+               {{-- end pendidikan --}}
+     
                 </div>
               </div>
             </section>

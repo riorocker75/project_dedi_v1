@@ -63,6 +63,32 @@
                           <label> Angsuran /Minggu</label>
                           <input type="number" name="angsuran" required="required" class="form-control" >
                         </div> 
+
+                        <div class="form-group">
+                          <label> Simpanan Wajib Mingguan</label>
+                          <input type="number" name="wajib" required="required" class="form-control" >
+                        </div>
+
+                        <div class="form-group">
+                          <label> Potongan Wajib (%)</label>
+                          <input type="number" name="persen_wajib" required="required" class="form-control" step=".01">
+                        </div>
+
+                        <div class="form-group">
+                          <label> Uang Potong</label>
+                          <input type="number" name="uang_potong" required="required" class="form-control" >
+                        </div>
+                        
+                        <div class="form-group">
+                          <label> Dana Kebajikan (%)</label>
+                          <input type="number" name="persen_sosial" required="required" class="form-control" step=".01">
+                        </div>
+
+                        <div class="form-group">
+                          <label> Setoran Perlindungan Pembiayaan (%)</label>
+                          <input type="number" name="persen_asuransi" required="required" class="form-control" step=".01">
+                        </div>
+                      
                         
                         <br/>
                         <input type="submit" value="Simpan" class="btn btn-primary">
@@ -81,7 +107,8 @@
                     <th>Jenis</th>
                     <th>Besar Pembiayaan</th>                   
                     <th>Lama Pembiayaan</th> 
-                    <th>Angsuran Pembiayaan</th>                   
+                    <th>Angsuran Pembiayaan </th>                   
+                    <th>Biaya Lainya</th>                   
 
                     <th>Besar Margin</th>                   
                     <th>Opsi</th>                   
@@ -90,14 +117,40 @@
                 <tbody> 
                   <?php $no=0 ?>
                   @foreach($kategori as $kat)
-                  <?php $no++ ?>                 
+                  @php
+                   $no++ ;
+                   $total_terima = $kat->kategori_besar_pinjaman - $kat->uang_potong;  
+                   $total_angsur= $kat->kategori_angsuran + $kat->biaya_wajib;
+                   $dana_bajik =($kat->persen_sosial /100) * $kat->kategori_besar_pinjaman;
+                   $dana_asuransi =($kat->persen_asuransi /100) * $kat->kategori_besar_pinjaman;
+
+                  @endphp
+                          
                   <tr>
                   
                     <td>{{ $no }}</td>
                     <td>{{ $kat->kategori_jenis }}</td>
-                    <td>{{ number_format($kat->kategori_besar_pinjaman) }}</td>
+                    <td>{{ number_format($kat->kategori_besar_pinjaman) }}
+                    <br>
+                    <small>potongan: <b>Rp.{{number_format($kat->uang_potong)}} ({{$kat->persen_potong}}%)</b> </small><br>
+                    <small>diterima: <b>Rp.{{number_format($total_terima)}}</b> </small>
+
+                    </td>
                     <td>{{ $kat->kategori_lama_pinjaman }} Minggu</td>
-                    <td>Rp. {{ number_format($kat->kategori_angsuran) }}/minggu</td>
+                    <td>Rp. {{ number_format( $total_angsur) }}/minggu
+                    <br>
+                    <small>Angsuran Pokok : <b>Rp.{{number_format($kat->kategori_angsuran)}}</b>  </small><br>
+                    <small>Wajib mingguan : <b>Rp.{{number_format($kat->biaya_wajib)}}</b>  </small><br>
+
+                    </td>
+                    <td>
+                     <small>
+                      Dana Kebajikan : <b>Rp.{{number_format($dana_bajik)}}</b>  
+                    </small> <br>
+                    <small>
+                      Dana SPP : <b>Rp.{{number_format($dana_asuransi)}}</b>  
+                    </small>
+                    </td>
 
                     <td>{{ $kat->kategori_besar_bunga }}% /bulan</td>                                       
                     <td>
@@ -152,7 +205,50 @@
                                                                      
                                         <input type="number" name="angsuran" class="form-control" value="{{$kat->kategori_angsuran}}">
                                       </td>
-                                    </tr>                                   
+                                    </tr>
+                                    <tr>
+                                      <th width="40%"> Simpanan Wajib Mingguan</th>
+                                      <th width="1%">:</th>
+                                      <td>      
+                                                                     
+                                        <input type="number" name="wajib" class="form-control" value="{{$kat->biaya_wajib}}">
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <th width="40%"> Potongan Wajib (%)</th>
+                                      <th width="1%">:</th>
+                                      <td>      
+                                                                     
+                                        <input type="number" name="persen_wajib" class="form-control" value="{{$kat->persen_potong}}">
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <th width="40%"> Uang Potong </th>
+                                      <th width="1%">:</th>
+                                      <td>      
+                                        <input type="number" name="uang_potong" class="form-control" value="{{$kat->uang_potong}}">
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <th width="40%">Dana Kebajikan (%) </th>
+                                      <th width="1%">:</th>
+                                      <td>      
+                                        <input type="number" name="persen_sosial" class="form-control" value="{{$kat->persen_sosial}}">
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th width="40%">Setoran Perlindungan Pembiayaan (%) </th>
+                                      <th width="1%">:</th>
+                                      <td>      
+                                        <input type="number" name="persen_asuransi" class="form-control" value="{{$kat->persen_asuransi}}">
+                                      </td>
+                                    </tr>
+                                  
+
+                                                                     
                                   </div>                
                                 </table> 
                                 <br/>

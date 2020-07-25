@@ -23,6 +23,8 @@ use App\Model\Simpanan;
 use App\Model\Simpanan\TransaksiSimpananLain;
 use App\Model\PinjamanTransaksi;
 use App\Model\SimpananTransaksi;
+use App\Model\Simpanan\OpsiSimpanan;
+
 
 use App\Model\Notif;
 use App\Model\BuktiBayar;
@@ -90,7 +92,9 @@ class AnggotaCtrl extends Controller
             'alamat' => 'required|min:4',
             'kerja' =>'required',
             'gaji' =>'required'
-        ]);
+		]);
+		
+
 
        $data = new Anggota();
         $data->anggota_kode =$kode;
@@ -115,8 +119,11 @@ class AnggotaCtrl extends Controller
 	   $data->status_pendidikan=0;
 
        $data->status = 1;
+     
 	   $data->save();
-	   
+
+	   $ang=Anggota::orderBy('anggota_id','desc')->first();
+	  	
 	   User::create([
         'nama' => $nama,
         'username' =>$username,
@@ -124,9 +131,67 @@ class AnggotaCtrl extends Controller
         'level' => 3,
         'kode_user' =>$kode,
         'status' => 1
-       ]);
+	   ]);
+	   $ops=OpsiSimpanan::where('id',1)->first();
+	   if($request->status_pinjaman == 1){
+		$no_rek='88'.rand(10000,9999);
+		Simpanan::create([
+			'no_rekening' => $no_rek,
+			'anggota_id' => $ang->anggota_id,
+			'total_simpanan' => $ops->sukarela_min,
+			'simpanan_opsi_id' => 1,
+			'jlh_pokok' => $ops->simpanan_pokok,
+			'jlh_wajib' => $ops->simpanan_wajib,
+			'tgl_buka_rek' => date('Y-m-d'),
+			'status' => 1
+		]);
+		 $kode_trs="TRSU-".rand(1000,9999);
+		 $kode_trs_2="TRSU-".rand(10000,99999);
+		 $kode_trs_3="TRSU-".rand(100,999);
 
-    //    $lastInsertedId= $data->anggota_id;
+		DB::table('tbl_simpanan_transaksi')->insert([
+		 'anggota_id' => $ang->anggota_id,
+		 'no_rekening' => $no_rek,
+		 'operator_id' => Session::get('op_kode'),
+		 'kode_simpanan' => "SSK",
+		 'kode_transaksi' =>$kode_trs,
+		 'nominal_transaksi' =>$ops->simpanan_pokok,
+		 'tgl_transaksi' => date('Y-m-d'),
+		 'jenis_transaksi' =>"Simpanan Pokok" ,
+		 'ket_transaksi' => "Pembayaran Simpanan Pokok Perdana",
+		 'status' => 1
+		]);
+
+		DB::table('tbl_simpanan_transaksi')->insert([
+		 'anggota_id' => $ang->anggota_id,
+		 'no_rekening' => $no_rek,
+		 'operator_id' => Session::get('op_kode'),
+		 'kode_simpanan' => "SSK",
+		 'kode_transaksi' =>$kode_trs_2,
+		 'nominal_transaksi' =>$ops->simpanan_wajib,
+		 'tgl_transaksi' => date('Y-m-d'),
+		 'jenis_transaksi' =>"Simpanan Wajib" ,
+		 'ket_transaksi' => "Pembayaran Simpanan Wajib Perdana",
+		 'status' => 1
+		]);
+
+		DB::table('tbl_simpanan_transaksi')->insert([
+		 'anggota_id' => $ang->anggota_id,
+		 'no_rekening' => $no_rek,
+		 'operator_id' => Session::get('op_kode'),
+		 'kode_simpanan' => "SSK",
+		 'kode_transaksi' =>$kode_trs_3,
+		 'nominal_transaksi' =>$ops->sukarela_min,
+		 'tgl_transaksi' => date('Y-m-d'),
+		 'jenis_transaksi' =>"Simpanan Sukarela" ,
+		 'ket_transaksi' => "Pembayaran Simpanan Sukarela Perdana",
+		 'status' => 1
+		]);
+
+		}
+	   
+
+
 
         return redirect('/dashboard/admin/anggota')->with('alert-success','Data telah disimpan');
 	}
