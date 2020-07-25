@@ -19,7 +19,19 @@
      <!-- Main content -->
      <section class="content">
         <div class="container-fluid">
-         
+          <?php
+          $pr=App\Model\Anggota::where('anggota_id',Session::get('ang_id'))->first();
+          if($pr->status_pinjaman == 0){
+          ?>
+          <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fas fa-exclamation-triangle"></i>Peringatan!!</h5>
+          Harap Melakukan Pembayaran Uang Pendaftaran dan Upload Peryaratan Segera!! <a href="{{url('/anggota/verifikasi/bayar')}}">&nbsp;disini</a>
+          <br>
+          Agar Anda Bisa melakukan Simpanan Pendidikan
+          </div>
+          <?php }else{?>
+            {{-- start else jika udah statusnya 1 atau lainya --}}
           <div class="row">
             <section class="col-lg-6 connectedSortable">
               <div class="card">
@@ -80,6 +92,8 @@
             </section>
           
           </div>
+             {{-- end else status pinjaman --}}
+             <?php } ?>
         </div>
       </section>
     </div>
