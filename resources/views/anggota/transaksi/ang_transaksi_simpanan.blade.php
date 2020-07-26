@@ -166,7 +166,7 @@
                       @endphp
                        @foreach ($data_umroh as $dm)
                        <tr>
-                           <td>{{$dm->no_rekeing}}</td>
+                           <td>{{$dm->no_rekening}}</td>
                            <td>{{cek_status_simpanan($dm->status)}}</td>
                           
                            <td>
@@ -222,7 +222,7 @@
                        @endphp
                         @foreach ($data_pendidikan as $dpn)
                         <tr>
-                          <td>{{$dpn->no_rekeing}}</td>
+                          <td>{{$dpn->no_rekening}}</td>
                           <td>{{cek_status_simpanan($dpn->status)}}</td>
                          
                           <td>
