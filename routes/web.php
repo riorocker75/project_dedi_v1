@@ -477,11 +477,15 @@ Route::post('/anggota/simpanan-umum/transfer/act/{id}' , 'Anggota\BuktiBayarCtrl
 
 // transfer simpanan deposit
 Route::get('/anggota/simpanan-deposit/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_deposit');
+
 // transfer simpanan umroh
 Route::get('/anggota/simpanan-umroh/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_umroh');
+Route::post('/anggota/simpanan-umroh/transfer/act/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_umroh_act');
 
 // transfer simpanan pendidikan
 Route::get('/anggota/simpanan-pendidikan/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_pendidikan');
+Route::post('/anggota/simpanan-pendidikan/transfer/act/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_pendidikan_act');
+
 
 /* 
 -----------------------------

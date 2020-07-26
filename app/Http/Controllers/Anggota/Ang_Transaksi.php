@@ -55,19 +55,7 @@ class Ang_Transaksi extends Controller
     }
 
     function histori_simpanan(){
-        // disini ambil session id nya buat nampilin wher dari simpanan`
-        // $umum =Simpanan::where('anggota_id',Session::get('ang_id'))->first();
-        // $data_umum = SimpananTransaksi::where('no_rekening',$umum->no_rekening)->orderBy('tgl_transaksi')->get();
         
-        // $deposit =SimpananBerjangka::where('anggota_id',Session::get('ang_id'))->first();
-        // $data_deposit = SimpananTransaksi::where('no_rekening',$deposit->rekening_deposit)->orderBy('tgl_transaksi')->get();
-
-        // $umroh =SimpananUmroh::where('anggota_id',Session::get('ang_id'))->first();
-        // $data_umroh = SimpananTransaksi::where('no_rekening',$umroh->no_rekening)->orderBy('tgl_transaksi')->get();
-
-        // $pend =SimpananPendidikan::where('anggota_id',Session::get('ang_id'))->first();
-        // $data_pendidikan = SimpananTransaksi::where('no_rekening',$pend->no_rekening)->orderBy('tgl_transaksi')->get();
-
         return view('anggota.transaksi.ang_transaksi_simpanan');
     }
 /*
@@ -102,7 +90,13 @@ function trs_sim_deposit_detail($id){
 =================================
 */
 function trs_sim_umroh_detail($id){
-    return view('anggota.transaksi.dt_transaksi_umroh_detail');
+    $data = SimpananTransaksi::where('no_rekening',$id)->get();
+        $data_sim =SimpananUmroh::where('no_rekening',$id)->get();
+        return view('anggota.transaksi.dt_transaksi_umroh_detail',[
+            'data' =>$data,
+            'data_sim' =>$data_sim
+        ]);
+  
 }
 
 /*
@@ -112,7 +106,13 @@ function trs_sim_umroh_detail($id){
 */
 
 function trs_sim_pendidikan_detail($id){
-    return view('anggota.transaksi.dt_transaksi_pendidikan_detail');
+    $data = SimpananTransaksi::where('no_rekening',$id)->get();
+    $data_sim =SimpananPendidikan::where('no_rekening',$id)->get();
+    return view('anggota.transaksi.dt_transaksi_pendidikan_detail',[
+        'data' =>$data,
+        'data_sim' =>$data_sim
+    ]);
+
 }
 
 
