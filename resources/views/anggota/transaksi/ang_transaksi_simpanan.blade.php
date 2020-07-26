@@ -218,7 +218,7 @@
                         
                         {{-- data 1 --}}
                         @php
-                        $data_umroh =App\Model\Simpanan\SimpananUmroh::where('anggota_id',Session::get('ang_id'))->get();
+                        $data_pendidikan =App\Model\Simpanan\SimpananPendidikan::where('anggota_id',Session::get('ang_id'))->get();
                        @endphp
                         @foreach ($data_pendidikan as $dpn)
                         <tr>
