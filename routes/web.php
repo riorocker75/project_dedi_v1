@@ -229,11 +229,12 @@ Route::get('/admin/pembayaran/pinjaman/transaksi/hapus/{id}','Admin\PembayaranCt
 
 //-- bagian transfer approve pinjaman
 Route::post('/admin/pinjaman/detail/transfer/act', 'Admin\PembayaranCtrl@transfer_pinjam_act');
+Route::get('/admin/pinjaman/detail/transfer/hapus/{id}', 'Admin\PembayaranCtrl@transfer_pinjam_hapus');
 
 /*
-------------------------
-pembayaran simpanan
--------------------------
+--------------------------------
+pembayaran simpanan dan transfer
+---------------------------------
 */
 Route::get('/admin/pembayaran/simpanan','Admin\PembayaranCtrl@laman_bayar_simpanan');
 
@@ -246,14 +247,21 @@ Route::post('/admin/pembayaran/simpanan-umum/tambah','Admin\PembayaranCtrl@bayar
 //--tutup rekening simpanan umum
 Route::post('/admin/pembayaran/simpanan-umum/tutup-rekening','Admin\PembayaranCtrl@sim_umum_tutup');
 
+//-+ bayar simpanan umum di transfer
+Route::post('/admin/pembayaran/simpanan-umum/transfer/act','Admin\PembayaranCtrl@transfer_sim_umum_act');
+Route::get('/admin/pembayaran/simpanan-umum/transfer/hapus/{id}','Admin\PembayaranCtrl@transfer_sim_umum_hapus');
 
-// harap kelarin besok
+
+
 // ---Bayar Simpanan deposit
 Route::get('/admin/pembayaran/simpanan-deposit','Admin\PembayaranCtrl@bayar_sim_deposit');
 Route::get('/admin/pembayaran/simpanan-deposit/detail/{id}','Admin\PembayaranCtrl@bayar_sim_deposit_detail');
 Route::post('/admin/pembayaran/simpanan-deposit/tambah','Admin\PembayaranCtrl@bayar_sim_deposit_tambah');
 //--tutup rekening simpanan pendidikan
 Route::post('/admin/pembayaran/simpanan-deposit/tutup-rekening','Admin\PembayaranCtrl@sim_deposit_tutup');
+//-+ bayar simpanan deposit di transfer
+Route::post('/admin/pembayaran/simpanan-deposit/transfer/act','Admin\PembayaranCtrl@transfer_sim_deposit_act');
+Route::get('/admin/pembayaran/simpanan-deposit/transfer/hapus/{id}','Admin\PembayaranCtrl@transfer_sim_deposit_hapus');
 
 
 // ---Bayar Simpanan umroh
@@ -263,6 +271,10 @@ Route::post('/admin/pembayaran/simpanan-umroh/tambah','Admin\PembayaranCtrl@baya
 
 //--tutup rekening simpanan umroh
 Route::post('/admin/pembayaran/simpanan-umroh/tutup-rekening','Admin\PembayaranCtrl@sim_umroh_tutup');
+//-+ bayar simpanan umroh di transfer
+Route::post('/admin/pembayaran/simpanan-umroh/transfer/act','Admin\PembayaranCtrl@transfer_sim_umroh_act');
+Route::get('/admin/pembayaran/simpanan-umroh/transfer/hapus/{id}','Admin\PembayaranCtrl@transfer_sim_umroh_hapus');
+
 
 // ---Bayar Simpanan pendidikan
 Route::get('/admin/pembayaran/simpanan-pendidikan','Admin\PembayaranCtrl@bayar_sim_pendidikan');
@@ -271,6 +283,9 @@ Route::post('/admin/pembayaran/simpanan-pendidikan/tambah','Admin\PembayaranCtrl
 
 //--tutup rekening simpanan pendidikan
 Route::post('/admin/pembayaran/simpanan-pendidikan/tutup-rekening','Admin\PembayaranCtrl@sim_pendidikan_tutup');
+//-+ bayar simpanan pendidikan di transfer
+Route::post('/admin/pembayaran/simpanan-pendidikan/transfer/act','Admin\PembayaranCtrl@transfer_sim_pendidikan_act');
+Route::get('/admin/pembayaran/simpanan-pendidikan/transfer/hapus/{id}','Admin\PembayaranCtrl@transfer_sim_pendidikan_hapus');
 
 
 /*
@@ -435,11 +450,44 @@ Route::post('/anggota/ajukan/simpanan-umroh/act','Anggota\Ang_SimpananCtrl@aju_u
 Route::get('/anggota/ajukan/simpanan-pendidikan','Anggota\Ang_SimpananCtrl@aju_simpanan_pendidikan');
 Route::post('/anggota/ajukan/simpanan-pendidikan/act','Anggota\Ang_SimpananCtrl@aju_pendidikan_act');
 
-// bagian transaksi
+/*
+---------------------------
+ 	bagian transaksi simpanan
+----------------------------
+*/
 Route::get('/anggota/riwayat/transaksi/','Anggota\Ang_Transaksi@histori_simpanan');
 
 
-// bagian bayar uang pendaftaran
+//--transaksi simpanan umum
+Route::get('/anggota/simpanan-umum/transaksi/{id}','Anggota\Ang_Transaksi@trs_sim_umum_detail');
+
+//--transaksi simpanan deposit
+Route::get('/anggota/simpanan-deposit/transaksi/{id}','Anggota\Ang_Transaksi@trs_sim_deposit_detail');
+
+//--transaksi simpanan umroh
+Route::get('/anggota/simpanan-umroh/transaksi/{id}','Anggota\Ang_Transaksi@trs_sim_umroh_detail');
+
+//--transaksi simpanan pendidikan
+Route::get('/anggota/simpanan-pendidikan/transaksi/{id}','Anggota\Ang_Transaksi@trs_sim_pendidikan_detail');
+
+
+// transfer simpanan umum
+Route::get('/anggota/simpanan-umum/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_umum');
+Route::post('/anggota/simpanan-umum/transfer/act/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_umum_act');
+
+// transfer simpanan deposit
+Route::get('/anggota/simpanan-deposit/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_deposit');
+// transfer simpanan umroh
+Route::get('/anggota/simpanan-umroh/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_umroh');
+
+// transfer simpanan pendidikan
+Route::get('/anggota/simpanan-pendidikan/transfer/{id}' , 'Anggota\BuktiBayarCtrl@transfer_sim_pendidikan');
+
+/* 
+-----------------------------
+bagian bayar uang pendaftaran
+-----------------------------
+*/
 
 Route::get('/anggota/verifikasi/bayar', 'Anggota\GabungCtrl@upload_bukti_daftar');
 Route::post('/anggota/verifikasi/bayar/act', 'Anggota\GabungCtrl@upload_bukti_daftar_act');

@@ -171,7 +171,7 @@ class AnggotaSimpanan extends Controller
         ]);
     }
     function aju_deposit_act(Request $request,$id){
-        $date=date('Y-m-d');
+        $date=date('Y-m-d H:i:s');
         
         $request->validate([
             'nominal' => 'required'

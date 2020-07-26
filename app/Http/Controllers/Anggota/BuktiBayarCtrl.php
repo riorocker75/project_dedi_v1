@@ -75,9 +75,9 @@ class BuktiBayarCtrl extends Controller
 			'bukti' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        $kode_by= "TRP-".rand(1000,9999);
+        $kode_by= "TRFP-".rand(1000,9999);
         $bukti_bayar =$request->file('bukti');
-        $nf_bukti_bayar = rand(10000,9999)."_".rand(1000,9999).".".$bukti_bayar->getClientOriginalExtension();
+        $nf_bukti_bayar = rand(10000,99999)."_".rand(1000,9999).".".$bukti_bayar->getClientOriginalExtension();
         $tujuan_upload = 'upload/bukti_bayar';
 
         $bukti_bayar->move($tujuan_upload,$nf_bukti_bayar);
@@ -92,6 +92,17 @@ class BuktiBayarCtrl extends Controller
             'tgl_upload' => date('Y-m-d'),
             'jenis_upload' => "TRFP",
             'ket_upload' => "Bayar Angsuran Pinjaman",
+            'status' => 0
+        ]);
+
+        DB::table('tbl_notif')->insert([
+            'kode_user' => Session::get('ang_kode'),
+            'pesan' => "Upload Bukti Transfer Pembayaran Pembiayaan",
+            'ket' => "Upload Bukti Transfer Pembayaran Pembiayaan Kode Pinjaman $id",
+            'tgl' => date('Y-m-d'),
+            'level' => 3,
+            'kode_transaksi' => $kode_by,
+            'status_baca' => 0,
             'status' => 0
         ]);
 
@@ -112,6 +123,54 @@ class BuktiBayarCtrl extends Controller
 -----------------------------
 */
 
+function transfer_sim_umum($id){
+    $data=Simpanan::where('no_rekening',$id)->get();
+    return view('anggota.transfer.tf_detail_umum',[
+        'data' =>$data
+    ]);
+}
+
+function transfer_sim_umum_act(Request $request,$id){
+    $this->validate($request, [
+        'nominal' => 'required',
+        'bukti' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
+    ]);
+
+    $kode_by= "TRFU-".rand(1000,9999);
+    $bukti_bayar =$request->file('bukti');
+    $nf_bukti_bayar = rand(10000,99999)."_".rand(1000,9999).".".$bukti_bayar->getClientOriginalExtension();
+    $tujuan_upload = 'upload/bukti_bayar';
+
+    $bukti_bayar->move($tujuan_upload,$nf_bukti_bayar);
+        
+
+    DB::table('tbl_bukti_bayar')->insert([
+        'anggota_id' => Session::get('ang_id'),
+        'kode_transaksi' => $kode_by,
+        'no_rekening' =>  $id,
+        'nominal' => $request->nominal,
+        'isi' =>$nf_bukti_bayar,
+        'tgl_upload' => date('Y-m-d'),
+        'jenis_upload' => "TRFU",
+        'ket_upload' => "Nabung Simpanan Sukarela",
+        'status' => 0
+    ]);
+    
+    DB::table('tbl_notif')->insert([
+        'kode_user' => Session::get('ang_kode'),
+        'pesan' => "Upload Bukti Transfer Simpanan",
+        'ket' => "Upload Bukti Transfer Simpanan Rekening $id",
+        'tgl' => date('Y-m-d'),
+        'level' => 3,
+        'kode_transaksi' => $kode_by,
+        'status_baca' => 0,
+        'status' => 0
+    ]);
+
+    return redirect()->back()->with('alert-success','Data Telah Terkirim, Tunggu Verifikasi !!');
+
+  
+}
 
 /* 
 -----------------------------

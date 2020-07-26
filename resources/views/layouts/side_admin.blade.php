@@ -141,7 +141,7 @@
           <a href="#" class="nav-link">
               <i class="nav-icon fa fa-leaf"></i>
             <p>
-              TRANSAKSI
+              Riwayat Transaksi
               <i class="fas fa-angle-left right"></i>
               {{-- <span class="badge badge-info right">6</span> --}}
             </p>

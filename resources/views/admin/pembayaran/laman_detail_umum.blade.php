@@ -23,17 +23,34 @@
           <div class="row">
             <section class="col-lg-6 connectedSortable">
               <div class="card">
+                @foreach ($data as $dt)
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                 Tambah Nilai Tabungan
+                 Tambah Nilai Tabungan 
+                 
                   </h3>
                   <div class="card-tools">
-                   
+                  <div class="float-right">
+                    @php
+                         $bukti_by = DB::table('tbl_bukti_bayar')
+                                  ->where([
+                                      ['no_rekening',$dt->no_rekening],
+                                      ['status',0]
+                                    ])->get();  
+                        $bukti_nulled= App\Model\BuktiBayar::where('no_rekening',$dt->no_rekening)->get();            
+
+                    @endphp
+                    <?php if(count($bukti_by) > 0){?>
+                      <label  class="badge badge-info">
+                        Konfirmasi transfer baru
+                        </label>
+                      <?php }?>       
+                  </div>  
                   </div>
                 </div>
                 <div class="card-body">
-                 @foreach ($data as $dt)
+                
                     <form action="{{url('/admin/pembayaran/simpanan-umum/tambah')}}" method="post">
                         @csrf
 
@@ -71,9 +88,9 @@
 
                         <button class="btn btn-primary float-right"><i class="fas fa-save="></i> Simpan</button>
                     </form>
-                 @endforeach
+                  </div>
+                  @endforeach
                 </div>
-              </div>
             </section>
 
 
@@ -85,10 +102,10 @@
                   Detail Pemilik Tabungan
                     </h3>
                     <div class="card-tools">
-                     
+                      <a data-toggle="collapse" href="#data-diri" class="btn btn-default"><i class="fa fa-chevron-circle-down"></i></a>
                     </div>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body collapse" id="data-diri">
                    @php
                        $ang=App\Model\Anggota::where('anggota_id',$dt->anggota_id)->first();
                        $pk=App\Model\Pekerjaan::where('id', $ang->anggota_pekerjaan)->first();
@@ -143,6 +160,107 @@
                 </div>
               </section>
 
+             {{-- data Transfer --}}
+             @if (count($bukti_nulled) > 0)
+             <section class="col-lg-12 connectedSortable">
+               <div class="card">
+                 <div class="card-header">
+                   <h3 class="card-title">
+                    
+                        List transaksi Bayar Transfer<b> {{$dt->no_rekening}}</b>
+                        @if (count($bukti_by) > 0)
+                            <label class="badge badge-info"> {{count($bukti_by)}} </label>
+                        @endif
+                   </h3>
+                   <div class="card-tools">
+                    <div class="float-right">
+                      <a  href="#transfer" class="btn btn-default" data-toggle="collapse"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+                    </div>
+                   </div>
+                 </div>
+                 <div class="card-body collapse" id="transfer">
+                     <table id="data2" class="table table-bordered table-striped">
+                         <thead>
+                             <tr>
+                             <th>Kode Transaksi</th>
+                             <th>Nominal Transfer</th> 
+                             <th>Status</th> 
+                             <th>Opsi</th>                   
+                             </tr>
+                         </thead>
+                         <tbody> 
+                            @foreach ($bukti_nulled as $bn)
+                                
+                            <tr>
+                                <td>{{$bn->kode_transaksi}}
+                                   <br>
+                                   <small>{{format_tanggal(date('Y-m-d',strtotime($bn->tgl_upload)))}}</small>
+                               </td>
+                            <td>Rp. {{number_format($bn->nominal)}}</td>
+                             <td>{{status_transfer($bn->status)}}</td>
+
+                            <td>
+                              
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#view_tr{{$bn->id}}"><i class="fa fa-eye"></i> </button>
+                            <a href="{{url('/admin/pembayaran/simpanan-umum/transfer/hapus/'.$bn->id)}}" style="padding:0 7px"> <i class="fa fa-trash"></i></a>
+                              
+                              {{-- modal transfer bukti bayar --}}
+                              <div class="modal fade" id="view_tr{{$bn->id}}" >
+                                <div class="modal-dialog modal-dialog-centered" role="dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Detail Transfer</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <form action="{{url('/admin/pembayaran/simpanan-umum/transfer/act')}}" method="post">
+                                      @csrf
+                                    <div class="modal-body">
+
+                                      <div class="form-group" style="margin-bottom:-145px">
+                                        <label >Bukti Bayar</label>
+                                        <div class="review-img">
+                                            
+                                            <?php echo preview_bukti($bn->isi)?>
+                                        </div>
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="">Keterangan</label>
+                                        <textarea class="form-control" name="ket" rows="3"></textarea>
+                                        <small class="text-danger">* isi jika ada alasan menolak  bukti bayar</small>
+
+                                      </div>
+
+                                    <input type="text" value="{{$bn->id}}" name="bukti_id" hidden>
+                                      
+                                  
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn btn-default float-right" style="margin-right:10px" type="submit" name="action" value="tolak"> Tolak Transfer</button>
+                                      <button class="btn btn-primary float-right" type="submit" name="action" value="terima">Terima Transfer</button>
+                                    </div>
+                                  </form>
+                                  </div>
+                                </div>
+                              </div>
+                              {{-- end modal transfer --}}
+
+
+                             </td>
+                         </tr>
+                         @endforeach
+                     
+                     
+                         </tbody>   
+                     </table>
+                 </div>
+               </div>
+             </section>
+             @endif
+
+           {{-- end data transfer --}}
 
               <section class="col-lg-12 connectedSortable">
                 <div class="card">
@@ -274,4 +392,10 @@
         </div>
       </div>
     </div>
+    {{-- end modal tutup rekening --}}
+
+    
+
+
+    
 @endsection

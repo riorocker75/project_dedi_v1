@@ -113,7 +113,7 @@ function aju_sim_deposit_tambah(){
 
 function aju_sim_deposit_act(Request $request){
     $no_rek='86'.rand(1000,9999);
-    $date=date('Y-m-d');
+    $date=date('Y-m-d H:i:s');
     $request->validate([
         'nama' => 'required',
         'nominal' => 'required'

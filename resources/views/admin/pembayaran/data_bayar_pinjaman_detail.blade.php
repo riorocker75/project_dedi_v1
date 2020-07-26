@@ -70,8 +70,8 @@
 
                               <div class="form-group">
                                 <label for="">Nominal Angsuran Pokok Yang Dibayar</label>
-                                <input type="number" class="form-control" name="bayar" id="format_rupiah" min="{{$dx->pinjaman_skema_angsuran}}" required>
-                                <div class="show_rupiah"></div>
+                                <input type="number" class="form-control" name="bayar" id="format_rupiah_2" min="{{$dx->pinjaman_skema_angsuran}}" required>
+                                <div class="show_rupiah_2"></div>
                                 @if($errors->has('bayar'))
                                 <small class="text-muted text-danger">
                                     {{ $errors->first('bayar')}}
@@ -277,8 +277,51 @@
 
                              <td>
                              <a data-toggle="modal" data-target="#view_tr{{$bn->id}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                             <a href="{{url('/')}}" style="padding:0 7px"> <i class="fa fa-trash"></i></a>
+                             <a href="{{url('/admin/pinjaman/detail/transfer/hapus/'.$bn->id)}}" style="padding:0 7px"> <i class="fa fa-trash"></i></a>
             
+                               {{-- modal transfer --}}
+                                  <div class="modal fade" id="view_tr{{$bn->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLongTitle">Detail Transfer</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                                <form action="{{url('/admin/pinjaman/detail/transfer/act')}}" method="post">
+                                                  @csrf
+                                                <div class="modal-body">
+
+                                                  <div class="form-group" style="margin-bottom:-145px">
+                                                    <label >Bukti Bayar</label>
+                                                    <div class="review-img">
+                                                        
+                                                        <?php echo preview_bukti($bn->isi)?>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                    <label for="">Keterangan</label>
+                                                    <textarea class="form-control" name="ket" rows="3"></textarea>
+                                                    <small class="text-danger">* isi jika ada alasan menolak  bukti bayar</small>
+
+                                                  </div>
+
+                                                <input type="text" value="{{$bn->id}}" name="bukti_id" hidden>
+                                                  
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button class="btn btn-default float-right" style="margin-right:10px" type="submit" name="action" value="tolak"> Tolak Transfer</button>
+                                                  <button class="btn btn-primary float-right" type="submit" name="action" value="terima">Terima Transfer</button>
+                                                </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  {{-- end modal transfer --}}
+
                               </td>
                           </tr>
                           @endforeach
@@ -353,48 +396,7 @@
       </section>
     </div>
 
-    {{-- modal transfer --}}
-    <div class="modal fade" id="view_tr{{$bn->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Detail Transfer</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form action="{{url('/admin/pinjaman/detail/transfer/act')}}" method="post">
-            @csrf
-          <div class="modal-body">
-
-            <div class="form-group" style="margin-bottom:-145px">
-              <label >Bukti Bayar</label>
-              <div class="review-img">
-                  
-                  <?php echo preview_bukti($bn->isi)?>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="">Keterangan</label>
-              <textarea class="form-control" name="ket" rows="3"></textarea>
-              <small class="text-danger">* isi jika ada alasan menolak  bukti bayar</small>
-
-            </div>
-
-          <input type="text" value="{{$bn->id}}" name="bukti_id" hidden>
-            
-        
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-default float-right" style="margin-right:10px" type="submit" name="action" value="tolak"> Tolak Transfer</button>
-            <button class="btn btn-primary float-right" type="submit" name="action" value="terima">Terima Transfer</button>
-          </div>
-        </form>
-        </div>
-      </div>
-    </div>
-    {{-- end modal transfer --}}
+    
 
 
 @endsection

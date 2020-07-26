@@ -26,12 +26,12 @@
 
           <div class="row">
             @if ($ang->status_simpanan == 1)
-            <section class="col-lg-12 connectedSortable">
+            <section class="col-lg-6 connectedSortable">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                  Transaksi Simpanan Sukarela
+                 Simpanan Sukarela
                   </h3>
                   <div class="card-tools">
                    <a data-toggle="collapse" href="#sim_umum" class="btn btn-default"> Tampilkan <i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -42,29 +42,27 @@
                   <table id="data1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Kode Transaksi</th>
+                        
                         <th>Nomor Rekening</th>
-                        <th>Jenis Transaksi</th>  
-                        <th>Nominal Transaksi</th>                   
-                        {{-- <th>Opsi</th>--}}
+                        <th>Status</th>                   
+                        <th>Opsi</th>
                       </tr>
                     </thead>
                     <tbody> 
                         
                         {{-- data 1 --}}
+                        @php
+                            $data_umum =App\Model\Simpanan::where('anggota_id',Session::get('ang_id'))->get();
+                        @endphp
                         @foreach ($data_umum as $du)
                             
                         <tr>
-                            <td>{{$du->kode_transaksi}}
-                              <br>
-                              <small class="tgl-text">{{format_tanggal(date('Y-m-d' , strtotime($du->tgl_transaksi)))}}</small>
+                            <td>{{$du->no_rekening}}</td>
+                            <td>{{cek_status_simpanan($du->status)}}</td>
+                        
+                            <td>
+                            <a href="{{url('/anggota/simpanan-umum/transaksi/'.$du->no_rekening)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
                             </td>
-                          <td>{{$du->no_rekening}}</td>
-                            <td>{{$du->jenis_transaksi}}</td>
-                            <td>Rp.{{number_format($du->nominal_transaksi)}}</td>
-                            {{-- <td>
-                            <a href="{{}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td> --}}
                         </tr>
                         @endforeach
 
@@ -83,12 +81,12 @@
 
             {{-- bagian simpanan deposit Transaksi --}}
             @if ($ang->status_deposit == 1)
-            <section class="col-lg-12 connectedSortable">
+            <section class="col-lg-6 connectedSortable">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                  Transaksi Simpanan Berjangka 
+                  Simpanan Berjangka 
                   </h3>
                   <div class="card-tools">
                     <a data-toggle="collapse" href="#sim_deposit" class="btn btn-default"> Tampilkan <i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -100,28 +98,25 @@
                   <table id="data2" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Kode Transaksi</th>
                         <th>Nomor Rekening</th>
-                        <th>Jenis Transaksi</th>  
-                        <th>Nominal Deposit</th>                   
-                        {{-- <th>Opsi</th>--}}
+                        <th>Status</th>                   
+                        <th>Opsi</th>            
+                    
                       </tr>
                     </thead>
                     <tbody> 
                         
                         {{-- data 1 --}}
-                        @foreach ($data_umum as $du)
+                        @php
+                        $data_deposit =App\Model\Simpanan\SimpananBerjangka::where('anggota_id',Session::get('ang_id'))->get();
+                       @endphp
+                        @foreach ($data_deposit as $dp)
                         <tr>
-                            <td>{{$du->kode_transaksi}}
-                              <br>
-                              <small class="tgl-text">{{format_tanggal(date('Y-m-d' , strtotime($du->tgl_transaksi)))}}</small>
+                            <td>{{$dp->rekening_deposit}}</td>
+                            <td>{{cek_status_simpanan($dp->status)}}}</td>
+                            <td>
+                            <a href="{{url('/anggota/simpanan-deposit/transaksi/'.$dp->rekening_deposit)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
                             </td>
-                            <td>{{$du->no_rekening}}</td>
-                            <td>{{$du->$jenis_transaksi}}</td>
-                            <td>Rp.{{number_format($du->nominal_transaksi)}}</td>
-                            {{-- <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td> --}}
                         </tr>
                         @endforeach
 
@@ -141,12 +136,12 @@
             {{-- bagian simpanan umroh transaksi --}}
 
             @if ($ang->status_umroh == 1)
-            <section class="col-lg-12 connectedSortable">
+            <section class="col-lg-6 connectedSortable">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                  Transaksi Simpanan Umroh
+                 Simpanan Umroh
                   </h3>
                   <div class="card-tools">
                     <a data-toggle="collapse" href="#sim_umroh" class="btn btn-default"> Tampilkan <i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -158,28 +153,27 @@
                   <table id="data3" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Kode Transaksi</th>
                         <th>Nomor Rekening</th>
-                        <th>Jenis Transaksi</th>  
-                        <th>Nominal Transaksi</th>                   
-                        <th>Opsi</th>                   
+                        <th>Status</th>                   
+                        <th>Opsi</th>                  
                       </tr>
                     </thead>
                     <tbody> 
                         
-                        {{-- data 1 --}}
-                        <tr>
-                            <td>TRSU-6555
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>886539</td>
-                            <td>Simpanan Sukarela</td>
-                            <td>Rp.200.000</td>
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
-                        </tr>
+                       {{-- data 1 --}}
+                       @php
+                       $data_umroh =App\Model\Simpanan\SimpananUmroh::where('anggota_id',Session::get('ang_id'))->get();
+                      @endphp
+                       @foreach ($data_umroh as $dm)
+                       <tr>
+                           <td>{{$dm->no_rekeing}}</td>
+                           <td>{{cek_status_simpanan($dm->status)}}</td>
+                          
+                           <td>
+                           <a href="{{url('/anggota/simpanan-umroh/transaksi/'.$dm->no_rekening)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
+                           </td>
+                       </tr>
+                       @endforeach
 
                       
                     </tbody>   
@@ -198,12 +192,12 @@
             {{-- bagian simpanan pendidikan transaksi --}}
 
             @if ($ang->status_pendidikan == 1)
-            <section class="col-lg-12 connectedSortable">
+            <section class="col-lg-6 connectedSortable">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
                    
-                  Transaksi Simpanan Pendidikan
+                  Simpanan Pendidikan
                   </h3>
                   <div class="card-tools">
                     <a data-toggle="collapse" href="#sim_pendidikan" class="btn btn-default"> Tampilkan <i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -215,28 +209,27 @@
                   <table id="data4" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Kode Transaksi</th>
                         <th>Nomor Rekening</th>
-                        <th>Jenis Transaksi</th>  
-                        <th>Nominal Transaksi</th>                   
+                        <th>Status</th>                   
                         <th>Opsi</th>                   
                       </tr>
                     </thead>
                     <tbody> 
                         
                         {{-- data 1 --}}
+                        @php
+                        $data_umroh =App\Model\Simpanan\SimpananUmroh::where('anggota_id',Session::get('ang_id'))->get();
+                       @endphp
+                        @foreach ($data_pendidikan as $dpn)
                         <tr>
-                            <td>TRSU-6555
-                              <br>
-                              <small class="tgl-text">14-07-2020</small>
-                            </td>
-                            <td>886539</td>
-                            <td>Simpanan Pendidikan</td>
-                            <td>Rp.200.000</td>
-                            <td>
-                            <a href="" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
-                            </td>
+                          <td>{{$dpn->no_rekeing}}</td>
+                          <td>{{cek_status_simpanan($dpn->status)}}</td>
+                         
+                          <td>
+                          <a href="{{url('/anggota/simpanan-pendidikan/transaksi/'.$dpn->no_rekening)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
+                          </td>
                         </tr>
+                        @endforeach
 
                     </tbody>   
                 </table> 

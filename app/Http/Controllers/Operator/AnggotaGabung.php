@@ -114,7 +114,7 @@ class AnggotaGabung extends Controller
         $ops=OpsiSimpanan::where('id',1)->first();
 
 
-        $no_rek='88'.rand(10000,9999);
+        $no_rek='88'.rand(10000,99999);
         switch ($request->input('action')) {
             case 'terima':
                 Syarat::where('id',$request->syarat_id)->update([

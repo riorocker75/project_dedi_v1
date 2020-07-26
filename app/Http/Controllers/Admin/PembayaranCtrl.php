@@ -96,8 +96,9 @@ class PembayaranCtrl extends Controller
          
          $sim_u = Simpanan::where('anggota_id',$anggota)->first();
          $kode_trs_sim ="TRSU-".rand(1000,9999);
+         $wajib_tambah = $sim_u->jlh_wajib + $request->wajib;
          Simpanan::where('anggota_id', $anggota)->update([
-            'jlh_wajib' => $request->wajib
+            'jlh_wajib' => $wajib_tambah
          ]);
          DB::table('tbl_simpanan_transaksi')->insert([
             'anggota_id' =>$anggota,
@@ -125,8 +126,6 @@ class PembayaranCtrl extends Controller
 
     // bagian transfer pinjaman
     function transfer_pinjam_act(Request $request){
-
-
         switch ($request->input('action')) {
             case 'terima':
               DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
@@ -147,11 +146,17 @@ class PembayaranCtrl extends Controller
              default:
              echo "terlarang";
             break;   
-        
-        
-        }
+          }
 
     }
+
+        // delete transfer sim pinjam
+        function transfer_pinjam_hapus($id){
+            $bukti_bayar=BuktiBayar::where('id',$id)->first();
+            File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
+            BuktiBayar::where('id',$id)->delete();
+            return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+        }
 
 
 /*
@@ -323,6 +328,39 @@ function sim_umum_tutup(Request $request){
 }
 
 
+    // bagian transfer simpanan Umum
+    function transfer_sim_umum_act(Request $request){
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                  'tgl_diterima' => date('Y-m-d'),
+                  'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Transfer diterima');
+                break;
+            case 'tolak':
+                DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                    'ket_upload' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+            return redirect()->back()->with('alert-warning','Transfer Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+            }
+
+    }
+
+    // delete transfer sim umum
+    function transfer_sim_umum_hapus($id){
+        $bukti_bayar=BuktiBayar::where('id',$id)->first();
+        File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
+        BuktiBayar::where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+    }
+
 
 
 //--- simpanan deposit bayar
@@ -441,6 +479,46 @@ function sim_deposit_tutup(Request $request){
 
 }
 
+
+
+    // bagian transfer simpanan deposit
+    function transfer_sim_deposit_act(Request $request){
+
+
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                  'tgl_diterima' => date('Y-m-d'),
+                  'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Transfer diterima');
+          
+                break;
+            case 'tolak':
+                DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                    'ket_upload' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+            return redirect()->back()->with('alert-warning','Transfer Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+        }
+
+    }
+
+        // delete transfer sim pendidikan
+        function transfer_sim_pendidikan_hapus($id){
+            $bukti_bayar=BuktiBayar::where('id',$id)->first();
+            File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
+            BuktiBayar::where('id',$id)->delete();
+            return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+        }
+
+
+
 //--- simpanan umroh bayar
 
 function bayar_sim_umroh(){
@@ -523,8 +601,6 @@ function bayar_sim_umroh_tambah(Request $request){
 }
 
 
-
-
 // tutup rekening simpanan umroh
 function sim_umroh_tutup(Request $request){
  
@@ -559,6 +635,43 @@ function sim_umroh_tutup(Request $request){
     return redirect()->back()->with('alert-success','Rekening telah Ditutup');
 
 }
+
+
+    // bagian transfer simpanan umroh
+    function transfer_sim_umroh_act(Request $request){
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                  'tgl_diterima' => date('Y-m-d'),
+                  'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Transfer diterima');
+          
+                break;
+            case 'tolak':
+                DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                    'ket_upload' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+            return redirect()->back()->with('alert-warning','Transfer Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+        }
+
+    }
+
+
+        // delete transfer sim umroh
+        function transfer_sim_umroh_hapus($id){
+            $bukti_bayar=BuktiBayar::where('id',$id)->first();
+            File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
+            BuktiBayar::where('id',$id)->delete();
+            return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+        }
+
 
 
 //--- simpanan pendidikan bayar
@@ -675,6 +788,45 @@ function sim_pendidikan_tutup(Request $request){
     return redirect()->back()->with('alert-success','Rekening telah Ditutup');
 
 }
+
+
+    // bagian transfer simpanan pendidikan
+    function transfer_sim_pendidikan_act(Request $request){
+
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                  'tgl_diterima' => date('Y-m-d'),
+                  'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Transfer diterima');
+          
+                break;
+            case 'tolak':
+                DB::table('tbl_bukti_bayar')->where('id',$request->bukti_id)->update([
+                    'ket_upload' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+            return redirect()->back()->with('alert-warning','Transfer Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+        }
+
+    }
+
+        // delete transfer sim deposit
+        function transfer_sim_deposit_hapus($id){
+            $bukti_bayar=BuktiBayar::where('id',$id)->first();
+            File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
+            BuktiBayar::where('id',$id)->delete();
+            return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+        }
+
+
+
 
 
 
