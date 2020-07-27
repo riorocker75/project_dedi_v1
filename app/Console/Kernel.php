@@ -25,6 +25,24 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+/*
+----------------------------- 
+untuk bagi hasil deposit 
+-----------------------------
+*/
+        // $schedule->command('kirim:deposit')->hourly();
+
+        
+/*
+----------------------------- 
+untuk bagi hasil Sukarela
+-----------------------------
+*/
+        // $schedule->command('kirim:sukarela')->hourly();
+        $schedule->command('demo:cron')->everyMinute();
+
+
     }
 
     /**

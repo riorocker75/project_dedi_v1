@@ -20,6 +20,10 @@
 
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<script src="{{asset('lte/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{asset('lte/plugins/chart.js/Chart.min.js') }}"></script>
+<script src="{{asset('lte/plugins/sparklines/sparkline.js') }}"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   {{show_alert()}}
@@ -96,7 +100,6 @@
   </aside>
 </div>
 
-<script src="{{asset('lte/plugins/jquery/jquery.min.js') }}"></script>
 
 <script src="{{asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
@@ -104,8 +107,7 @@
 </script>
 <script src="{{asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<script src="{{asset('lte/plugins/chart.js/Chart.min.js') }}"></script>
-<script src="{{asset('lte/plugins/sparklines/sparkline.js') }}"></script>
+
 <script src="{{asset('lte/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
 <script src="{{asset('lte/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
 <script src="{{asset('lte/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
