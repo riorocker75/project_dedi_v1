@@ -122,6 +122,13 @@
               'anggota_id' => Session::get('ang_id')
             ])
             ->sum('nilai_deposit');
+            $tot_nisbah =App\Model\Simpanan\SimpananBerjangka::
+            where([
+              'status' => 1,
+              'anggota_id' => Session::get('ang_id')
+            ])
+            ->sum('total_nisbah');
+            $nisbah_depo =$tot_nisbah + $tot_deposit;
             // ==================================================
             /* total simpanan umroh */
             $tot_umroh =App\Model\Simpanan\SimpananUmroh::
@@ -138,7 +145,7 @@
             ])
             ->sum('total_angsur');
             // ==================================================
-            $tot_sim =$tot_umum +$tot_deposit + $tot_umroh +$tot_pend;
+            $tot_sim =$tot_umum +  $nisbah_depo + $tot_umroh +$tot_pend;
             @endphp
             <div class="inner">
               <h3>Rp.{{number_format($tot_sim)}}</h3>

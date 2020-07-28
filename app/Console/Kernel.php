@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
 untuk bagi hasil deposit 
 -----------------------------
 */
-        // $schedule->command('kirim:deposit')->hourly();
+        $schedule->command('kirim:deposit')->daily();
 
         
 /*

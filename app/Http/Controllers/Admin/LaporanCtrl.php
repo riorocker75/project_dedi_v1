@@ -35,7 +35,7 @@ class LaporanCtrl extends Controller
     function __invoke(){}
 
     function laporan_shu(){
-        return view('admin.laporan.data_laporan_shu');
+        return view('admin.laporan.v_data_laporan');
     }
 
 

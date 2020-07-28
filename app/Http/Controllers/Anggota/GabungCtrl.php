@@ -102,6 +102,8 @@ class GabungCtrl extends Controller
     }
 
 
-
+    function tes(){
+        return view('tester');
+    }
 
 }

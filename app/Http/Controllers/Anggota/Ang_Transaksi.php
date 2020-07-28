@@ -81,7 +81,12 @@ class Ang_Transaksi extends Controller
 =================================
 */    
 function trs_sim_deposit_detail($id){
-    return view('anggota.transaksi.dt_transaksi_deposit_detail');
+    $data = SimpananTransaksi::where('no_rekening',$id)->get();
+    $data_sim =SimpananBerjangka::where('rekening_deposit',$id)->get();
+    return view('anggota.transaksi.dt_transaksi_deposit_detail',[
+        'data' =>$data,
+        'data_sim' =>$data_sim
+    ]);
 }
 
 /*

@@ -25,7 +25,8 @@ Route::get('/simulasi','Front\FrontCtrl@simulasi');
 
 Route::get('/login/tes' ,'Auth\UserController@tes');
 
-
+Route::get('/tes','Anggota\GabungCtrl@tes');
+	//
 /*
 =========================== 
 		Login User
