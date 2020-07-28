@@ -289,6 +289,14 @@ Route::get('/admin/pembayaran/simpanan-pendidikan/transfer/hapus/{id}','Admin\Pe
 
 
 /*
+------------------------------------
+	Bagian Data Buktii Bayar Transfer
+------------------------------------
+*/
+
+Route::get('/admin/bukti-bayar/','Admin\BuktiBayarAdm');
+
+/*
 --------------------------- 
 	Bagian Pengaturan Sistem
 ---------------------------

@@ -1,4 +1,58 @@
 
+{{-- notif start  --}}
+    <!-- Right navbar links -->
+    @php
+      // nda =notif daftar anggota // nda =notif daftar anggota
+      // nbk =notif daftar deposit  // num=notif daftar umroh
+     // npd=notif daftar pendidikan // npj=notif daftar pinjaman
+     
+        $nda= App\Model\Anggota::where('status',0)->get();
+        $nbk = App\Model\Simpanan\SimpananBerjangka::where('status',0)->get();
+        $num = App\Model\Simpanan\SimpananUmroh::where('status_aju',0)->get();
+        $npd = App\Model\Simpanan\SimpananPendidikan::where('status_aju',0)->get();
+        $npj= App\Model\Pinjaman::where('pinjaman_status',0)->get();
+        $nt_sim =count($nbk) + count($num) + count($npd) ;
+      $tot_notif = count($nda) + $nt_sim + count($npj) ;
+    @endphp
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown">
+         
+          @if ($tot_notif > 0)
+          <i class="far fa-bell bell" ></i>
+            <span class="badge badge-warning navbar-badge ">
+            {{number_format($tot_notif)}}
+            </span>
+            @else
+            <i class="far fa-bell"></i>
+            @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">{{number_format($tot_notif)}} Pemberitahun</span>
+          <div class="dropdown-divider"></div>
+          <a href="{{url('/operator/mohon-gabung')}}" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> {{count($nda)}} Gabung Anggota
+            
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{url('/operator/data-pinjaman')}}" class="dropdown-item">
+             <i class="fas fa-credit-card mr-2"></i> {{count($npj)}} Aju Pinjaman
+          
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{url('/operator/data-simpanan')}}" class="dropdown-item">
+            <i class="fas fa-save mr-2"></i> {{$nt_sim}} Aju Simpanan
+          
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>     
+    </ul>
+  </nav>
+
+{{-- end notif --}}
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">

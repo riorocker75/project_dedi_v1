@@ -177,3 +177,38 @@ function status_transfer($status){
     break;
     }
 }
+
+// pengecekan link bukti bayar di admin
+    function link_bukti_bayar($jenis,$rek){
+        $url_umum = url('admin/pembayaran/simpanan-umum/detail/'.$rek);
+        $url_umroh = url('admin/pembayaran/simpanan-umroh/detail/'.$rek);
+        $url_pendidikan = url('/admin/pembayaran/simpanan-pendidikan/detail/'.$rek);
+        $url_pinjaman = url('/admin/pembayaran/pinjaman/detail/'.$rek);
+
+        if($jenis == "TRFU"){
+            echo "
+            <a href='$url_umum' style='padding:0 7px'> 
+                <i class='fa fa-eye'></i>
+            </a>
+            ";
+        }elseif($jenis == "TRFH"){
+            echo "
+            <a href='$url_umroh' style='padding:0 7px'> 
+                <i class='fa fa-eye'></i>
+            </a>
+            ";
+        }elseif($jenis == "TRFD"){
+            echo "
+            <a href='$url_pendidikan' style='padding:0 7px'> 
+                <i class='fa fa-eye'></i>
+             </a>   
+            ";
+        }elseif($jenis == "TRFP"){
+            echo "
+            <a href='$url_pinjaman' style='padding:0 7px'> 
+                <i class='fa fa-eye'></i>
+             </a> 
+            ";
+        }
+
+    }

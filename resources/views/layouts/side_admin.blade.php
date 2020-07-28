@@ -1,4 +1,53 @@
 
+{{-- notif start  --}}
+    <!-- Right navbar links -->
+    @php
+    // nsk =notif transfer simpanan umum // 
+    // nbk =notif transfer deposit  // num=notif transfer umroh
+   // npd=notif transfer pendidikan // npj=notif transfer pinjaman
+   
+      $nda= App\Model\Anggota::where('status',0)->get();
+      // $nbk = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRBK"]);
+      $nsk = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFU"])->get();
+      $num = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFH"])->get();
+      $npd = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFD"])->get();
+      $npj= App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFP"])->get();
+      $nt_sim =count($nsk) + count($num) + count($npd) ;
+    $tot_notif = $nt_sim + count($npj) ;
+  @endphp
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          @if ($tot_notif > 0)
+            <i class="far fa-bell bell" ></i>
+             <span class="badge badge-warning navbar-badge">{{ $tot_notif}}</span>
+            @else
+            <i class="far fa-bell"></i>
+            @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header"> {{$tot_notif}} Pemberitahuan</span>
+          <div class="dropdown-divider"></div>
+          <a href="{{url('/admin/bukti-bayar')}}" class="dropdown-item">
+            <i class="fas fa-credit-card mr-2"></i> {{count($npj)}} Transfer Pembiayaan
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{url('/admin/bukti-bayar')}}" class="dropdown-item">
+            <i class="fas fa-save mr-2"></i> {{$nt_sim}} Transfer Simpanan
+          </a>
+          <div class="dropdown-divider"></div>
+          {{-- <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a> --}}
+          <div class="dropdown-divider"></div>
+          {{-- <a href="#" class="dropdown-item dropdown-footer">See All Pemberitahuan</a> --}}
+        </div>
+      </li>     
+    </ul>
+  </nav>
+{{-- end notif --}}
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="#" class="brand-link">
