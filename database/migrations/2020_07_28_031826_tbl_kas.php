@@ -16,10 +16,10 @@ class TblKas extends Migration
        if (!Schema::hasTable('tbl_kas')) {
            Schema::create('tbl_kas', function (Blueprint $table) {
                $table->bigIncrements('id');
-               $table->text('pendapatan');
+               $table->text('saldo')->nullable();
+               $table->text('nama');
                $table->dateTime('tgl')->nullable();
-               $table->text('jenis')->nullable();
-               $table->text('status')->nullable();
+               $table->text('status')->nullable()->comment('1=aktif,0=non aktif');
               
            });
        }

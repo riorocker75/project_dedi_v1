@@ -19,10 +19,13 @@
   <link rel="stylesheet" href="{{asset('css/bootstrap-select.css') }}">
 
 
+
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <script src="{{asset('lte/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{asset('lte/plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{asset('lte/plugins/sparklines/sparkline.js') }}"></script>
+
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -72,18 +75,14 @@
 </div>
 
 
-<script src="{{asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+{{-- <script src="{{asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script> --}}
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <script src="{{asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-
-<script src="{{asset('lte/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-<script src="{{asset('lte/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
 <script src="{{asset('lte/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
 <script src="{{asset('lte/plugins/moment/moment.min.js') }}"></script>
-<script src="{{asset('lte/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{asset('lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script src="{{asset('lte/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{asset('lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
@@ -98,12 +97,34 @@
 
 <script src="{{asset('lte/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+
 <script src="{{asset('js/data_table.js') }}"></script>
 <script src="{{asset('js/ckeditor/ckeditor.js') }}"></script>
+<script src="{{asset('js/filter_tanggal.js')}}"></script>
+
+<script>
+  $(document).ready(function() {
+      var table = $('#example').DataTable();
+ 
+      // Add event listeners to the two range filtering inputs
+      $('#min').keyup( function() { table.draw(); } );
+      $('#max').keyup( function() { table.draw(); } );
+  } );
+</script>
+
 <script type="text/javascript">
   CKEDITOR.replace('editor1');
 </script>
-
+<script>
+  $(document).ready(function () {
+    $("#data1").DataTable();
+    $("#data2").DataTable();
+    $("#data3").DataTable();
+    $("#data4").DataTable();
+    $("#data5").DataTable();
+    $("#data6").DataTable();
+  });
+</script>
 
 </body>
 </html>

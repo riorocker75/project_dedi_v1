@@ -7,6 +7,9 @@ $(document).ready(function () {
     $(".snackbar-top").fadeOut(7000).delay(7000);
 });
 
+// next date close
+
+
 // $(document).ready(function () {
 //     var tes;
 //    $('#angsur').change(function () {
@@ -108,6 +111,21 @@ $(document).ready(function () {
     if(x != ""){
       // $(this).val(n.toLocaleString());
       $(".show_rupiah_2").html("Rp.&nbsp;"+n.toLocaleString());
+     
+    }else{
+      $(this).val();
+    }
+   
+  });
+
+  
+  $("#format_rupiah_3").on('keyup', function(){
+   
+    var x =$(this).val();
+    var n = parseInt($(this).val().replace(/\D/g,''),10);
+    if(x != ""){
+      // $(this).val(n.toLocaleString());
+      $(".show_rupiah_3").html("Rp.&nbsp;"+n.toLocaleString());
      
     }else{
       $(this).val();

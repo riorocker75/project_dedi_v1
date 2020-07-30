@@ -51,6 +51,11 @@ Route::post('/ajax/cek-pendidikan','AjaxCtrl@cek_pendidikan');
 // pengecekan data anggota
 Route::post('/ajax/cek-anggota','AjaxCtrl@cek_anggota');
 
+
+//pengecekan filter laporan shu
+Route::post('/ajax/filter-shu','AjaxCtrl@filter_shu');
+
+
 /*
 =========================== 
 		Review File
@@ -321,6 +326,28 @@ Route::post('/admin/pengaturan/rekening/update', 'Admin\PengaturanCtrl@rekening_
 */	
 //-- laporan shu
 Route::get('/admin/laporan/shu','Admin\LaporanCtrl@laporan_shu');
+Route::post('/admin/laporan/shu/tambah','Admin\LaporanCtrl@laporan_shu_act');
+Route::post('/admin/laporan/shu/update','Admin\LaporanCtrl@laporan_shu_update');
+
+Route::get('/admin/laporan/shu/hapus/{id}','Admin\LaporanCtrl@laporan_shu_hapus');
+
+//-- cetak laporan shu
+Route::get('/admin/laporan/shu/cetak/all', 'Admin\LaporanCtrl@cetak_shu_all');
+Route::post('/admin/laporan/shu/cetak/filter', 'Admin\LaporanCtrl@cetak_shu_filter');
+
+/*
+--------------------------- 
+	Bagian Keuangan
+---------------------------
+*/	
+
+Route::get('/admin/laman/akuntan','Admin\Akuntan@laman_akuntan');
+
+Route::post('/admin/akuntan/kas/tambah','Admin\Akuntan@kas_tambah');
+Route::post('/admin/akuntan/kas/update','Admin\Akuntan@kas_update');
+Route::get('/admin/akuntan/kas/hapus/{id}','Admin\Akuntan@kas_delete');
+
+
 
 
 /*

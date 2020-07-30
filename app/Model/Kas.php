@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kas extends Model
 {
-    protected $table= "tbl_laporan";
+    protected $table= "tbl_kas";
     public $timestamps = false;
        protected $fillable =[
-      'pendapatan'
-
+      'nama',
    ];
 }

@@ -32,7 +32,8 @@ use App\Model\PinjamanTransaksi;
 
 use App\Model\Pekerjaan;
 
-
+use App\Model\Kas;
+use App\Model\Laporan;
 use App\Model\Notif;
 
 use App\Model\User;
@@ -335,6 +336,128 @@ class AjaxCtrl extends Controller
             public_path($file)
         );
     }
+
+
+
+/*
+------------------------------------------
+|   Bagian Print cetak laporan per tanggal
+------------------------------------------
+*/
+
+function filter_shu(Request $request){
+    $dari =$request->dari;
+    $sampai =$request->sampai;
+    $data_filter=DB::table('tbl_laporan')
+                ->where('jenis' , "SHU")
+                ->whereBetween('tgl', [$dari, $sampai])
+                ->get();
+
+    echo "
+    
+    <thead>
+      <tr>
+        <th>Kode Laporan</th>
+        <th>Nominal Transaksi</th>
+        <th>Sisa Saldo </th>
+        <th>Keterangan </th>                   
+        <th>Jenis</th>
+                        
+      </tr>
+    </thead>
+    ";            
+    echo"<tbody>";            
+    foreach($data_filter as $dt){
+      $op= Kas::where('id', $dt->kas_id)->first();
+      $saldo=number_format($op->saldo);
+
+      $ftanggal=format_tanggal(date('Y-m-d',strtotime($dt->tgl))); 
+      $nominal =number_format($dt->nominal); 
+        echo"<tr>";
+
+            // bagian kode laporan
+            echo"
+                <td>
+                    $dt->kode_laporan
+                    <br>
+                   <small class='tgl_text'>$ftanggal</small>
+                </td>
+            ";
+            // end kode laporan
+           
+            // bagian nominal transaksi
+            if($dt->status ==1 ){
+                echo"
+                    <td>
+                    <span style='color:green'>+ Rp. $nominal</span>
+                    </td>
+                ";    
+            }elseif($dt->status == "2"){
+                echo"
+                    <td>
+                    <span style='color:red'>- Rp. $nominal</span>
+                    </td>
+                ";    
+            }
+            // end nominal transaksi
+
+            // bagian saldo
+                echo"
+                    <td>
+                        Rp. $saldo 
+                        <br>
+                        <small><b>$op->nama</b></small>
+                    </td>
+                "; 
+            // end bagian saldo
+
+            // bagian keterangan
+
+                echo "
+                     <td>
+                          $dt->ket
+                     </td>
+                ";
+            // end keterangan
+
+            // bagian jenis
+            if($dt->status ==1 ){
+                echo"
+                    <td>
+                    <label class='badge badge-success'>Pemasukan</label>
+                    </td>
+                ";    
+            }elseif($dt->status == "2"){
+                echo"
+                    <td>
+                    <label class='badge badge-danger'>Pengeluaran</label>
+                    </td>
+                ";    
+            }
+            // end bagian jenis
+      
+        echo"</tr>";
+    }
+    // end foreach    
+  
+    echo "</tbody>";
+
+
+
+}
+
+
+
+
+/*
+------------------------------------------
+|   end Print cetak laporan per tanggal
+------------------------------------------
+*/
+
+
+
+
 
 
 }

@@ -16,10 +16,9 @@ class TblLaporan extends Migration
         if (!Schema::hasTable('tbl_laporan')) {
             Schema::create('tbl_laporan', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->text('pendapatan_kotor');
-                $table->text('pendapatan_bersih');
-                $table->text('pengeluaran')->nullable();
+                $table->text('nominal');
                 $table->text('kode_laporan');
+                $table->text('kas_id')->nullable();
                 $table->text('jenis')->nullable();
                 $table->dateTime('tgl');
                 $table->text('ket');

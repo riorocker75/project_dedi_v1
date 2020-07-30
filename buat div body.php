@@ -57,3 +57,14 @@
 <div class="show_rupiah"></div>
 
 ->with('alert-warning','Penolakan berhasil');
+
+<!-- buat cetak laporan -->
+
+@extends('layouts.cetak_app')
+@section('content')
+<div class="cetak_laporan">
+
+</div>
+@endsection
+
+<!-- end cetak laporan -->

@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
          $this->call(User_seed::class);
 
          $this->call(Option_seed::class);
+         $this->call(Kas_seed::class);
+
 
 
 

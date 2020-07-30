@@ -9,8 +9,7 @@ class Laporan extends Model
     protected $table= "tbl_laporan";
     public $timestamps = false;
        protected $fillable =[
-        'pendapatan_kotor',
-        'pendapatan_bersih',
+        'nominal',
         'kode_laporan',
         'tgl',
         'ket',
