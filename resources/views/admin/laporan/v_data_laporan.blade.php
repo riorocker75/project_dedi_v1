@@ -149,9 +149,10 @@
                         @endforeach
                     </tbody>
                   </table> 
-                  <table id='data2' class='hasil_filter table table-bordered table-striped'>
+                  <div class="hasil_filter"></div>
+                 
                    
-                  </table>
+                 
                
             </div>
           </div>

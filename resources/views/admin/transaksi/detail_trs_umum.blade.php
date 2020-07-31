@@ -131,10 +131,15 @@
                      List Transaksi Rekening :<b>{{$dt->no_rekening}}</b>
                     </h3>
                     <div class="card-tools">
-                     
+                     <div class="float-right">
+                        <a id="print_transaksi" onclick="printDiv('printableArea')" class="btn btn-outline-primary btn-sm">
+                          <i class="fa fa-print"></i>
+                          Cetak Transaksi
+                        </a>
+                     </div>
                     </div>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" id="printableArea">
                     <table id="data1" class="table table-bordered table-striped">
                       <thead>
                         <tr>

@@ -6,7 +6,8 @@
        KSPPS KIS<br>
        <span>KANTOR PUSAT</span> <br>
        <span>LAPORAN SISA HASIL USAHA</span><br>
-        {{-- <span>TAHUN {{date('Y')}}</span> --}}
+        <span>{{$dari}} - {{$sampai}}</span>
+        
     </div>
     
     <div class="tabel_laporan">

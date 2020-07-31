@@ -352,9 +352,37 @@ function filter_shu(Request $request){
                 ->where('jenis' , "SHU")
                 ->whereBetween('tgl', [$dari, $sampai])
                 ->get();
+    $total_filter=count($data_filter);
+    $fdari=format_tanggal(date('Y-m-d',strtotime($dari)));
+    $fsampai=format_tanggal(date('Y-m-d',strtotime($sampai)));
+
+    echo"
+    <table style='width:220px;margin-bottom:20px'>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dari</td>
+                <td>$fdari</td>
+            </tr>
+            <tr>
+                <td>Sampai</td>
+                <td>$fsampai</td>
+            </tr>
+            <tr>
+                <td>Total Data</td>
+                <td>$total_filter</td>
+            </tr>
+        </tbody>
+    </table>
+    ";
 
     echo "
-    
+    <table id='data2' class='table table-bordered table-striped'>
     <thead>
       <tr>
         <th>Kode Laporan</th>
@@ -440,7 +468,7 @@ function filter_shu(Request $request){
     }
     // end foreach    
   
-    echo "</tbody>";
+    echo " </tbody></table>";
 
 
 

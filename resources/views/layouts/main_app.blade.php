@@ -101,6 +101,7 @@
 <script src="{{asset('js/data_table.js') }}"></script>
 <script src="{{asset('js/ckeditor/ckeditor.js') }}"></script>
 <script src="{{asset('js/filter_tanggal.js')}}"></script>
+<script src="{{asset('js/print.js') }}"></script>
 
 <script>
   $(document).ready(function() {

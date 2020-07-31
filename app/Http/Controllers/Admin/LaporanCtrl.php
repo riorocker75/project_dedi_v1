@@ -127,7 +127,8 @@ bagian laporan shu
                     ->where('jenis' , "SHU")
                     ->whereBetween('tgl', [$dari, $sampai])
                     ->get();
-        
+        $fdari=format_tanggal(date('Y-m-d',strtotime($dari)));
+        $fsampai=format_tanggal(date('Y-m-d',strtotime($sampai)));
         if(count($data_filter) < 1){
             return redirect('/admin/laporan/shu');
         }
@@ -153,6 +154,8 @@ bagian laporan shu
            'data_keluar' => $data_keluar,
            'total_masuk' =>$total_masuk,
            'total_keluar' =>$total_keluar,
+           'dari' => $fdari,
+           'sampai' => $fsampai,
            'laba_kotor' =>$laba_kotor
 
         ]);
