@@ -23,6 +23,8 @@ use App\Model\User;
 
 use App\Model\BuktiBayar;
 use App\Model\Syarat;
+
+
 class Ang_PinjamanCtrl extends Controller
 {
     public function __construct()

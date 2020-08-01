@@ -203,6 +203,8 @@ class AnggotaSimpanan extends Controller
                 'tgl_transaksi' => date('Y-m-d'),
                 'jenis_transaksi' => "Simpanan Berjangka",
                 'ket_transaksi' => "Pembayaran Simpanan Berjangka Pertama",
+                'metode' => 1,
+                'sisa_angsuran' =>$ops->nominal_deposit,
                 'status' => 1
         ]);
 
@@ -284,6 +286,8 @@ class AnggotaSimpanan extends Controller
                 'tgl_transaksi' => date('Y-m-d'),
                 'jenis_transaksi' => "Simpanan Umroh",
                 'ket_transaksi' => "Pembayaran Angsuran Simpanan Umroh Pertama",
+                'metode' => 1,
+
                 'status' => 1
         ]);
 
@@ -361,6 +365,8 @@ class AnggotaSimpanan extends Controller
                 'tgl_transaksi' => date('Y-m-d'),
                 'jenis_transaksi' => "Simpanan Pendidikan",
                 'ket_transaksi' => "Pembayaran Angsuran Simpanan Pendidikan Pertama",
+                'metode' => 1,
+
                 'status' => 1
         ]);
 

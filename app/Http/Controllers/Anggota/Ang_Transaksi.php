@@ -64,7 +64,7 @@ class Ang_Transaksi extends Controller
 =================================
 */
     function trs_sim_umum_detail($id){
-        $data = SimpananTransaksi::where('no_rekening',$id)->get();
+        $data = SimpananTransaksi::where('no_rekening',$id)->orderBy('tgl_transaksi','desc')->get();
         $data_sim =Simpanan::where('no_rekening',$id)->get();
         return view('anggota.transaksi.dt_transaksi_umum_detail',[
             'data' =>$data,
@@ -81,7 +81,7 @@ class Ang_Transaksi extends Controller
 =================================
 */    
 function trs_sim_deposit_detail($id){
-    $data = SimpananTransaksi::where('no_rekening',$id)->get();
+    $data = SimpananTransaksi::where('no_rekening',$id)->orderBy('tgl_transaksi','desc')->get();
     $data_sim =SimpananBerjangka::where('rekening_deposit',$id)->get();
     return view('anggota.transaksi.dt_transaksi_deposit_detail',[
         'data' =>$data,
@@ -95,7 +95,7 @@ function trs_sim_deposit_detail($id){
 =================================
 */
 function trs_sim_umroh_detail($id){
-    $data = SimpananTransaksi::where('no_rekening',$id)->get();
+    $data = SimpananTransaksi::where('no_rekening',$id)->orderBy('tgl_transaksi','desc')->get();
         $data_sim =SimpananUmroh::where('no_rekening',$id)->get();
         return view('anggota.transaksi.dt_transaksi_umroh_detail',[
             'data' =>$data,
@@ -111,7 +111,7 @@ function trs_sim_umroh_detail($id){
 */
 
 function trs_sim_pendidikan_detail($id){
-    $data = SimpananTransaksi::where('no_rekening',$id)->get();
+    $data = SimpananTransaksi::where('no_rekening',$id)->orderBy('tgl_transaksi','desc')->get();
     $data_sim =SimpananPendidikan::where('no_rekening',$id)->get();
     return view('anggota.transaksi.dt_transaksi_pendidikan_detail',[
         'data' =>$data,

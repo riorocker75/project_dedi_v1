@@ -113,7 +113,7 @@
                         @foreach ($data_deposit as $dp)
                         <tr>
                             <td>{{$dp->rekening_deposit}}</td>
-                            <td>{{cek_status_simpanan($dp->status)}}}</td>
+                            <td>{{cek_status_simpanan($dp->status)}}</td>
                             <td>
                             <a href="{{url('/anggota/simpanan-deposit/transaksi/'.$dp->rekening_deposit)}}" style="padding:0 7px"> <i class="fa fa-eye"></i></a>
                             </td>

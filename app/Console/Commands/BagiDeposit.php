@@ -45,14 +45,14 @@ class BagiDeposit extends Command
             foreach($data_sim as $ds){
 
                     $op=OpsiSimpananBerjangka::where('id', $ds->opsi_deposit_id)->first();
-                    
+            
                     $t= date('d',strtotime($ds->tgl_deposit));
                     $tx = $t;
                     // $tx = $t-2;
 
                     $hari_ini =date('d');  
                     $tot_nisbah = $ds->total_nisbah + $op->nisbah_bulan;  
-                
+                    $saldo_tambah = $ds->nilai_deposit + $ds->total_nisbah ;
                     if($tx = $hari_ini) {
 
                         DB::table('tbl_simpanan_berjangka')->where([
@@ -70,9 +70,10 @@ class BagiDeposit extends Command
                             'kode_simpanan' => "SBK",
                             'kode_transaksi' => $kode_trs,
                             'nominal_transaksi' => $op->nisbah_bulan,
-                            'tgl_transaksi' => date('Y-m-d'),
+                            'tgl_transaksi' => date('Y-m-d H:i:s'),
                             'jenis_transaksi' => "Simpanan Berjangka",
                             'ket_transaksi' => "Pembagian Nisbah Bulanan",
+                            'sisa_angsuran' => $saldo_tambah,
                             'status' => 1
                         ]);
 

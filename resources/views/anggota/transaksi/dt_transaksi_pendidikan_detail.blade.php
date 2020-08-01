@@ -60,7 +60,7 @@
                 <div class="form-group">
                   <label for="">Angsuran perbulan</label>
                   <input type="text"
-                  class="form-control" value="Rp.{{number_format($ds->angsuran_umroh)}}" disabled>
+                  class="form-control" value="Rp.{{number_format($ds->angsuran_pend)}}" disabled>
                 </div>
                 
                 <div class="form-group">
@@ -70,7 +70,7 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="">Sisa Angsuran Umroh</label>
+                  <label for="">Sisa Angsuran pendidikan</label>
                   <input type="text"
                 class="form-control" value="Rp.{{number_format($det_angsur->sisa_angsuran)}}" disabled>
                 </div>
@@ -85,7 +85,6 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">
-                   
                   History Transaksi
                   </h3>
                   <div class="card-tools">
@@ -93,7 +92,35 @@
                   </div>
                 </div>
                 <div class="card-body">
+                {{-- start cetak transaksi --}}
+                @if(count($data) > 0)
+                <form action="{{url('/cetak/transaksi/simpanan/pendidikan/filter/'.$ds->no_rekening)}}" method="post" target="__blank">
+                  @csrf
+                  <div class="row">
+                      <div class="col-lg-3 col-md-6 col-12">
+                          <div class="form-group">
+                              <label for="">Dari Tanggal</label>
+                            <input type="date" class="form-control" name="dari" id="dari" value="{{date('Y-m-d', strtotime('first day of january this year'))}}">
+                            </div> 
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-12">
+                          <div class="form-group">
+                              <label for="">Sampai Tanggal</label>
+                              <input type="date" class="form-control" name="sampai" id="sampai" value="{{date('Y-m-d')}}">
 
+                            </div> 
+                      </div>
+                  
+                    <button type="submit" style="margin-top:32px;margin-bottom:20px" 
+                      class="btn btn-outline-primary float-right">
+                      Print &nbsp;
+                      <i class="fa fa-print"></i>
+                      </button>
+                  </div>
+                </form>
+                @endif
+
+                {{-- end cetak transaksi --}}
                   <table id="data1" class="table table-bordered table-striped">
                       <thead>
                           <tr>
@@ -113,7 +140,9 @@
                               </td>
                               
                               <td>{{$dt->jenis_transaksi}}</td>
-                              <td>{{$dt->ket_transaksi}}</td>
+                              <td>{{$dt->ket_transaksi}}
+                                <br>{{status_metode($dt->metode)}}
+                              </td>
                               <td>
                                   <?php if($dt->status == 1){?>
                                       <div style="color:green">

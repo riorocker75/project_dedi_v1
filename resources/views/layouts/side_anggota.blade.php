@@ -92,8 +92,8 @@
 
           <li class="nav-item">
             <a href="{{url('/anggota/riwayat/transaksi/')}}" class="nav-link">
-              <i class="nav-icon fas fa-bookmark"></i>
-              <p> Riwayat Simpanan</p>
+              <i class="nav-icon fas fa-book"></i>
+              <p> Data Simpanan</p>
             </a>
           </li>
 

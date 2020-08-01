@@ -77,7 +77,19 @@
                                 @endif
                         </div>
 
-                       
+                        <div class="form-group">
+                          <label for="">Metode Simpan / Penarikan</label>
+                         <select name="metode" class="form-control" required>
+                             <option value="">--Pilih Metode--</option>
+                             <option value="1">Langsung</option>
+                             <option value="2">Transfer</option>
+                         </select>
+                              @if($errors->has('metode'))
+                              <small class="text-muted text-danger">
+                              {{ $errors->first('metode')}}
+                              </small>
+                              @endif
+                      </div>
 
                         <button class="btn btn-primary float-right"><i class="fas fa-save="></i> Simpan</button>
                     </form>
@@ -107,7 +119,11 @@
                               </div>
                             </div>
                             <div class="card-body collapse" id="simpanan">
-                           
+                              <div class="form-group">
+                                <label for="">Total Pendapatan Nisbah</label>
+                                <input type="text"
+                              class="form-control" value="Rp.{{number_format($dt->total_nisbah)}}" disabled>
+                            </div>
                             <div class="form-group">
                                 <label for="">Nilai Simpanan Berjangka</label>
                                 <input type="text"
@@ -131,11 +147,7 @@
                               class="form-control" value="Rp.{{number_format($ops_lain->nisbah_bulan)}}" disabled>
                             </div>
 
-                            <div class="form-group">
-                                <label for="">Total Pendapatan Nisbah</label>
-                                <input type="text"
-                              class="form-control" value="Rp.{{number_format($dt->total_nisbah)}}" disabled>
-                            </div>
+                           
                             {{-- 
                             <div class="form-group">
                                 <label for="">Terakhir bayar</label>
@@ -169,13 +181,7 @@
                             </div>
                             <div class="card-body collapse" id="data-diri">
                            
-                              <div class="form-group">
-                                  <label for="">Total Angsuran</label>
-                                  <input type="text"
-                                  class="form-control" value="Rp.{{number_format($dt->total_angsur)}}" disabled>
-                              </div>
-          
-          
+                         
                              <div class="form-group">
                                <label for="">Nama</label>
                                <input type="text"
@@ -240,6 +246,35 @@
                     </div>
                   </div>
                   <div class="card-body">
+                          {{-- start cetak transaksi --}}
+                    @if(count($data) > 0)
+                    <form action="{{url('/cetak/transaksi/simpanan/deposit/filter/'.$dt->rekening_deposit)}}" method="post" target="__blank">
+                      @csrf
+                      <div class="row">
+                          <div class="col-lg-3 col-md-6 col-12">
+                              <div class="form-group">
+                                  <label for="">Dari Tanggal</label>
+                                <input type="date" class="form-control" name="dari" id="dari" value="{{date('Y-m-d', strtotime('first day of january this year'))}}">
+                                </div> 
+                          </div>
+                          <div class="col-lg-3 col-md-6 col-12">
+                              <div class="form-group">
+                                  <label for="">Sampai Tanggal</label>
+                                  <input type="date" class="form-control" name="sampai" id="sampai" value="{{date('Y-m-d')}}">
+
+                                </div> 
+                          </div>
+                      
+                        <button type="submit"  style="margin-top:32px;margin-bottom:20px" 
+                          class="btn btn-outline-primary float-right">
+                          Print &nbsp;
+                          <i class="fa fa-print"></i>
+                          </button>
+                      </div>
+                    </form>
+                    @endif
+
+                    {{-- end cetak transaksi --}}
                     <table id="data1" class="table table-bordered table-striped">
                         <thead>
                           <tr>
@@ -254,7 +289,7 @@
                         <tbody> 
                             
                             @php
-                                $last =App\Model\SimpananTransaksi::where('no_rekening',$dt->rekening_deposit)->orderBy('id','asc')->get();
+                                $last =App\Model\SimpananTransaksi::where('no_rekening',$dt->rekening_deposit)->orderBy('tgl_transaksi','desc')->get();
                             @endphp
                             {{-- data 1 --}}
                             @foreach ($last as $lt)
@@ -266,7 +301,10 @@
                                 </td>
                               
                               <td>{{$lt->jenis_transaksi}}</td>
-                              <td>{{$lt->ket_transaksi}}</td>
+                              <td>{{$lt->ket_transaksi}}
+                                <br>
+                                {{status_metode($lt->metode)}}
+                              </td>
 
                                 <td>
                                     <?php if($lt->status == 1){?>

@@ -70,7 +70,7 @@
 
                               <div class="form-group">
                                 <label for="">Nominal Angsuran Pokok Yang Dibayar</label>
-                                <input type="number" class="form-control" name="bayar" id="format_rupiah_2" min="{{$dx->pinjaman_skema_angsuran}}" required>
+                                <input type="number" class="form-control" name="bayar" id="format_rupiah_2" min="{{$dx->pinjaman_skema_angsuran}}" value="{{$dx->pinjaman_skema_angsuran}}" required>
                                 <div class="show_rupiah_2"></div>
                                 @if($errors->has('bayar'))
                                 <small class="text-muted text-danger">
@@ -81,7 +81,7 @@
 
                               <div class="form-group">
                                 <label for="">Nominal Wajib Mingguan </label>
-                                <input type="number" class="form-control" name="wajib" id="format_rupiah" min="{{$ops->biaya_wajib}}" required>
+                                <input type="number" class="form-control" name="wajib" id="format_rupiah" min="{{$ops->biaya_wajib}}" value="{{$ops->biaya_wajib}}" required>
                                 <div class="show_rupiah"></div>
                                 @if($errors->has('bayar'))
                                 <small class="text-muted text-danger">
@@ -96,6 +96,20 @@
                                 <small>*isi nilai 0 jika uangnya pas</small>
                               
                               </div>
+
+                              <div class="form-group">
+                                <label for="">Metode Bayar</label>
+                               <select name="metode" class="form-control" required>
+                                   <option value="">--Pilih Metode--</option>
+                                   <option value="1">Langsung</option>
+                                   <option value="2">Transfer</option>
+                               </select>
+                                    @if($errors->has('metode'))
+                                    <small class="text-muted text-danger">
+                                    {{ $errors->first('metode')}}
+                                    </small>
+                                    @endif
+                            </div>
 
                               <div class="form-group">
                                 <label for="">Keterangan Bayar</label>
@@ -175,7 +189,7 @@
                       </div>
                       {{-- ini bagian detail yang akan dibayarkan --}}
                       <div class="col-lg-6 col-md-12 col-12">
-                              @php
+                           @php
                               $source_sisa =App\Model\PinjamanTransaksi::where('pinjaman_kode',$dx->pinjaman_kode)->get();
                               // cek dulu ada apa nggak nya data di tabel itu baru -> kau bisa manggil dia last record row
                               $sg= App\Model\PinjamanTransaksi::where('pinjaman_kode',$dx->pinjaman_kode)->orderBy('id', 'DESC')->first(); 
@@ -349,6 +363,35 @@
                   </div>
                 </div>
                 <div class="card-body">
+                      {{-- start cetak transaksi --}}
+                      @if(count($data) > 0)
+                      <form action="{{url('/cetak/transaksi/simpanan/pinjaman/filter/'.$dx->pinjaman_kode)}}" method="post" target="__blank">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="">Dari Tanggal</label>
+                                  <input type="date" class="form-control" name="dari" id="dari" value="{{date('Y-m-d', strtotime('first day of january this year'))}}">
+                                  </div> 
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="">Sampai Tanggal</label>
+                                    <input type="date" class="form-control" name="sampai" id="sampai" value="{{date('Y-m-d')}}">
+        
+                                  </div> 
+                            </div>
+                        
+                          <button type="submit" style="margin-top:32px;margin-bottom:20px" 
+                            class="btn btn-outline-primary float-right">
+                            Print &nbsp;
+                            <i class="fa fa-print"></i>
+                            </button>
+                        </div>
+                      </form>
+                      @endif
+    
+                      {{-- end cetak transaksi --}}
                     <table id="data1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -372,10 +415,16 @@
                            <small> Kembalian: Rp. {{number_format($dt->kembalian_bayar)}}</small> 
                             </td>
                            <td>Rp. {{number_format($dt->sisa_bayar)}}</td>
-                            <td>{{$dt->ket_bayar}}</td>
+                            <td>{{$dt->ket_bayar}}
+                              <br>
+                              {{status_metode($dt->metode)}}
+                            </td>
                             
                            <td>
-                           <a href="{{url('/admin/pembayaran/pinjaman/transaksi/hapus/'.$dt->id)}}" style="padding:0 7px"> <i class="fa fa-trash"></i></a>
+                           <a href="{{url('/admin/pembayaran/pinjaman/transaksi/hapus/'.$dt->id)}}" style="padding:0 7px"
+                            onclick="return confirm('Apakah anda yakin menghapus data ini ?');"> 
+                            <i class="fa fa-trash"></i>
+                          </a>
                             </td>
                         </tr>
                         @endforeach

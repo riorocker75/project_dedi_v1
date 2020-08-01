@@ -422,6 +422,12 @@ Route::get('/operator/verifikasi/anggota/hapus/{id}','Operator\AnggotaGabung@ver
 // pesan
 
 
+// laporan operator
+Route::get('/operator/laporan/shu','Operator\OPLaporanCtrl@laporan_shu');
+Route::get('/operator/laporan/shu/cetak/all','Operator\OPLaporanCtrl@cetak_shu_all');
+
+Route::post('/operator/laporan/shu/cetak/filter','Operator\OPLaporanCtrl@cetak_shu_all');
+
 
 
 
@@ -551,3 +557,28 @@ Route::post('/anggota/pinjaman/bayar/transfer/act/{id}','Anggota\BuktiBayarCtrl@
 
 
 //---transfer Simpanan Pendidikan
+
+
+
+
+/*
+----------------------------------
+|	Cetak RIwayat Transaksi
+-----------------------------------
+*/
+
+// cetak transaksi umum
+Route::post('/cetak/transaksi/simpanan/umum/filter/{id}','CetakCtrl@trs_filter_umum');
+
+// cetak transaksi deposit
+Route::post('/cetak/transaksi/simpanan/deposit/filter/{id}','CetakCtrl@trs_filter_deposit');
+
+// cetak transaksi umroh
+Route::post('/cetak/transaksi/simpanan/umroh/filter/{id}','CetakCtrl@trs_filter_umroh');
+
+// cetak transaksi pendidikan
+Route::post('/cetak/transaksi/simpanan/pendidikan/filter/{id}','CetakCtrl@trs_filter_pendidikan');
+
+// cetak transaksi pinjaman
+Route::post('/cetak/transaksi/simpanan/pinjaman/filter/{id}','CetakCtrl@trs_filter_pinjaman');
+

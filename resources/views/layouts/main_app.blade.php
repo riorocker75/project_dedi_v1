@@ -75,7 +75,7 @@
 </div>
 
 
-{{-- <script src="{{asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script> --}}
+<script src="{{asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -116,16 +116,7 @@
 <script type="text/javascript">
   CKEDITOR.replace('editor1');
 </script>
-<script>
-  $(document).ready(function () {
-    $("#data1").DataTable();
-    $("#data2").DataTable();
-    $("#data3").DataTable();
-    $("#data4").DataTable();
-    $("#data5").DataTable();
-    $("#data6").DataTable();
-  });
-</script>
+
 
 </body>
 </html>

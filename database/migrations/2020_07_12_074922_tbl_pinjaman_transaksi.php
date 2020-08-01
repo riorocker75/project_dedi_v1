@@ -23,6 +23,7 @@ class TblPinjamanTransaksi extends Migration
                 $table->text('kembalian_bayar');
                 $table->text('sisa_bayar');
                 $table->text('ket_bayar');
+                $table->text('metode')->nullable()->comment('1=bayar langsung,2=Transfer');
                 $table->text('status')->nullable();
                
             });   

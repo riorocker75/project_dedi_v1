@@ -98,6 +98,20 @@ function status_kas($status){
     }
 }
 
+
+function status_metode($status){
+    switch($status){
+        case 1:
+            echo "<label class='badge badge-success'>Langsung</label>";
+        break;
+        case 0: 
+            echo "<label class='badge badge-primary'> Transfer</label>";
+        break;
+        default:
+    break;
+    }
+}
+
 function preview_file($nama_file){ /*ini menggunakanan paramerter $nama_file*/
     $url_sh=substr($nama_file,0,-4);
     $url_klik= url('upload/syarat/'.$nama_file);

@@ -1,3 +1,9 @@
+.cetak_transaksi{
+	width:30cm;
+	padding: 0.48cm 2cm 1cm 2.5cm;
+	margin: 1cm auto;
+}
+
 .cetak_laporan {
 	/* font-family: "Times New Roman", Times, serif !important; */
 	width: 21cm;

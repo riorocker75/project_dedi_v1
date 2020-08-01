@@ -37,6 +37,20 @@
     <?php }else{?>
       {{-- start else jika udah statusnya 1 atau lainya --}}
       <div class="row">
+    @php
+         $cek_pinjaman=App\Model\Pinjaman::where('anggota_id',Session::get('ang_id'))
+                                          ->orderBy('id','desc')
+                                          ->first();
+    @endphp
+        <?php if($cek_pinjaman->status_bayar == "1"){?>
+          <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fas fa-exclamation-triangle"></i>Mohon Maaf </h5>
+              Anda Sedang Dalam Masa Pembiayaan Laman Tidak Tersedia
+          <br>
+          
+          </div>
+        <?php }else{?> 
         <section class="col-lg-12 connectedSortable">
           <div class="card">
             <div class="card-header">
@@ -119,7 +133,8 @@
             </div>
           </div>
         </section>
-      
+      <?php } ?>
+          {{-- end elsenya apabila dia sudah dan sedang melakukan pembiayaan --}}
       </div>
       {{-- end else status pinjaman --}}
     <?php } ?>

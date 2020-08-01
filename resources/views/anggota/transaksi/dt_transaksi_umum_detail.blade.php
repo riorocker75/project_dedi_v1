@@ -5,12 +5,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Simpanan Umum </h1>
+              <h1 class="m-0 text-dark">Simpanan</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/dashboard/anggota')}}">Home</a></li>
-                <li class="breadcrumb-item active">Simpanan Umum </li>
+                <li class="breadcrumb-item active">Simpanan</li>
               </ol>
             </div>
           </div>
@@ -85,6 +85,36 @@
                     </div>
                   </div>
                   <div class="card-body">
+
+                    {{-- start cetak transaksi --}}
+                    @if(count($data) > 0)
+                    <form action="{{url('/cetak/transaksi/simpanan/umum/filter/'.$ds->no_rekening)}}" method="post" target="__blank">
+                      @csrf
+                      <div class="row">
+                          <div class="col-lg-3 col-md-6 col-12">
+                              <div class="form-group">
+                                  <label for="">Dari Tanggal</label>
+                                 <input type="date" class="form-control" name="dari" id="dari" value="{{date('Y-m-d', strtotime('first day of january this year'))}}">
+                                </div> 
+                          </div>
+                          <div class="col-lg-3 col-md-6 col-12">
+                              <div class="form-group">
+                                  <label for="">Sampai Tanggal</label>
+                                  <input type="date" class="form-control" name="sampai" id="sampai" value="{{date('Y-m-d')}}">
+      
+                                </div> 
+                          </div>
+                       
+                        <button type="submit" style="margin-top:32px;margin-bottom:20px" 
+                          class="btn btn-outline-primary float-right">
+                          Print &nbsp;
+                          <i class="fa fa-print"></i>
+                          </button>
+                      </div>
+                    </form>
+                    @endif
+
+                    {{-- end cetak transaksi --}}
 
                     <table id="data1" class="table table-bordered table-striped">
                         <thead>

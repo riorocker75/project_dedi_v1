@@ -73,7 +73,8 @@ class PembayaranCtrl extends Controller
             'wajib' => 'required',
             'ket_bayar' => 'required',
             'kode' =>'required',
-            'kembalian' =>'required'
+            'kembalian' =>'required',
+            'metode' => 'required'
         ]);
         $nominal_fix=$request->bayar - $request->kembalian;
         $sisa_bayar=$request->angsuran - $nominal_fix;
@@ -84,14 +85,15 @@ class PembayaranCtrl extends Controller
                 'status_bayar' => 2
             ]);
         }
-        PinjamanTransaksi::create([
+        DB::table('tbl_pinjaman_transaksi')->insert([
             'pinjaman_kode' =>$kode,
             'anggota_id' =>$anggota,
             'tgl_transaksi' =>$date,
             'nominal_bayar' =>$request->bayar,
             'kembalian_bayar' =>$request->kembalian,
             'sisa_bayar' =>$sisa_bayar,
-            'ket_bayar' => $request->ket_bayar
+            'ket_bayar' => $request->ket_bayar,
+            'metode' => $request->metode
          ]);
          
          $sim_u = Simpanan::where('anggota_id',$anggota)->first();
@@ -110,6 +112,7 @@ class PembayaranCtrl extends Controller
             'tgl_transaksi' => date('Y-m-d'),
             'jenis_transaksi' => "Simpanan Wajib",
             'ket_transaksi' => "Pembayaran Simpanan Wajib dari Angsuran Pembiayaan",
+            'metode' =>$request->metode,
             'status' => 1
          ]);
 
@@ -195,7 +198,8 @@ function bayar_sim_umum_detail($id){
 function bayar_sim_umum_tambah(Request $request){
     $request->validate([
         'nominal' => 'required',
-        'jenis_tr' => 'required'
+        'jenis_tr' => 'required',
+        'metode' => 'required'
     ]);
 
     $kode_trs="TRSU-" .rand(1000,9999);
@@ -220,6 +224,8 @@ function bayar_sim_umum_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Sukarela",
             'ket_transaksi' => "Nabung Simpanan Sukarela",
+            'metode' => $request->metode,
+            'sisa_angsuran' => $total_nabung,
             'status' => 1
         ]);
 
@@ -233,6 +239,8 @@ function bayar_sim_umum_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Wajib",
             'ket_transaksi' => "Nabung Simpanan Wajib",
+            'metode' => $request->metode,
+            'sisa_angsuran' => $jlh_wajib,
             'status' => 1
         ]);
 
@@ -255,6 +263,8 @@ function bayar_sim_umum_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Sukarela",
             'ket_transaksi' => "Penarikan Simpanan",
+            'metode' => $request->metode,
+            'sisa_angsuran' => $kurang_saldo,
             'status' => 2
         ]);
 
@@ -294,6 +304,7 @@ function sim_umum_tutup(Request $request){
         'tgl_transaksi' => date('Y-m-d H:i:s'),
         'jenis_transaksi' => "Simpanan Sukarela",
         'ket_transaksi' => "Penarikan Simpanan",
+        'sisa_angsuran' => 0,
         'status' => 2
     ]);
 
@@ -307,6 +318,7 @@ function sim_umum_tutup(Request $request){
         'tgl_transaksi' => date('Y-m-d H:i:s'),
         'jenis_transaksi' => "Simpanan Wajib",
         'ket_transaksi' => "Penarikan Simpanan",
+        'sisa_angsuran' => 0,
         'status' => 2
     ]);
 
@@ -320,6 +332,7 @@ function sim_umum_tutup(Request $request){
         'tgl_transaksi' => date('Y-m-d H:i:s'),
         'jenis_transaksi' => "Simpanan Wajib",
         'ket_transaksi' => "Penarikan Simpanan",
+        'sisa_angsuran' => 0,
         'status' => 2
     ]);
 
@@ -381,7 +394,8 @@ function bayar_sim_deposit_detail($id){
 function bayar_sim_deposit_tambah(Request $request){
     $request->validate([
         'nominal' => 'required',
-        'jenis_tr' => 'required'
+        'jenis_tr' => 'required',
+        'metode' => 'required'
     ]);
 
     $kode_trs="TRUH-" .rand(1000,9999);
@@ -395,18 +409,17 @@ function bayar_sim_deposit_tambah(Request $request){
   
         $total_nabung= $request->nominal + $saldo->nilai_deposit;
        
-       
         DB::table('tbl_simpanan_transaksi')->insert([
             'anggota_id' => $request->ang_id,
             'no_rekening' => $request->no_rek,
             'operator_id' => Session::get('adm_kode'),
             'kode_simpanan' => "SBK",
             'kode_transaksi' =>$kode_trs,
-           
             'nominal_transaksi' =>  $request->nominal,
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Berjangka",
             'ket_transaksi' => "Nabung Simpanan Berjangka",
+            'metode' => $request->metode,
             'status' => 1
         ]);
 
@@ -418,8 +431,8 @@ function bayar_sim_deposit_tambah(Request $request){
     
     // ini untuk penarikan
     if($request->jenis_tr == 2){
-        $kurang_saldo= $saldo->nilai_deposit  - $request->nominal;
-       
+        $kurang_saldo= $saldo->total_nisbah  - $request->nominal;
+        $saldo_tarik = ($saldo->total_nisbah - $request->nominal) +  $saldo->nilai_deposit;
         DB::table('tbl_simpanan_transaksi')->insert([
             'anggota_id' => $request->ang_id,
             'no_rekening' => $request->no_rek,
@@ -431,11 +444,13 @@ function bayar_sim_deposit_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Berjangka",
             'ket_transaksi' => "Penarikan Simpanan Berjangka",
+            'metode' => $request->metode,
+            'sisa_angsuran' => $saldo_tarik,
             'status' => 2
         ]);
 
         SimpananBerjangka::where('rekening_deposit',$request->no_rek)->update([
-            'nilai_deposit' => $kurang_saldo
+            'total_nisbah' => $kurang_saldo
         ]);
         
     }
@@ -509,13 +524,14 @@ function sim_deposit_tutup(Request $request){
 
     }
 
-        // delete transfer sim pendidikan
-        function transfer_sim_pendidikan_hapus($id){
-            $bukti_bayar=BuktiBayar::where('id',$id)->first();
-            File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
-            BuktiBayar::where('id',$id)->delete();
-            return redirect()->back()->with('alert-danger','Data Telah Terhapus');
-        }
+       // delete transfer sim deposit
+       function transfer_sim_deposit_hapus($id){
+        $bukti_bayar=BuktiBayar::where('id',$id)->first();
+        File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
+        BuktiBayar::where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','Data Telah Terhapus');
+    }
+
 
 
 
@@ -539,7 +555,8 @@ function bayar_sim_umroh_detail($id){
 function bayar_sim_umroh_tambah(Request $request){
     $request->validate([
         'nominal' => 'required',
-        'jenis_tr' => 'required'
+        'jenis_tr' => 'required',
+        'metode' => 'required'
     ]);
 
     $kode_trs="TRUH-" .rand(1000,9999);
@@ -565,6 +582,7 @@ function bayar_sim_umroh_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Umroh",
             'ket_transaksi' => "Angsuran Simpanan Umroh",
+            'metode' => $request->metode,
             'status' => 1
         ]);
 
@@ -588,6 +606,7 @@ function bayar_sim_umroh_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Umroh",
             'ket_transaksi' => "Penarikan Simpanan Umroh",
+            'metode' => $request->metode,
             'status' => 2
         ]);
 
@@ -692,7 +711,8 @@ function bayar_sim_pendidikan_detail($id){
 function bayar_sim_pendidikan_tambah(Request $request){
     $request->validate([
         'nominal' => 'required',
-        'jenis_tr' => 'required'
+        'jenis_tr' => 'required',
+        'metode' => 'required'
     ]);
 
     $kode_trs="TRPN-" .rand(1000,9999);
@@ -717,6 +737,8 @@ function bayar_sim_pendidikan_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Pendidikan",
             'ket_transaksi' => "Angsuran Simpanan Pendidikan",
+            'metode' => $request->metode,
+
             'status' => 1
         ]);
 
@@ -741,6 +763,7 @@ function bayar_sim_pendidikan_tambah(Request $request){
             'tgl_transaksi' => date('Y-m-d H:i:s'),
             'jenis_transaksi' => "Simpanan Pendidikan",
             'ket_transaksi' => "Penarikan Simpanan Pendidikan",
+            'metode' => $request->metode,
             'status' => 2
         ]);
 
@@ -817,14 +840,14 @@ function sim_pendidikan_tutup(Request $request){
 
     }
 
-        // delete transfer sim deposit
-        function transfer_sim_deposit_hapus($id){
+     
+        // delete transfer sim pendidikan
+        function transfer_sim_pendidikan_hapus($id){
             $bukti_bayar=BuktiBayar::where('id',$id)->first();
             File::delete('upload/bukti_bayar/'.$bukti_bayar->isi);
             BuktiBayar::where('id',$id)->delete();
             return redirect()->back()->with('alert-danger','Data Telah Terhapus');
         }
-
 
 
 

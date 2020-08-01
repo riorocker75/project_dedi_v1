@@ -21,6 +21,7 @@
         <div class="container-fluid">
          
           <div class="row">
+             {{--
             <section class="col-lg-12 connectedSortable">
               <div class="card">
                 <div class="card-header">
@@ -49,7 +50,7 @@
                     </thead>
                     <tbody> 
                         
-                        {{-- data 1 --}}
+                       
                         @php
                             $sim_umum =App\Model\Simpanan::where('status', 0)->get();
                         @endphp
@@ -81,7 +82,7 @@
                 </table>
                 </div>
               </div>
-            </section>
+            </section> --}}
 
             {{-- end simpanan sukarela --}}
 
