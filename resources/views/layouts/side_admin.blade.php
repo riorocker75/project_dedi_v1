@@ -1,21 +1,68 @@
 
-{{-- notif start  --}}
+
     <!-- Right navbar links -->
-    @php
-    // nsk =notif transfer simpanan umum // 
-    // nbk =notif transfer deposit  // num=notif transfer umroh
-   // npd=notif transfer pendidikan // npj=notif transfer pinjaman
-   
-      $nda= App\Model\Anggota::where('status',0)->get();
-      // $nbk = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRBK"]);
-      $nsk = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFU"])->get();
-      $num = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFH"])->get();
-      $npd = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFD"])->get();
-      $npj= App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFP"])->get();
-      $nt_sim =count($nsk) + count($num) + count($npd) ;
-    $tot_notif = $nt_sim + count($npj) ;
-  @endphp
+
     <ul class="navbar-nav ml-auto">
+
+      {{-- penarikan dana --}}
+      @php
+      $dana_tarik =App\Model\TarikDana::where('status',0)->orderBy('tgl_aju','desc')->take(7)->get();
+
+      @endphp
+      <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#">
+        @if (count($dana_tarik) > 0)
+        <i class="fa fa-download bell"></i>
+          <span class="badge badge-warning navbar-badge">{{ count($dana_tarik) }}</span>
+          @else
+          <i class="fa fa-download"></i>
+          @endif
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header"> {{count($dana_tarik) }} Permohonan Penarikan Dana</span>
+        <div class="dropdown-divider"></div>
+        @if (count($dana_tarik) > 0)
+          @foreach ($dana_tarik as $dn)
+              @php
+                    // $cek_jam = date('Y-m-d H:i:s' strtotime($dn->tgl_aju) - 3600));
+              @endphp   
+          <a href="{{ link_tarik_dana_nulled($dn->jenis, $dn->no_rekening)}}" class="dropdown-item">
+                #{{$dn->kode_transaksi}} 
+                <small class="tgl_text float-right" style="color:#c1c2c3">{{format_notif_jam($dn->tgl_aju)}}</small>
+                <br>
+          <small class="tgl_text"><b>Rp.{{number_format($dn->nominal)}}</b></small>
+          </a>
+          @endforeach
+        @else
+          <span class="dropdown-item">Belum ada penarikan dana....</span>
+        @endif
+
+
+        <div class="dropdown-divider"></div>
+      <a  style="color:#717c86"href="{{url('/admin/data/penarikan/dana')}}" class="dropdown-item dropdown-footer">lihat Selengkapnya <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+      </li>  
+      {{-- end penarikan dana --}}
+
+
+
+
+      {{-- start notifikas --}}
+      @php
+      // nsk =notif transfer simpanan umum // 
+      // nbk =notif transfer deposit  // num=notif transfer umroh
+     // npd=notif transfer pendidikan // npj=notif transfer pinjaman
+     
+        $nda= App\Model\Anggota::where('status',0)->get();
+        // $nbk = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRBK"]);
+        $nsk = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFU"])->get();
+        $num = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFH"])->get();
+        $npd = App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFD"])->get();
+        $npj= App\Model\BuktiBayar::where(['status' => 0, 'jenis_upload'=>"TRFP"])->get();
+        $nt_sim =count($nsk) + count($num) + count($npd) ;
+      $tot_notif = $nt_sim + count($npj) ;
+    @endphp
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           @if ($tot_notif > 0)
@@ -44,9 +91,15 @@
           {{-- <a href="#" class="dropdown-item dropdown-footer">See All Pemberitahuan</a> --}}
         </div>
       </li>     
+      {{-- end notif --}}
+
+
+   
     </ul>
+
+
+ 
   </nav>
-{{-- end notif --}}
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->

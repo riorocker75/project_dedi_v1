@@ -35,7 +35,8 @@
                     </h3>
                     <div class="card-tools">
                      <div class="float-right">
-                         <a href="{{url('/anggota/simpanan-umum/transfer/'.$ds->no_rekening)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-credit-card"></i> Bayar Tabungan </a>
+                      <a href="{{url('/anggota/simpanan-umum/tarik/'.$ds->no_rekening)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;Tarik Dana</a>
+
                      </div>
                     </div>
                   </div>
@@ -81,7 +82,10 @@
                     History Transaksi
                     </h3>
                     <div class="card-tools">
-                     
+                     <div class="float-right">
+                      <a href="{{url('/anggota/simpanan-umum/transfer/'.$ds->no_rekening)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;Bayar Tabungan </a>
+
+                     </div>
                     </div>
                   </div>
                   <div class="card-body">

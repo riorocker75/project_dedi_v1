@@ -19,11 +19,12 @@ class TblTarikDana extends Migration
                 $table->text('kode_user');
                 $table->text('kode_transaksi');
                 $table->text('no_rekening');
+                $table->text('nominal');
+                $table->text('jenis');
                 $table->dateTime('tgl_aju');
                 $table->dateTime('tgl_cair')->nullable();
                 $table->text('ket')->nullable();
                 $table->text('info')->nullable();
-
                 $table->text('status')->comment('0=review,1=diapprove');
             });
         }

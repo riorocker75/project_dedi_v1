@@ -11,6 +11,8 @@ class TarikDana extends Model
        protected $fillable =[
       'kode_user',
       'kode_transaksi',
+      'nominal',
+      'jenis',
       'no_rekening',
       'tgl_aju',
       'status'

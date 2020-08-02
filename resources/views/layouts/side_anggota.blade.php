@@ -76,27 +76,27 @@
               <p> Data Pribadi</p>
             </a>
           </li>
+          
           <li class="nav-item">
-            <a href="{{url('/anggota/ajukan-pinjaman')}}" class="nav-link">
-              <i class="nav-icon fas fa-credit-card"></i>
-              <p> Ajukan Pembiayaan</p>
+            <a href="{{url('/anggota/riwayat/transaksi/')}}" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>Simpanan</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{url('/anggota/data-pinjaman/'.Session::get('ang_id').'')}}" class="nav-link">
               <i class="nav-icon fas fa-bookmark"></i>
-              <p> Riwayat Pembiayaan</p>
+              <p>Pembiayaan</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{url('/anggota/riwayat/transaksi/')}}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p> Data Simpanan</p>
+            <a href="{{url('/anggota/ajukan-pinjaman')}}" class="nav-link">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p> Ajukan Pembiayaan</p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="{{url('/anggota/aju-simpanan')}}" class="nav-link">
              <i class="nav-icon fa fa-plus-circle" aria-hidden="true"></i>

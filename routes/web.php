@@ -302,6 +302,27 @@ Route::get('/admin/pembayaran/simpanan-pendidikan/transfer/hapus/{id}','Admin\Pe
 
 Route::get('/admin/bukti-bayar/','Admin\BuktiBayarAdm');
 
+
+/*
+-------------------------------------
+	bagian Penarikan dana si anggota
+-------------------------------------
+*/
+
+Route::get('/admin/data/penarikan/dana','Admin\PenarikanCtrl');
+// penarikan umum
+Route::get('/admin/penarikan/simpanan-umum/detail/{id}','Admin\PenarikanCtrl@hapus_tr_pinjaman');
+
+// penarikan deposit
+
+// penarikan umroh
+
+// penarikan pendidikan
+
+
+
+
+
 /*
 --------------------------- 
 	Bagian Pengaturan Sistem
@@ -551,12 +572,34 @@ Route::get('/anggota/verifikasi/bayar/hapus/{id}', 'Anggota\GabungCtrl@upload_bu
 Route::get('/anggota/pinjaman/bayar/transfer/detail/{id}','Anggota\BuktiBayarCtrl@transfer_pinjaman_detail');
 Route::post('/anggota/pinjaman/bayar/transfer/act/{id}','Anggota\BuktiBayarCtrl@transfer_pinjaman_act');
 
-//---transfer simpanan umum
 
-//---transfer Simpanan umroh
+/* 
+--------------------------
+|	Minta Tarik Dana
+---------------------------
+*/
 
+// tarik simpanan umum
+Route::get('/anggota/simpanan-umum/tarik/{id}','Anggota\TarikDana@tarik_dana_umum');
+Route::post('/anggota/simpanan-umum/tarik/act','Anggota\TarikDana@tarik_dana_umum_act');
+Route::get('/anggota/simpanan-umum/tarik/delete/{id}','Anggota\TarikDana@tarik_dana_umum_delete');
 
-//---transfer Simpanan Pendidikan
+// tarik simpanan berjangka
+Route::get('/anggota/simpanan-deposit/tarik/{id}','Anggota\TarikDana@tarik_dana_deposit');
+Route::post('/anggota/simpanan-deposit/tarik/act','Anggota\TarikDana@tarik_dana_deposit_act');
+Route::get('/anggota/simpanan-deposit/tarik/delete/{id}','Anggota\TarikDana@tarik_dana_deposit_delete');
+
+// tarik simpanan umroh
+Route::get('/anggota/simpanan-umroh/tarik/{id}','Anggota\TarikDana@tarik_dana_umroh');
+Route::post('/anggota/simpanan-umroh/tarik/act','Anggota\TarikDana@tarik_dana_umroh_act');
+Route::get('/anggota/simpanan-umroh/tarik/delete/{id}','Anggota\TarikDana@tarik_dana_umroh_delete');
+
+// tarik simpanan pendidikan
+
+Route::get('/anggota/simpanan-pendidikan/tarik/{id}','Anggota\TarikDana@tarik_dana_pendidikan');
+Route::post('/anggota/simpanan-pendidikan/tarik/act','Anggota\TarikDana@tarik_dana_pendidikan_act');
+Route::get('/anggota/simpanan-pendidikan/tarik/delete/{id}','Anggota\TarikDana@tarik_dana_pendidikan_delete');
+
 
 
 
