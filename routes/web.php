@@ -311,13 +311,20 @@ Route::get('/admin/bukti-bayar/','Admin\BuktiBayarAdm');
 
 Route::get('/admin/data/penarikan/dana','Admin\PenarikanCtrl');
 // penarikan umum
-Route::get('/admin/penarikan/simpanan-umum/detail/{id}','Admin\PenarikanCtrl@hapus_tr_pinjaman');
+Route::post('/admin/penarikan/simpanan-umum/act','Admin\PenarikanCtrl@penarikan_umum_act');
+Route::get('/admin/penarikan/simpanan-umum/hapus/{id}','Admin\PenarikanCtrl@penarikan_umum_delete');
 
 // penarikan deposit
+Route::post('/admin/penarikan/simpanan-deposit/act','Admin\PenarikanCtrl@penarikan_deposit_act');
+Route::get('/admin/penarikan/simpanan-deposit/hapus/{id}','Admin\PenarikanCtrl@penarikan_deposit_delete');
 
 // penarikan umroh
+Route::post('/admin/penarikan/simpanan-umroh/act','Admin\PenarikanCtrl@penarikan_umroh_act');
+Route::get('/admin/penarikan/simpanan-umroh/hapus/{id}','Admin\PenarikanCtrl@penarikan_umroh_delete');
 
 // penarikan pendidikan
+Route::post('/admin/penarikan/simpanan-pendidikan/act','Admin\PenarikanCtrl@penarikan_pendidikan_act');
+Route::get('/admin/penarikan/simpanan-pendidikan/hapus/{id}','Admin\PenarikanCtrl@penarikan_pendidikan_delete');
 
 
 

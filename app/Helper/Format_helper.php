@@ -155,7 +155,7 @@ function status_metode($status){
         case 1:
             echo "<label class='badge badge-success'>Langsung</label>";
         break;
-        case 0: 
+        case 2: 
             echo "<label class='badge badge-primary'> Transfer</label>";
         break;
         default:

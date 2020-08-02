@@ -23,17 +23,34 @@
           <div class="row">
             <section class="col-lg-6 connectedSortable">
               <div class="card">
+                @foreach ($data as $dt)
+
                 <div class="card-header">
                   <h3 class="card-title">
                    
                  Aktivitas Simpanan Berjangka
                   </h3>
+
+                  @php
+                  $tarik_dana=App\Model\TarikDana::where([
+                                                    'no_rekening'=> $dt->rekening_deposit,
+                                                    'status' => 0   
+                                                   ])->get();         
+                  $tarik_dana_nulled= App\Model\TarikDana::where('no_rekening',$dt->rekening_deposit)
+                                                  ->orderBy('tgl_aju','desc')         
+                                                  ->get();   
+                  @endphp
                   <div class="card-tools">
-                   
+                    <div class="float-right">
+                      <?php if(count($tarik_dana) > 0){?>
+                        <label  class="badge badge-success">
+                         Konfirmasi Penarikan Dana
+                          </label>
+                        <?php }?>  
+                    </div>
                   </div>
                 </div>
                 <div class="card-body">
-                 @foreach ($data as $dt)
                     <form action="{{url('/admin/pembayaran/simpanan-deposit/tambah')}}" method="post">
                         @csrf
 
@@ -93,8 +110,8 @@
 
                         <button class="btn btn-primary float-right"><i class="fas fa-save="></i> Simpan</button>
                     </form>
-                 @endforeach
-                </div>
+                  </div>
+                  @endforeach
               </div>
             </section>
     
@@ -220,10 +237,132 @@
                     </div>
                     {{-- end detail data diri --}}
                 </div>
-          
-                
               </section>
 
+              {{-- data penarikan --}}
+@if (count($tarik_dana_nulled) > 0)
+<section class="col-lg-12 connectedSortable">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+       
+           Riwayat Penarikan Dana<b> {{$dt->no_rekening}}</b>
+           @if (count($tarik_dana) > 0)
+               <label class="badge badge-info"> {{count($tarik_dana)}} </label>
+           @endif
+      </h3>
+      <div class="card-tools">
+       <div class="float-right">
+         <a  href="#tarik-dana" class="btn btn-default" data-toggle="collapse"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+       </div>
+      </div>
+    </div>
+    <div class="card-body collapse" id="tarik-dana">
+        <table id="data4" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                <th>Kode Transaksi</th>
+                <th>Nominal Penarikan</th> 
+                <th>Keterangan</th> 
+                <th>Status</th>                   
+                <th>Opsi</th>                   
+                </tr>
+            </thead>
+            <tbody> 
+               @foreach ($tarik_dana_nulled as $tdn)
+                   
+               <tr>
+                   <td>{{$tdn->kode_transaksi}}
+                      <br>
+                      <small>{{format_tanggal(date('Y-m-d',strtotime($tdn->tgl_aju)))}}</small>
+                  </td>
+               <td>Rp. {{number_format($tdn->nominal)}}</td>
+               <td>{{$tdn->ket}}</td>
+
+                <td>{{status_tarik($tdn->status)}}</td>
+
+               <td>
+                 
+               <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#view_tarik{{$tdn->id}}"><i class="fa fa-eye"></i> </button>
+               <a href="{{url('/admin/penarikan/simpanan-deposit/hapus/'.$tdn->id)}}" style="padding:0 7px" onclick="return confirm('Yakin menghapus data ini ?')"> <i class="fa fa-trash"></i></a>
+                 
+                 {{-- modal penarikan dana --}}
+                 <div class="modal fade" id="view_tarik{{$tdn->id}}" >
+                   <div class="modal-dialog modal-dialog-centered" role="dialog">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLongTitle">Detail penarikan</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
+                       </div>
+                       <form action="{{url('/admin/penarikan/simpanan-deposit/act')}}" method="post">
+                         @csrf
+                       <div class="modal-body">
+                        <div class="form-group">
+                          <label >Nominal Penarikan</label>
+                          <input type="text"
+                            class="form-control" value="Rp.{{number_format($tdn->nominal)}}" disabled>
+                         
+                          </div>
+
+                          <div class="form-group">
+                            <label >Nomor Rekening Bank</label>
+                            <input type="text"
+                          class="form-control" value="{{$tdn->info}}" disabled>
+                            </div>
+                          <div class="form-group">
+                            <label >Saldo</label>
+                            <input type="text"
+                              class="form-control" value="Rp.{{number_format($dt->total_nisbah)}}" disabled>
+                            </div>
+
+                            <div class="form-group">
+                              <label >Nama Pemilik Rekening</label>
+                              <input type="text"
+                                class="form-control" value="{{$ang->anggota_nama}}" disabled>
+                                <small class="text-danger">*Tolak jika nama tidak sama dengan rekening</small>
+                              
+                              </div>
+                              @if ($tdn->status < 1)
+                              <div class="form-group">
+                                <label >Keterangan</label>
+                                <textarea  class="form-control" name="ket"  rows="3"></textarea>
+                                <small class="text-danger">*isi jika melakukan penolakan</small>
+                                </div>
+                                @endif
+
+                        <input type="text" value="{{$tdn->id}}" name="tarik_id" hidden>
+                        <input type="text" value="{{$ang->anggota_kode}}" name="ang_kode" hidden>
+                        <input type="text" value="{{$tdn->kode_transaksi}}" name="trs_kode" hidden>
+                        <input type="text" value="{{$tdn->nominal}}" name="nominal" hidden>
+                         
+                       </div>
+                       <div class="modal-footer">
+                         @if ($tdn->status < 1)
+                         <button class="btn btn-default float-right" style="margin-right:10px" type="submit" name="action" value="tolak"> Tolak Penarikan</button>
+                         <button class="btn btn-primary float-right" type="submit" name="action" value="terima">Terima Penarikan</button>
+                         @endif
+                       </div>
+                     </form>
+                     </div>
+                   </div>
+                 </div>
+                 {{-- end modal penarikan--}}
+
+
+                </td>
+            </tr>
+            @endforeach
+        
+            </tbody>   
+        </table>
+    </div>
+  </div>
+</section>
+@endif
+
+{{-- end data penarikan--}}
 
               <section class="col-lg-12 connectedSortable">
                 <div class="card">

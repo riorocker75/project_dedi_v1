@@ -34,7 +34,10 @@
                    Detail Simpanan <b>{{$ds->rekening_deposit}}</b> 
                   </h3>
                   <div class="card-tools">
-                   
+                    <div class="float-right">
+                      <a href="{{url('/anggota/simpanan-deposit/tarik/'.$ds->rekening_deposit)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;Tarik Dana</a>
+
+                     </div>
                   </div>
                 </div>
 

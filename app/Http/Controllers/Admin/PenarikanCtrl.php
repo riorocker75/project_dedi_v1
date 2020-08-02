@@ -69,8 +69,55 @@ class PenarikanCtrl extends Controller
 ----------------------------------
 */
 
-    function penarikan_umum($id){
+    function penarikan_umum_act(Request $request){
+        $nominal=$request->nominal;
+        $nominal_format=number_format($request->nominal);
 
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                  'tgl_cair' => date('Y-m-d H:i:s'),
+                  'status' => 1
+              ]);
+              DB::table('tbl_notif')->insert([
+                'kode_user' =>$request->ang_kode,
+                'pesan' => "Penarikan Berhasil",
+                'ket' => "Pernarikan Dana Rp. $nominal_format Berhasil",
+                'tgl' => date('Y-m-d H:i:s'),
+                'kode_transaksi' => $request->trs_kode,
+                'level' => 3,
+                'status_baca' => 0,
+                'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Penarikan Berhasil');
+                break;
+            case 'tolak':
+                DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                    'ket' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+
+                DB::table('tbl_notif')->insert([
+                    'kode_user' =>$request->ang_kode,
+                    'pesan' => "Penarikan Ditolak",
+                    'ket' => "Pernarikan Dana Rp. $nominal_format Ditolak",
+                    'tgl' => date('Y-m-d H:i:s'),
+                    'kode_transaksi' => $request->trs_kode,
+                    'level' => 3,
+                    'status_baca' => 0,
+                    'status' => 1
+                  ]);
+            return redirect()->back()->with('alert-warning','Penarikan Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+            }    
+    }
+    function penarikan_umum_delete($id){
+        DB::table('tbl_tarik_dana')->where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','data telah dihapus');
     }
 
 /*
@@ -79,6 +126,56 @@ class PenarikanCtrl extends Controller
 ----------------------------------
 */
 
+    function penarikan_deposit_act(Request $request){
+        $nominal=$request->nominal;
+        $nominal_format=number_format($request->nominal);
+
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                  'tgl_cair' => date('Y-m-d H:i:s'),
+                  'status' => 1
+              ]);
+              DB::table('tbl_notif')->insert([
+                'kode_user' =>$request->ang_kode,
+                'pesan' => "Penarikan Berhasil",
+                'ket' => "Pernarikan Dana Rp. $nominal_format Berhasil",
+                'tgl' => date('Y-m-d H:i:s'),
+                'kode_transaksi' => $request->trs_kode,
+                'level' => 3,
+                'status_baca' => 0,
+                'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Penarikan Berhasil');
+                break;
+            case 'tolak':
+                DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                    'ket' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+
+                DB::table('tbl_notif')->insert([
+                    'kode_user' =>$request->ang_kode,
+                    'pesan' => "Penarikan Ditolak",
+                    'ket' => "Pernarikan Dana Rp. $nominal_format Ditolak",
+                    'tgl' => date('Y-m-d H:i:s'),
+                    'kode_transaksi' => $request->trs_kode,
+                    'level' => 3,
+                    'status_baca' => 0,
+                    'status' => 1
+                  ]);
+            return redirect()->back()->with('alert-warning','Penarikan Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+            } 
+    }
+    function penarikan_deposit_delete($id){
+        DB::table('tbl_tarik_dana')->where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','data telah dihapus');
+    }
 
 
 /*
@@ -86,6 +183,56 @@ class PenarikanCtrl extends Controller
 |   Penarikan simpanan umroh
 ----------------------------------
 */
+    function penarikan_umroh_act(Request $request){
+        $nominal=$request->nominal;
+        $nominal_format=number_format($request->nominal);
+
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                  'tgl_cair' => date('Y-m-d H:i:s'),
+                  'status' => 1
+              ]);
+              DB::table('tbl_notif')->insert([
+                'kode_user' =>$request->ang_kode,
+                'pesan' => "Penarikan Berhasil",
+                'ket' => "Pernarikan Dana Rp. $nominal_format Berhasil",
+                'tgl' => date('Y-m-d H:i:s'),
+                'kode_transaksi' => $request->trs_kode,
+                'level' => 3,
+                'status_baca' => 0,
+                'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Penarikan Berhasil');
+                break;
+            case 'tolak':
+                DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                    'ket' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+
+                DB::table('tbl_notif')->insert([
+                    'kode_user' =>$request->ang_kode,
+                    'pesan' => "Penarikan Ditolak",
+                    'ket' => "Pernarikan Dana Rp. $nominal_format Ditolak",
+                    'tgl' => date('Y-m-d H:i:s'),
+                    'kode_transaksi' => $request->trs_kode,
+                    'level' => 3,
+                    'status_baca' => 0,
+                    'status' => 1
+                  ]);
+            return redirect()->back()->with('alert-warning','Penarikan Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+            } 
+    }
+    function penarikan_umroh_delete($id){
+        DB::table('tbl_tarik_dana')->where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','data telah dihapus');
+    }
 
 
 
@@ -95,6 +242,56 @@ class PenarikanCtrl extends Controller
 ----------------------------------
 */
 
+    function penarikan_pendidikan_act(Request $request){
+        $nominal=$request->nominal;
+        $nominal_format=number_format($request->nominal);
+
+        switch ($request->input('action')) {
+            case 'terima':
+              DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                  'tgl_cair' => date('Y-m-d H:i:s'),
+                  'status' => 1
+              ]);
+              DB::table('tbl_notif')->insert([
+                'kode_user' =>$request->ang_kode,
+                'pesan' => "Penarikan Berhasil",
+                'ket' => "Pernarikan Dana Rp. $nominal_format Berhasil",
+                'tgl' => date('Y-m-d H:i:s'),
+                'kode_transaksi' => $request->trs_kode,
+                'level' => 3,
+                'status_baca' => 0,
+                'status' => 1
+              ]);
+            return redirect()->back()->with('alert-success','Penarikan Berhasil');
+                break;
+            case 'tolak':
+                DB::table('tbl_tarik_dana')->where('id',$request->tarik_id)->update([
+                    'ket' => "Tertolak ".$request->ket,
+                    'status' => 2
+                ]);
+
+                DB::table('tbl_notif')->insert([
+                    'kode_user' =>$request->ang_kode,
+                    'pesan' => "Penarikan Ditolak",
+                    'ket' => "Pernarikan Dana Rp. $nominal_format Ditolak",
+                    'tgl' => date('Y-m-d H:i:s'),
+                    'kode_transaksi' => $request->trs_kode,
+                    'level' => 3,
+                    'status_baca' => 0,
+                    'status' => 1
+                  ]);
+            return redirect()->back()->with('alert-warning','Penarikan Ditolak');
+        
+                break;
+             default:
+             echo "terlarang";
+            break;   
+            } 
+    }
+    function penarikan_pendidikan_delete($id){
+        DB::table('tbl_tarik_dana')->where('id',$id)->delete();
+        return redirect()->back()->with('alert-danger','data telah dihapus');
+    }
 
 
 

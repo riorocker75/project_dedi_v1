@@ -103,7 +103,7 @@
                     </div>
                   </div>
                   @php
-                    $data_narik =App\Model\TarikDana::where('no_rekening',$dt->no_rekening)->orderBy('tgl_aju','desc')->get();
+                    $data_narik =App\Model\TarikDana::where('no_rekening',$dt->rekening_deposit)->orderBy('tgl_aju','desc')->get();
                   @endphp
                   <div class="card-body">
                     <table id="data1" class="table table-bordered table-striped">
