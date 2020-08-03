@@ -5,12 +5,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Data Pembayaran Pinjaman</h1>
+              <h1 class="m-0 text-dark">Data Pembayaran Pembiayaan</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/dashboard/admin')}}">Home</a></li>
-                <li class="breadcrumb-item active">Data Pembayaran Pinjaman</li>
+                <li class="breadcrumb-item active">Data Pembayaran Pembiayaan</li>
               </ol>
             </div>
           </div>
@@ -36,8 +36,9 @@
                     <table id="data1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                            <th>Kode Pinjaman</th>
-                            <th>Tanggal Pinjaman</th>  
+                            <th>Kode Pembiayaan</th>
+                            <th>Nama</th>
+                            <th>Tanggal Pembiayaan</th>  
                             <th>Jenis Pembiayaan</th>
                              <th>status</th>             
                             <th>Opsi</th>                   
@@ -45,10 +46,14 @@
                         </thead>
                         <tbody> 
                            @foreach ($data as $dt)
-                               
+                               @php
+                                $ang= App\Model\Anggota::where('anggota_id',$dt->anggota_id)->first();
+                                @endphp
                            <tr>
                                <td>{{$dt->pinjaman_kode}}</td>
-                            
+                            <td>{{$ang->anggota_nama}}
+                            <br><small class="tgl-text">NIK: {{$ang->anggota_nik}}</small>
+                            </td>
                             <td>{{date('d-M-Y' , strtotime($dt->pinjaman_tgl))}}</td>
                            @php
                                $jpj=App\Model\Cat_Pinjaman::where('kategori_id' , $dt->kategori_id)->first();
