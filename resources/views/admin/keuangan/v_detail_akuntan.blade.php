@@ -19,8 +19,79 @@
  <!-- Main content -->
  <section class="content">
     <div class="container-fluid">
-     
+      @php
+      /* total simpanan sukarela */
+      $sim_sukarela=App\Model\Simpanan::where('status', 1)->sum('total_simpanan');
+      /* total simpanan wajib*/
+      $sim_wajib=App\Model\Simpanan::where('status', 1)->sum('jlh_wajib');
+      /* total simpanan pokok */
+      $sim_pokok=App\Model\Simpanan::where('status', 1)->sum('jlh_pokok');
+      $tot_umum = $sim_sukarela + $sim_wajib + $sim_pokok;
+      $tot_wajib_pokok=$sim_wajib + $sim_pokok;
+      // ==================================================
+      /* total simpanan deposit */
+      $tot_deposit =App\Model\Simpanan\SimpananBerjangka::where('status',1)->sum('nilai_deposit');
+      // ==================================================
+      /* total simpanan umroh */
+      $tot_umroh =App\Model\Simpanan\SimpananUmroh::where('status',1)->sum('total_angsur');
+      /* total simpanan pendidikan */
+      $tot_pend =App\Model\Simpanan\SimpananPendidikan::where('status',1)->sum('total_angsur');
+      // ==================================================
+      $tot_sim =$tot_umum +$tot_deposit + $tot_umroh +$tot_pend;
+      @endphp
       <div class="row">
+        <section class="col-lg-3 col-6 connectedSortable">
+          <div class="small-box bg-default">
+            <div class="inner">
+              <h3>Rp.{{number_format($sim_sukarela)}}</h3>
+              <p>Total Aset Simpanan Sukarela</p>
+            </div>
+            <div class="icon">
+            <i class="fas fa-dollar-sign    "></i>
+            </div>
+          
+          </div>
+        </section>
+
+        <section class="col-lg-3 col-6 connectedSortable">
+          <div class="small-box bg-default">
+            <div class="inner">
+              <h3>Rp.{{number_format($tot_umroh)}}</h3>
+              <p>Total Aset Simpanan Umroh</p>
+            </div>
+            <div class="icon">
+            <i class="fas fa-dollar-sign    "></i>
+            </div>
+          
+          </div>
+        </section>
+
+        <section class="col-lg-3 col-6 connectedSortable">
+          <div class="small-box bg-default">
+            <div class="inner">
+              <h3>Rp.{{number_format($tot_pend)}}</h3>
+              <p>Total Aset Simpanan Pendidikan</p>
+            </div>
+            <div class="icon">
+            <i class="fas fa-dollar-sign    "></i>
+            </div>
+          
+          </div>
+        </section>
+
+        <section class="col-lg-3 col-6 connectedSortable">
+          <div class="small-box bg-default">
+            <div class="inner">
+              <h3>Rp.{{number_format($tot_wajib_pokok)}}</h3>
+              <p>Total Aset Simpanan Wajib & Pokok</p>
+            </div>
+            <div class="icon">
+            <i class="fas fa-dollar-sign    "></i>
+            </div>
+          
+          </div>
+        </section>
+
         <section class="col-lg-4 connectedSortable">
           <div class="card">
             <div class="card-header">

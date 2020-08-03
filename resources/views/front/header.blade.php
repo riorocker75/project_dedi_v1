@@ -232,10 +232,7 @@
             <!--Featured Block-->
             <div class="featured-block col-md-4 col-sm-6 col-xs-12">
                 <div class="inner-box">
-                    <div class="upper-box">
-                        <div class="text">Explain to you how all this mistaken idea of denouncing pleasure and praising pain was  complete account system. </div>
-                        <a class="read-more" href=""><span class="icon flaticon-right-arrow-1"></span> Selengkapnya</a>
-                    </div>
+                    
                     <div class="lower-box">
                         <div class="lower-inner">
                             <div class="icon-box">
@@ -251,10 +248,7 @@
             <!--Featured Block-->
             <div class="featured-block col-md-4 col-sm-6 col-xs-12">
                 <div class="inner-box">
-                    <div class="upper-box">
-                        <div class="text">Explain to you how all this mistaken idea of denouncing pleasure and praising pain was  complete account system. </div>
-                        <a class="read-more" href=""><span class="icon flaticon-right-arrow-1"></span> Selengkapnya</a>
-                    </div>
+                   
                     <div class="lower-box">
                         <div class="lower-inner">
                             <div class="icon-box">
@@ -270,10 +264,10 @@
             <!--Featured Block-->
             <div class="featured-block col-md-4 col-sm-6 col-xs-12">
                 <div class="inner-box">
-                    <div class="upper-box">
+                    {{-- <div class="upper-box">
                         <div class="text">Explain to you how all this mistaken idea of denouncing pleasure and praising pain was  complete account system. </div>
                         <a class="read-more" href=""><span class="icon flaticon-right-arrow-1"></span> Selengkapnya</a>
-                    </div>
+                    </div> --}}
                     <div class="lower-box">
                         <div class="lower-inner">
                             <div class="icon-box">
