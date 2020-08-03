@@ -24,7 +24,7 @@ class OpsiSimpananBerjangka_seed extends Seeder
             'id' => 2,
             'nominal_deposit' => 25000000,
             'bunga_deposit' => 10,
-            'nisbah_bulan' =>20833,
+            'nisbah_bulan' =>208333,
             'periode_deposit' =>12
         ]);
 
