@@ -18,7 +18,7 @@ class Kas_seed extends Seeder
         Kas::create([
           'id' => 1,
           'saldo' => 70000000,
-          'nama' => "Kas Utama",
+          'nama' => "Pendapatan Kotor",
           'status' => '1'
         ]);
     }

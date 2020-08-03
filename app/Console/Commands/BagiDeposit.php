@@ -50,7 +50,7 @@ class BagiDeposit extends Command
                     $tx = $t;
                     // $tx = $t-2;
 
-                    $hari_ini =date('d');  
+                    $hari_ini =date('d'); //ini untuk cek tgl hari ini 
                     $tot_nisbah = $ds->total_nisbah + $op->nisbah_bulan;  
                     $saldo_tambah = $ds->nilai_deposit + $ds->total_nisbah ;
                     if($tx = $hari_ini) {
