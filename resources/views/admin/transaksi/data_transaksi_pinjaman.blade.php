@@ -37,6 +37,7 @@
                         <thead>
                           <tr>
                             <th>Kode Pembiayaan</th>
+                            <th>Nama</th>
                             <th>Tanggal Transaksi</th>
                             <th>Nominal Yang Dibayar</th>  
                             <th>Total Angsuran</th>                   
@@ -52,13 +53,19 @@
                                 $cad=App\Model\PinjamanTransaksi::where('id',$dt->id)->first();
                                 $tbl_pinjaman=App\Model\Pinjaman::where('pinjaman_kode',$dt->pinjaman_kode)->first();
                                 $total_angsur = $tbl_pinjaman->pinjaman_skema_angsuran * $tbl_pinjaman->pinjaman_angsuran_lama;
+                                $ang= App\Model\Anggota::where('anggota_id',$tbl_pinjaman->anggota_id)->first();
+
                             @endphp
+
                             {{-- data 1 --}}
                             <tr>
                                 <td>{{$dt->pinjaman_kode}}
                                     <br>
                                 <small class="tgl-text"></small>
                                 </td>
+                                <td>{{$ang->anggota_nama}}
+                                  <br><small class="tgl-text">NIK: {{$ang->anggota_nik}}</small>
+                                  </td>
                                 <td>{{format_tanggal(date('Y-m-d',strtotime($cad->tgl_transaksi)))}}</td>
                                 <td>Rp.{{number_format($cad->nominal_bayar)}}
                                 <br><small>Kembalian: Rp.{{number_format($cad->kembalian_bayar)}}</small>

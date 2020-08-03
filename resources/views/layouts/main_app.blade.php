@@ -123,7 +123,7 @@
       });
   }
   $(function() {
-      setTimeout(startRefresh,120000);
+      setTimeout(startRefresh,620000);
   });
 </script>
 

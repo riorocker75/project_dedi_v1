@@ -37,6 +37,7 @@
                     <thead>
                         <tr>
                         <th>No</th>
+                        <th>Nama</th>
                         <th>Nomor Rekening</th>  
                         <th>Status</th>                 
                         <th>Opsi</th>                   
@@ -48,10 +49,16 @@
                        @endphp
                        @foreach ($data as $dt)
                            
-                 
+                       @php
+                       $ang= App\Model\Anggota::where('anggota_id',$dt->anggota_id)->first();
+                       @endphp
+                       
                          <tr>
                             <td>{{$no++}}</td>
                             
+                          <td>{{$ang->anggota_nama}}
+                            <br><small class="tgl-text">NIK: {{$ang->anggota_nik}}</small>
+                            </td>
                             <td>{{$dt->no_rekening}}</td>
                             <td>{{cek_status_simpanan($dt->status)}}</td>
                             <td>
