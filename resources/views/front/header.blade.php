@@ -77,15 +77,16 @@
                                 <li class="current"><a href="{{url('/')}}">Home</a></li>
                                 <li class="dropdown"><a href="#">Layanan</a>
                                     <ul>
-                                        <li><a href="">Pinjaman</a></li>
-                                        <li><a href="">Simpanan</a></li>
+                                        <li><a  data-toggle="modal" data-target="#pinjaman">Pembiayaan</a></li>
+                                        <li><a  data-toggle="modal" data-target="#simpanan">Simpanan</a></li>
+                                        <li><a  data-toggle="modal" data-target="#anggota">Anggota</a></li>
+
                                       
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#">Tentang</a></li>
+                                <li class="dropdown"><a data-toggle="modal" data-target="#tentang">Tentang</a></li>
 
-                                <li class="dropdown"><a href="#">Lokasi</a></li>
-                                <li class="dropdown"><a href="#">Berita</a></li>
+                                <li class="dropdown"><a data-toggle="modal" data-target="#lokasi">Lokasi</a></li>
                              </ul>
                         </div>
                     </nav>

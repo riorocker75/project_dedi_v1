@@ -176,15 +176,209 @@
 <script src="{{url('/')}}/a_front/js/knob.js"></script>
 <script src="{{url('/')}}/a_front/js/appear.js"></script>
 <script src="{{url('/')}}/a_front/js/script.js"></script>
-{{-- <script>
-    function startRefresh() {
-        $.get('', function(data) {
-            $(document.body).html(data);    
-        });
-    }
-    $(function() {
-        setTimeout(startRefresh,12000);
-    });
-</script> --}}
+
+
+{{-- modal tentang --}}
+<div class="modal fade" id="tentang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Tentang Koperasi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p><b>Struktur</b> </p>
+         <p>
+           
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Sesuai ketentuan yang tertuang dalam Undang-Undang Nomor 25 tahun 1992, bahwa perangkat organisasi suatu koperasi terdiri dari RAT (Rapat anggota Tahunan), pengurus dan dewan pengawas (dalam hal ini pengawas umum dan pengawas syariah). Sedangkan unsur lain yang melengkapi organisasi koperasi adalah: unsur penasehat unsur pelaksana, manajer dan karyawan-karyawan koperasi
+            
+         </p>
+         <p>Struktur organisasi KSPPS KIS dapat dilihat pada Gambar Dibawah ini:</p>
+         <p>
+         <img src="{{url('/')}}/gambar/struktur.png" style="height:400px;max-width:100%">
+         </p>
+
+         <p>
+            Susunan pengurus pengawas dan pengelola berdasarkan RAT tahun buku 2018 yang diselenggarakan tanggal 12 Januari 2019 adalah sebagai berikut :
+         </p>
+
+         <p>
+            I. PENGURUS
+         </p>
+         <div style="margin-left:30px">
+            <p>Ketua	: Ir. H.Rachmat Lubis, MM</p>
+            <p>Sekretaris	: Sholihati, S.P, M.Si</p>
+             <p>Bendahara	: Nurjannah Lubis, SE</p>
+        </div>
+
+        <p>
+            II.	PENGAWAS
+         </p>
+         <div style="margin-left:30px">
+            <p>Ketua		: Dr. Hj. Yeti Lisa Purnama dewi </p>
+            <p>Anggota I	: Ir. H Mahmulsyah Daulay</p>
+             <p>Anggota II	: Ir. H. Ali Muda Siregar</p>
+        </div>
+        <p>
+            III. DEWAN PENGAWAS SYARIAH
+         </p>
+         <div style="margin-left:30px">
+            <p>Ketua	: H. Edi Candra LC. M.E.I </p>
+            <p>Anggota	: Ir. H. Zulfi Ramlan Pohan, MM</p>
+        </div>
+
+        <p>
+            IV.	PENGAWAS
+         </p>
+         <div style="margin-left:30px">
+            <p>Ketua		: Ir. H Mahmulsyah Daulay</p>
+            <p>Anggota I	: Ir. H.Rachmat Lubis,MM </p>
+             <p>Anggota II	: Ir. H. Ali Muda Siregar</p>
+        </div>
+        <p>
+            V.	DEWAN PENGAWAS SYARIAH
+         </p>
+         <div style="margin-left:30px">
+            <p>Ketua	: H. Edi Candra LC. M.E.I</p>
+            <p>Anggota	: Ir. H. Zulfi Ramlan Pohan, MM</p>
+        </div>
+
+
+
+
+
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+{{-- end modal tentang --}}
+
+{{-- modal lokasi --}}
+
+<div class="modal fade" id="lokasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Lokasi Koperasi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><b>Kantor Pusat</b> </p>
+          <p>Jl.Raya Dramaga, Perumahan Ziara Valley,Cluster Kencana Blok I No.1 Margajaya Kota Bogor</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+{{-- end modal lokasi --}}
+
+{{-- modal simpanan --}}
+<div class="modal fade" id="simpanan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Jenis Simpanan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:16px"><b>Simpanan Umroh,</b> </p>
+          <p>
+            Adalah simpanan yang di prioritaskan untuk anggota atau nasabah untuk keperluan ibadah haji dan umroh dengan menggunakan akad dan ketentuan yang sesuai syariah islam.
+          </p>
+          <p>
+          <img src="{{url('/')}}/gambar/umroh.png">
+          </p>
+          <br>
+          <p style="font-size:16px"><b>Simpanan Pendidikan,</b> </p>
+          
+          <p>
+            <img src="{{url('/')}}/gambar/pendidikan.png">
+          </p>
+          <br>
+          <p style="font-size:16px"><b>Simpanan Berjangka,</b> </p>
+          <p>
+             <b>Simpanan </b> pada <b>koperasi</b> yang penyetorannya dilakukan satu kali untuk jangka waktu tertentu sesuai dengan perjanjian antara penyimpan dengan koperasi yang bersangkutan dan tidak boleh diambil sebelum jangka waktu tersebut berakhir
+          </p>
+           
+          <p>
+            <img src="{{url('/')}}/gambar/deposit.png">
+          </p>
+
+          <br>
+          <p style="font-size:16px"><b>Simpanan Sukarela,</b> </p>
+          <p>
+              Dalam Upaya membudayakan Simpanan Sukarela bagi anggota, ditetapkan sebuah program yang diberi nama <b>Gema Seri</b> (Gerakan Menyimpan Seribu Sehari). Nilai bagi hasil sebagai jasa <b>wadiah yat dhamamah</b> (setara 6% pertahun)
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+{{-- end modal simpanan --}}
+
+{{-- modal pembiayaan --}}
+<div class="modal fade" id="pinjaman" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pembiayaan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                <img src="{{url('/')}}/gambar/pinjaman.png">
+              </p>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+{{-- end modal pembiayaan --}}
+
+{{-- modal anggota --}}
+<div class="modal fade" id="anggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Alur Keanggotan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>1.	Mengisi formulir pendaftaran</p>
+          <p>2.	Mengikuti pendidikan perkoperasian</p>
+          <p>3.	Menyerahkan fotocopy KTP</p>
+          <p>4.	Memiliki usaha produktif dan ketentuan lainnya</p>
+          <p>5.	Membayar simpanan pokok sebesar 20.000 *</p>
+          <p>6.	Membayar simpanan wajib perdana sebesar 5000, dan simpanan wajib selanjutnya sesuai dengan ketentuan yang berlaku atau berdasarkan nilai pinjaman/pembiayaan yang diterima **</p>
+          <p>7.	Menabung sukarela perdana Min Rp. 5000 dan membeli buku simpanan seharga 5000</p>
+          <p>8.	Taat dan patuh terhadap aturan – aturan yang berlaku pada KSPPS KIS</p>
+          <p><b>
+            *Simpanan pokok dapat ditarik kembali jika berhenti jadi anggota  
+            </b></p>
+            <p><b>
+                ** Simpanan wajib dapat ditarik kembali jika berhenti jadi anggota
+                </b></p>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+{{-- end modal anggota --}}
+
 </body>
 </html>
