@@ -14,8 +14,8 @@
 
 
 </head>
-<body >
-    {{-- <body onload="window.print();"> --}}
+{{-- <body > --}}
+    <body onload="window.print();">
 
 
     <div class="content-wrapper simulasi-page">

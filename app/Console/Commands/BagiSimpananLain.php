@@ -4,18 +4,16 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Model\Simpanan;
-use App\Model\Simpanan\OpsiSimpanan;
-
-
-class BagiSukarela extends Command
+use App\Model\Simpanan\SimpananPendidikan;
+use App\Model\Simpanan\OpsiSimpananLain;
+class BagiSimpananLain extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'kirim:sukarela';
+    protected $signature = 'kirim:simlain';
 
     /**
      * The console command description.

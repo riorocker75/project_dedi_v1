@@ -42,8 +42,24 @@ untuk bagi hasil Sukarela
         // $schedule->command('kirim:sukarela')->hourly();
         $schedule->command('demo:cron')->everyMinute();
 
+/*
+----------------------------- 
+untuk bagi hasil Simpanan lain
+-----------------------------
+*/
+        // $schedule->command('kirim:simlain')->hourly();
+        $schedule->command('kirim:simlain')->daily();
+       
+
+
+
+
+
 
     }
+
+
+    
 
     /**
      * Register the commands for the application.

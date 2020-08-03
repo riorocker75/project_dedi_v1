@@ -12,8 +12,8 @@
 <link href="{{asset('a_front/css/style.css')}}" rel="stylesheet">
 <link href="{{asset('a_front/css/responsive.css')}}" rel="stylesheet">
 
-<link rel="shortcut icon" href="{{asset('a_front/images/favicon.png')}}" type="image/x-icon">
-<link rel="icon" href="{{asset('a_front/images/favicon.png')}}" type="image/x-icon">
+<link rel="shortcut icon" href="{{url('/')}}/gambar/koperasi.jpeg" type="image/x-icon">
+<link rel="icon" href="{{url('/')}}/gambar/koperasi.jpeg" type="image/x-icon">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -50,18 +50,15 @@
                                     <ul class="footer-list">
                                         <li><a href="#">Tentang</a></li>
                                         <li><a href="#">Layanan</a></li>
-                                        <li><a href="#">Why Choose Us</a></li>
-                                        <li><a href="#">How It Works</a></li>
-                                        <li><a href="#">News & Updates</a></li>
+                                       
                                     </ul>
                                 </div>
                                 <div class="widget-column col-md-6 col-sm-6 col-xs-12">
                                     <ul class="footer-list">
                                         <li><a href="#">Testimonials</a></li>
                                         <li><a href="#">FAQ’s</a></li>
-                                        <li><a href="#">Pricing Plans</a></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
+                                        <li><a href="#">Kontak Kami</a></li>
+                                        <li><a href="#">Syarat & Ketentuan</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -179,7 +176,7 @@
 <script src="{{url('/')}}/a_front/js/knob.js"></script>
 <script src="{{url('/')}}/a_front/js/appear.js"></script>
 <script src="{{url('/')}}/a_front/js/script.js"></script>
-<script>
+{{-- <script>
     function startRefresh() {
         $.get('', function(data) {
             $(document.body).html(data);    
@@ -188,6 +185,6 @@
     $(function() {
         setTimeout(startRefresh,12000);
     });
-</script>
+</script> --}}
 </body>
 </html>

@@ -247,3 +247,12 @@
   43% { transform: rotate(0); }
   100% { transform: rotate(0); }
 }
+
+
+.content-image{
+width:580px!important;
+}
+.content-image img{
+  width:400px!important;
+  height: 400px!important;
+}

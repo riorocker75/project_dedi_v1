@@ -55,8 +55,18 @@
                                        
                                     </tr>
                                     <tr>
-                                        <td scope="row">Angsuran Per-minggu</td>
+                                        <td scope="row">Angsuran Pokok/minggu</td>
+
                                         <td>Rp. {{number_format($sm->pinjaman_skema_angsuran)}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">Angsuran Wajib/minggu</td>
+
+                                        @php
+                                            $op=App\Model\Cat_Pinjaman::where('kategori_id',$sm->kategori_id)->first();
+                                        @endphp
+                                        <td>Rp. {{number_format($op->biaya_wajib)}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -107,7 +117,7 @@
                             $end = strtotime(date($sm->pinjaman_tgl));
                             $start = $month = strtotime("+1 week", $end);
     
-                            
+                          
                         @endphp
                         
                         <thead>
@@ -130,8 +140,8 @@
                                 <td>{{$no++}}</td>   
                             <td>
                                 @php
+                                 $month = strtotime("+1 week",  $month);
                                     echo date("Y-m-d", $month);
-                                 $month = strtotime("+1 week", $month);
                                 @endphp
                                 
     

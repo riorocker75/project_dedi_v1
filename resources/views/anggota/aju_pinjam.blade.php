@@ -41,8 +41,14 @@
          $cek_pinjaman=App\Model\Pinjaman::where('anggota_id',Session::get('ang_id'))
                                           ->orderBy('id','desc')
                                           ->first();
+      $cek_pj_null=App\Model\Pinjaman::where([
+                                               'anggota_id'=>Session::get('ang_id'),
+                                               'status_bayar' => 1
+                                            ])
+                                          ->orderBy('id','desc')
+                                          ->get();
     @endphp
-        <?php if($cek_pinjaman->status_bayar == "1"){?>
+        <?php if(count($cek_pj_null) > 0){?>
           <div class="alert alert-warning alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h5><i class="icon fas fa-exclamation-triangle"></i>Mohon Maaf </h5>

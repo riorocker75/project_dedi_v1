@@ -16,12 +16,12 @@
           <i class="far fa-bell bell"></i>
           <span class="badge badge-warning navbar-badge">{{count($notif_nulled)}}</span>
           @else    
-          <i class="far fa-bell bell"></i>
+          <i class="far fa-bell"></i>
           @endif
         
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">{{count($notif)}} Pemberitahuan</span>
+          <span class="dropdown-item dropdown-header">{{count($notif_nulled)}} Pemberitahuan Baru</span>
           <div class="dropdown-divider"></div>
           @foreach ($notif as $nt)
           <a href="#" class="dropdown-item">
