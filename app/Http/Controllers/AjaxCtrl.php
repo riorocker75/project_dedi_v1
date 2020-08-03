@@ -485,6 +485,19 @@ function filter_shu(Request $request){
 
 
 
+/*
+------------------------------------------
+|   notif ang
+------------------------------------------
+*/
+
+function notif_ang(Request $request){
+
+    DB::table('tbl_notif')->where('kode_user',$request->ang_kode)->update([
+        'status_baca' => 1
+    ]);
+}
+
 
 
 

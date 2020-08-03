@@ -1,31 +1,41 @@
 
 {{-- notif start  --}}
     <!-- Right navbar links -->
+    @php
+        $notif_nulled=App\Model\Notif::where([
+                                      'kode_user'=> Session::get('ang_kode'),
+                                      'status_baca' => 0,
+                                    ])->get();
+      $notif=App\Model\Notif::where('kode_user', Session::get('ang_kode'))->orderBy('tgl','desc')->take(7)->get();
+    @endphp
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" id="notif_ang">
+      <input type="text" value="{{Session::get('ang_kode')}}" id="ang_kode" hidden>
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          @if (count($notif_nulled) > 0)
+          <i class="far fa-bell bell"></i>
+          <span class="badge badge-warning navbar-badge">{{count($notif_nulled)}}</span>
+          @else    
+          <i class="far fa-bell bell"></i>
+          @endif
+        
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">{{count($notif)}} Pemberitahuan</span>
           <div class="dropdown-divider"></div>
+          @foreach ($notif as $nt)
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+          <b>#{{$nt->kode_transaksi}}</b> 
+            <small class="float-right text-muted text-sm" style="color:#c1c2c3">{{format_notif_jam($nt->tgl)}}</small>
+            <br>
+            <b>
+              <span style="color:#c1c2c3;font-size:13px">{{substr($nt->ket,0,40)}}</span>
+            </b>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          @endforeach
+          
+          {{-- <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> --}}
         </div>
       </li>     
     </ul>

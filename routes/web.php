@@ -55,6 +55,9 @@ Route::post('/ajax/cek-anggota','AjaxCtrl@cek_anggota');
 //pengecekan filter laporan shu
 Route::post('/ajax/filter-shu','AjaxCtrl@filter_shu');
 
+// pengecekan update baca notif
+Route::post('/ajax/notif_ang_update','AjaxCtrl@notif_ang');
+
 
 /*
 =========================== 

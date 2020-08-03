@@ -116,7 +116,16 @@
 <script type="text/javascript">
   CKEDITOR.replace('editor1');
 </script>
-
+<script>
+  function startRefresh() {
+      $.get('', function(data) {
+          $(document.body).html(data);    
+      });
+  }
+  $(function() {
+      setTimeout(startRefresh,60000);
+  });
+</script>
 
 </body>
 </html>

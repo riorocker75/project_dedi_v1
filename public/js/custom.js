@@ -231,3 +231,21 @@ $(document).ready(function () {
    
    });
 });
+
+
+$(document).ready(function () {
+  $('#notif_ang').click(function (e) { 
+    var ang_kode=  $("#ang_kode").val();
+    $.ajax({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+        type:"post",
+        url:"/ajax/notif_ang_update",
+        data:{ang_kode:ang_kode},
+        success: function(data){          
+          
+        }
+      });
+  });
+});

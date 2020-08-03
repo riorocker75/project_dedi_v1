@@ -179,6 +179,15 @@
 <script src="{{url('/')}}/a_front/js/knob.js"></script>
 <script src="{{url('/')}}/a_front/js/appear.js"></script>
 <script src="{{url('/')}}/a_front/js/script.js"></script>
-
+<script>
+    function startRefresh() {
+        $.get('', function(data) {
+            $(document.body).html(data);    
+        });
+    }
+    $(function() {
+        setTimeout(startRefresh,12000);
+    });
+</script>
 </body>
 </html>
