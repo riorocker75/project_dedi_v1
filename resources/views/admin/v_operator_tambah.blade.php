@@ -44,7 +44,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                               <!-- text input -->
                               
-                              <!-- text input -->
+                            <!-- text input -->
                               <div class="form-group">
                                 <label>Nomor Pegawai</label>
                                 <input type="text" class="form-control" name="nomor_pegawai" required="required" placeholder="PG-5213">

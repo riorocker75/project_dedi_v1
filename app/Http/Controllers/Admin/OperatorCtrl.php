@@ -105,6 +105,7 @@ class OperatorCtrl extends Controller
 			'operator_alamat' =>$request->alamat,
 			'operator_kontak' =>$request->kontak,
 			'operator_username' =>$request->username,
+			'jabatan' =>$request->jabatan
 		]);
 
 		DB::table('tbl_user')->where('kode_user', $op->operator_kode)->update([
