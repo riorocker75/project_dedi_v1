@@ -59,17 +59,19 @@ class OperatorCtrl extends Controller
 			'operator_alamat' =>$request->alamat,
 			'operator_kontak' =>$request->kontak,
 			'operator_username' =>$request->username,
-			'operator_password' => bcrypt($request->password)
+			'operator_password' => bcrypt($request->password),
+			'jabatan' =>$request->jabatan,
 		]);
-
-		DB::table('tbl_user')->insert([
-			'nama' => $request->nama,
-			'username' => $request->username, 
-			'password' =>  bcrypt($request->password),
-			'kode_user' => $kode_op,
-			'level' => 2,
-			'status' => 1
-		]);
+		
+		
+		// DB::table('tbl_user')->insert([
+		// 	'nama' => $request->nama,
+		// 	'username' => $request->username, 
+		// 	'password' =>  bcrypt($request->password),
+		// 	'kode_user' => $kode_op,
+		// 	'level' => 2,
+		// 	'status' => 1
+		// ]);
 
 
 		return redirect('dashboard/admin/operator')->with('alert-success','Data telah ditambahkan');
@@ -127,44 +129,6 @@ class OperatorCtrl extends Controller
 		return redirect('dashboard/admin/operator')->with('alert-success','Data telah diperbaharui');
 	}
 
-	// public function operator_update(Request $request){
-
-		// DB::table('operator')->where('operator_id',$request->id)->update([
-		// 	'operator_kode' => $request->kode_pagawai,
-		// 	'operator_nomor_pegawai' => $request->nomor_pegawai,
-		// 	'operator_kelamin' => $request->kelamin,
-		// 	'operator_tempat_lahir' => $request->tempat_lahir,
-		// 	'operator_tanggal_lahir' => $request->tanggal_lahir,
-		// 	'operator_alamat' => $request->alamat,
-		// 	'operator_kontak' => $request->kontak,
-		// 	'operator_username' => $request->username
-		// ]);
-		  // if(!empty($request->password)) {
-		  // 	DB::table('tbl_operator')->where('operator_id',$request->id)->update([
-		  // 		'operator_kode' => $request->kode_pagawai,
-		  // 		'operator_nomor_pegawai' => $request->nomor_pegawai,
-		  // 		'operator_kelamin' => $request->kelamin,
-		  // 		'operator_tempat_lahir' => $request->tempat_lahir,
-		  // 		'operator_tanggal_lahir' => $request->tanggal_lahir,
-		  // 		'operator_alamat' => $request->alamat,
-		  // 		'operator_kontak' => $request->kontak,
-		  // 		'operator_username' => $request->username
-		  // 	]);
-
-		  // }else{
-		  // 	DB::table('tbl_operator')->where('operator_id',$request->id)->update([
-		  // 		'operator_kode' => $request->kode_pagawai,
-		  // 		'operator_nomor_pegawai' => $request->nomor_pegawai,
-		  // 		'operator_kelamin' => $request->kelamin,
-		  // 		'operator_tempat_lahir' => $request->tempat_lahir,
-		  // 		'operator_tanggal_lahir' => $request->tanggal_lahir,
-		  // 		'operator_alamat' => $request->alamat,
-		  // 		'operator_kontak' => $request->kontak,
-		  // 		'operator_username' => $request->username,
-		  // 		'operator_password' => Hash::make($request->password)
-		  // 	]);
-		  // }
-		  // return redirect('dashboard/admin/operator');	
-	// }
+	
 
 }

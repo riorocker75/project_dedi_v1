@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Data Operator</h1>
+          <h1 class="m-0 text-dark">Data Pegawai</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Data Operator</li>
+            <li class="breadcrumb-item active">Data Pegawai</li>
           </ol>
         </div>
       </div>
@@ -28,8 +28,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Operator</h3>
-              <a href="operator_tambah" class="btn btn-info btn-sm float-right">Tambah Data</a>
+              <h3 class="card-title">Data Pegawai</h3>
+              @if (Session::get('level') == "1")
+              <a href="{{url('/dashboard/admin/operator_tambah')}}" class="btn btn-info btn-sm float-right">Tambah Data</a>
+              @endif
 
             </div>
             <!-- /.card-header -->
@@ -38,11 +40,13 @@
                 <thead>
                   <tr>
                     <th>NO</th>
-                    <th>NIK</th>
-                    <th>NAMA</th>
-                    <th>KELAMIN</th>
-                    <th>KONTAK</th>
+                    <th>Nomor Pegawai</th>
+                    <th>Nama</th>
+                    <th>Jabatan</th>
+                    <th>Kontak</th>
+                    @if (Session::get('level') == "1")
                     <th>Opsi</th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody> 
@@ -53,13 +57,17 @@
                   <tr>
                    <td>{{ $no }}</td>
                    <td>{{ $o->operator_nomor_pegawai }}</td>
-                   <td>{{ $o->operator_nama }}</td>
-                   <td>{{ $o->operator_kelamin }}</td>
-                   <td>{{ $o->operator_kontak }}</td>
-                   <td>
-                    <a class="btn btn-info btn-sm" href="operator_edit/{{ $o->operator_id }}"><i class="fas fa-pencil-alt"></i> Edit</a>
-                    <a class="btn btn-danger btn-sm" href="operator_hapus/{{ $o->operator_id }}"><i class="fas fa-trash"></i> Delete</a>
+                   <td>{{ $o->operator_nama }}
+                    <br><small class="tgl-text">{{ $o->operator_kelamin }}</small>  
                   </td>
+                  <td>{{jabatan($o->jabatan)}}</td>
+                   <td>{{ $o->operator_kontak }}</td>
+                   @if (Session::get('level') == "1")
+                   <td>
+                     <a class="btn btn-info btn-sm" href="operator_edit/{{ $o->operator_id }}"><i class="fas fa-pencil-alt"></i> Edit</a>
+                     <a class="btn btn-danger btn-sm" href="operator_hapus/{{ $o->operator_id }}"><i class="fas fa-trash"></i> Delete</a>
+                    </td>
+                    @endif
                 </tr>
                 @endforeach
                 

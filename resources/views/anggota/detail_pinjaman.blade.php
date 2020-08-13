@@ -115,7 +115,7 @@
                             $bayar=$ck;
                             $angsuran =$sm->pinjaman_skema_angsuran;
                             $end = strtotime(date($sm->pinjaman_tgl));
-                            $start = $month = strtotime("+1 week", $end);
+                            $start = $month = strtotime("+0 day", $end);
     
                           
                         @endphp

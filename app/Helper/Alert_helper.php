@@ -50,6 +50,9 @@
             case 3:
                echo "Anggota";
                 break;
+                case 4:
+                    echo "Manager";
+                     break;   
             default:
                echo "tidak ada";
                 break;

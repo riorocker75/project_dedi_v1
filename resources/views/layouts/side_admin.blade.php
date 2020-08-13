@@ -147,7 +147,7 @@
             <li class="nav-item">
               <a href="{{url('/dashboard/admin/operator')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Data Pengurus</p>
+                <p>Data Pegawai</p>
               </a>
             </li>
             <li class="nav-item">
@@ -298,6 +298,12 @@
             </p>
           </a>
           <ul class="nav nav-treeview" style="margin-left:20px;font-size:14px">
+            <li class="nav-item">
+              <a href="{{url('/admin/pengaturan/akses')}}" class="nav-link">
+                 <i class="fa fa-key nav-icon" aria-hidden="true"></i>
+                  <p>Hak Akses</p>
+                </a>
+              </li>
             <li class="nav-item">
             <a href="{{url('/admin/pengaturan/web')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>

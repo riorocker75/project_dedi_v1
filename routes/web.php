@@ -338,6 +338,13 @@ Route::get('/admin/penarikan/simpanan-pendidikan/hapus/{id}','Admin\PenarikanCtr
 	Bagian Pengaturan Sistem
 ---------------------------
 */
+Route::get('/admin/pengaturan/akses', 'Admin\PengaturanCtrl@akses');
+Route::get('/admin/pengaturan/akses/edit/{id}', 'Admin\PengaturanCtrl@akses_edit');
+
+Route::post('/admin/pengaturan/akses/tambah', 'Admin\PengaturanCtrl@akses_tambah');
+Route::post('/admin/pengaturan/akses/update/{id}', 'Admin\PengaturanCtrl@akses_update');
+Route::get('/admin/pengaturan/akses/hapus/{id}', 'Admin\PengaturanCtrl@akses_hapus');
+
 Route::get('/admin/pengaturan/syarat', 'Admin\PengaturanCtrl@syarat');
 Route::post('/admin/pengaturan/syarat/update', 'Admin\PengaturanCtrl@syarat_update');
 
@@ -634,4 +641,10 @@ Route::post('/cetak/transaksi/simpanan/pendidikan/filter/{id}','CetakCtrl@trs_fi
 
 // cetak transaksi pinjaman
 Route::post('/cetak/transaksi/simpanan/pinjaman/filter/{id}','CetakCtrl@trs_filter_pinjaman');
+
+/* 
+--------------------------
+|	Manager
+---------------------------
+*/
 

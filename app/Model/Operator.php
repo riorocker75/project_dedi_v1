@@ -17,7 +17,7 @@ class Operator extends Model
         'operator_tanggal_lahir',
         'operator_tempat_lahir',
         'operator_alamat',
-        'operator_kontak'
-       
+        'operator_kontak',
+        'jabatan'
     ];
 }

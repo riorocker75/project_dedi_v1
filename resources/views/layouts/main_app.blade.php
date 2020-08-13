@@ -54,6 +54,8 @@
   @include('layouts/side_operator')
 @elseif(Session::get('level') == '3')
   @include('layouts/side_anggota')
+@elseif(Session::get('level') == '4')
+  @include('layouts/side_manager')
 @endif
 
 <!-- end sidebar -->

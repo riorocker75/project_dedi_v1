@@ -364,3 +364,40 @@ function status_transfer($status){
     
             // end else
         }
+
+        function jabatan($status){
+            switch($status){
+                case 1:
+                    echo "Manager" ;
+                break;
+                case 2:
+                    echo "Asisten Manager" ;
+                break; 
+                case 3:
+                    echo "Pengurus" ;
+                break;
+                case 4:
+                    echo "Staf Lapangan" ;
+                break;
+                default:
+                echo "None jabatan";
+            break;
+            }
+        }
+
+        function akses($status){
+            switch($status){
+                case 1:
+                    echo "Admin (Asisten Manager)";
+                break;
+                case 2:
+                    echo "Pengurus";
+                break;
+                case 4: 
+                    echo "Manager";
+                break;
+                default:
+                echo "Tidak ada akses";
+            break;
+            }
+        }

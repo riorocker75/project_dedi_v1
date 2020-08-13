@@ -9,12 +9,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Data Pengurus</h1>
+          <h1 class="m-0 text-dark">Data Pegawai</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Data Pengurus</li>
+            <li class="breadcrumb-item active">Data Pegawai</li>
           </ol>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tambah Data Pengurus</h3>
+              <h3 class="card-title">Tambah Data Pegawai</h3>
               <a href="{{url('/dashboard/admin/operator')}}" class="btn btn-danger btn-sm float-right">Kembali</a>
             </div>
             <!-- /.card-header -->
@@ -46,8 +46,8 @@
                               
                               <!-- text input -->
                               <div class="form-group">
-                                <label>Nomor Pengurus</label>
-                                <input type="number" class="form-control" name="nomor_pegawai" required="required" placeholder="Nomor ....">
+                                <label>Nomor Pegawai</label>
+                                <input type="text" class="form-control" name="nomor_pegawai" required="required" placeholder="PG-5213">
                                 @if($errors->has('nomor_pegawai'))
                                 <small class="text-muted text-danger">
                                     {{ $errors->first('nomor_pegawai')}}
@@ -57,8 +57,8 @@
                           
                           
                               <div class="form-group">
-                                <label>Nama Pengurus</label>
-                                <input type="text" class="form-control" name="nama" required="required" placeholder="Nama ...">
+                                <label>Nama</label>
+                                <input type="text" class="form-control" name="nama" required="required">
 
                                 @if($errors->has('nama'))
                                 <small class="text-muted text-danger">
@@ -67,7 +67,23 @@
                                 @endif
                               </div>
                             
-                          
+                              <div class="form-group">
+                                <label>Jabatan</label>
+                                <select class="form-control" name="jabatan" required="required">
+                                  <option value="">--Pilih--</option>
+                                  <option value="1">Manager</option>
+                                  <option value="2">Asisten Manager</option>
+                                  <option value="3">Pengurus</option>
+                                  <option value="4">Staf Lapangan</option>
+
+                                </select>  
+                                @if($errors->has('jabatan'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('jabatan')}}
+                                    </small>
+                                @endif                          
+                              </div>
+
                               <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <select class="form-control" name="kelamin" required="required">
@@ -124,6 +140,21 @@
                                     </small>
                                 @endif
                               </div>
+
+                              {{-- <div class="form-group">
+                                <label>Hak Akses</label>
+                                <select class="form-control" name="akses" required="required">
+                                  <option value="">--Pilih--</option>
+                                  <option value="4">Manager</option>
+                                  <option value="1">Admin (Asisten Manager)</option>
+                                  <option value="2">Pengurus</option>
+                                </select>  
+                                @if($errors->has('akses'))
+                                <small class="text-muted text-danger">
+                                    {{ $errors->first('akses')}}
+                                    </small>
+                                @endif                          
+                              </div> --}}
 
                               <div class="form-group">
                                 <label>Username</label>

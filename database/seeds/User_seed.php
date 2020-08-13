@@ -19,10 +19,18 @@ class User_seed extends Seeder
             'username' => 'admin',
             'password' =>bcrypt("admin"),
             'level' => 1,
-            'kode_user' => 'AD-443',
+            'kode_user' => 'OP-443',
             'status' => 1
         ]);
-
+        User::create([
+            'nama' => 'Muzanni',
+            'username' => 'manager',
+            'password' =>bcrypt("manager"),
+            'level' => 4,
+            'kode_user' => 'OP-473',
+            'status' => 1
+        ]);
+   
         User::create([
             'nama' => 'Atika',
             'username' => 'pengurus',

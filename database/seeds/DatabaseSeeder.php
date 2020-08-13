@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
 
          $this->call(Option_seed::class);
          $this->call(Kas_seed::class);
+         $this->call(Pegawai_seed::class);
+
 
 
 

@@ -41,7 +41,7 @@ class AdminLogin extends Controller
                     if(Hash::check($password,$data->password)){
                         Session::put('adm_id', $data->id);
                         Session::put('adm_nama', $data->nama);
-                        Session::put('adm_username', $data->admin_username);
+                        Session::put('adm_username', $data->username);
                         Session::put('adm_kode', $data->kode_user);
                         Session::put('level', 1);
                         Session::put('login-adm',TRUE);
@@ -97,7 +97,23 @@ class AdminLogin extends Controller
                     } 
 
              // end cek level anggota
-            }else{
+            }elseif($data->level == 4){
+                Session::flush();
+                
+                if(Hash::check($password,$data->password)){
+                    Session::put('mg_id', $data->id);
+                    Session::put('mg_nama', $data->nama);
+                    Session::put('mg_username', $data->username);
+                    Session::put('mg_kode', $data->kode_user);
+                    Session::put('level', 4);
+                    Session::put('login-adm',TRUE);
+                    return redirect('/dashboard/admin')->with('alert-success','Selamat Datang Kembali Manager');
+                }else{
+                    return redirect('/login/user')->with('alert-danger','Password atau Email, Salah !');
+                }
+
+            // end cek data manager di buat
+        }else{
                 return redirect('/login/user')->with('alert-danger','Tidak meliki akses kesini');
             }
                 // end cek level 

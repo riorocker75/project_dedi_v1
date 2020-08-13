@@ -36,7 +36,7 @@
                 <div class="card-body">
                   @if (count($data_aju) > 0)
 
-                      @foreach ($data_aju as $cp)
+                     
                       <table id="data1" class="table table-bordered table-striped">
                         <thead>
                           <tr>
@@ -51,6 +51,7 @@
                           </tr>
                         </thead>
                         <tbody> 
+                          @foreach ($data_aju as $cp)
                             <tr>
 
                             <td>{{$cp->pinjaman_kode}}</td>
@@ -73,9 +74,10 @@
                             </td>
 
                             </tr>
+                    @endforeach
+
                         </tbody>   
                     </table> 
-                    @endforeach
                  @else
                   Belum ada anggota yang mengajukan pembiayaan ....
                       

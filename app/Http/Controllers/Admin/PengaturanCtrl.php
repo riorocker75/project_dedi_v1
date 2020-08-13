@@ -85,5 +85,57 @@ function rekening_update(Request $request){
 
     // end
 
+    // pengaturan hak akses
+    function akses(){
+        return view('admin.pengaturan.v_akses');
+    }
+
+    function akses_tambah(Request $request){
+        
+     $request->validate([
+        'pegawai' => 'required',
+        'akses' => 'required'
+     ]); 
+
+     $cek=Operator::where('operator_kode',$request->pegawai)->first();
+      
+    DB::table('tbl_user')->insert([
+        'nama' => $cek->operator_nama,
+        'username' => $cek->operator_username,
+        'password' => $cek->operator_password,
+        'kode_user' => $cek->operator_kode,
+        'level' => $request->akses,
+        'status' => 1
+    ]); 
+    return redirect('/admin/pengaturan/akses')->with('alert-success','Data telah ditambahkan');
+    }
+
+    function akses_edit($id){
+        $data=User::where('id',$id)->get();
+        return view('admin.pengaturan.v_akses_edit',[
+            'data' => $data
+        ]);
+    }
+
+    function akses_update(Request $request,$id){
+        $request->validate([
+            'akses' => 'required'
+        ]);
+        
+        DB::table('tbl_user')->where('id',$id)->update([
+            'level' => $request->akses
+        ]);
+        
+        return redirect('/admin/pengaturan/akses')->with('alert-success','Data telah diperbaharui');
+
+    }
+
+    function akses_hapus($id){
+        DB::table('tbl_user')->where('id',$id)->delete();
+        return redirect('/admin/pengaturan/akses')->with('alert-success','Data telah dihapus');
+
+    }
+    // end pengaturan hak akses
+
 
 }
