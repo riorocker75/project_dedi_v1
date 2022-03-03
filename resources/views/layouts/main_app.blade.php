@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="{{asset('lte/plugins/jqvmap/jqvmap.min.css') }}">
   <link rel="stylesheet" href="{{asset('lte/dist/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{asset('lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-  <link rel="stylesheet" href="{{asset('lte/plugins/daterangepicker/daterangepicker.css') }}">
+  <link rel="stylesheet" href="{tsts{asset('lte/plugins/daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{asset('lte/plugins/summernote/summernote-bs4.css') }}">
   <link rel="stylesheet" href="{{asset('css/custom.css') }}">
   <link rel="stylesheet" href="{{asset('css/bootstrap-select.css') }}">
